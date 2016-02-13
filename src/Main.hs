@@ -1,6 +1,7 @@
 module Main (main) where
 
-import System.Environment
+import System.Environment  (getArgs)
+import Run                 (run)
 
 main :: IO ()
-main = getArgs >>= print
+main = getArgs >>= run
