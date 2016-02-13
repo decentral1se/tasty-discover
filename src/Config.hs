@@ -1,5 +1,6 @@
 module Config (
-    parseConfig
+    Config
+  , parseConfig
   , usage
 ) where
 

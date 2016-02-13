@@ -1,3 +1,6 @@
+{-# LANGUAGE TypeSynonymInstances, FlexibleInstances, OverloadedStrings #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+
 module Run (run) where
 
 -- System
@@ -5,8 +8,14 @@ import System.IO
 import System.Exit
 import System.Environment  (getProgName)
 
+-- Data
+import           Data.String
+
 -- Config
-import Config              (parseConfig, usage)
+import Config              (Config, parseConfig, usage)
+
+instance IsString ShowS where
+  fromString = showString
 
 run :: [String] -> IO ()
 run processor_args = do
@@ -19,8 +28,19 @@ run processor_args = do
         exitFailure
 
       Right conf -> do
-        writeFile dst "main = undefined"
+        writeFile dst (testModule src conf)
 
     _ -> do
       hPutStrLn stderr (usage name)
       exitFailure
+
+
+testModule :: FilePath -> Config -> String
+testModule src _ =
+  ( "{-# LINE 1 \"test/SomeTest.hs\" #-}\n"
+  . showString "{-# OPTIONS_GHC -fno-warn-warnings-deprecations #-}\n"
+  . showString ("module Main where\n")
+  . showString "import Test.Tasty\n"
+  . showString "import SomeTest (props)\n"
+  . showString "main = defaultMain props"
+  ) "\n"
