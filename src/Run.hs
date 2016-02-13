@@ -39,8 +39,12 @@ testModule :: FilePath -> Config -> String
 testModule src _ =
   ( "{-# LINE 1 \"test/SomeTest.hs\" #-}\n"
   . showString "{-# OPTIONS_GHC -fno-warn-warnings-deprecations #-}\n"
+  . showString "{-# LANGUAGE TemplateHaskell #-}\n"
   . showString ("module Main where\n")
   . showString "import Test.Tasty\n"
-  . showString "import SomeTest (props)\n"
-  . showString "main = defaultMain props"
+  . showString "import Test.Tasty.HUnit\n"
+  . showString "import Test.Tasty.QuickCheck\n"
+  . showString "import Test.Tasty.TH\n"
+  . showString "import SomeTest\n"
+  . showString "main = $(defaultMainGenerator)"
   ) "\n"
