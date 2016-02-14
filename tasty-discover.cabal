@@ -27,26 +27,11 @@ executable tasty-discover
   main-is:
       Main.hs
   other-modules:
-      Run
-      Config
+      Test.Tasty.Discover
+      Test.Tasty.Config
+      Test.Tasty.Run
   build-depends:
       base == 4.*
-  default-language: Haskell2010
-
-test-suite tasty-discover-tests
-  type:
-      exitcode-stdio-1.0
-  ghc-options:
-      -Wall
-  hs-source-dirs:
-      src
-    , test
-  main-is:
-      Tasty.hs
-  build-depends:
-      base == 4.*
-    , tasty
-    , tasty-quickcheck
-    , tasty-hunit
-    , tasty-th
+    , filepath
+    , directory
   default-language: Haskell2010

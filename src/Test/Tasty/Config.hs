@@ -1,7 +1,8 @@
-module Config (
+module Test.Tasty.Config (
     Config
   , parseConfig
   , usage
+  , defaultConfig
 ) where
 
 import System.Console.GetOpt (
