@@ -1,10 +1,6 @@
-resolver: lts-5.0
-
+resolver: lts-5.3
 packages:
 - '.'
-
-extra-deps: []
-
+extra-deps:
+- "tasty-th-0.1.4"
 flags: {}
-
-extra-package-dbs: []
