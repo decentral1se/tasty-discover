@@ -5,6 +5,8 @@ module Test.Tasty.Run (
     run
 
   -- for experimentation/testing
+  , getListOfTests
+  , getTestFiles
   , findTests
   , tmpModule
   , fileToTest
@@ -44,6 +46,9 @@ import Control.Monad
 
 -- Config
 import Test.Tasty.Config  (Config, defaultConfig, parseConfig, usage)
+
+-- Tasty
+import Test.Tasty.TH
 
 instance IsString ShowS where
   fromString = showString
@@ -86,6 +91,15 @@ tmpModule src conf tests =
   . showString "main :: IO ()\n"
   . showString "main = $(defaultMainGenerator)"
   ) "\n"
+
+getListOfTests :: IO [String]
+getListOfTests = do
+    allFiles <- getTestFiles $ findTests "test/Tasty.hs"
+    allTests <- mapM extractTestFunctions allFiles
+    return $ concat allTests
+
+getTestFiles :: IO [Test] -> IO [FilePath]
+getTestFiles tests = fmap (fmap testFile) tests
 
 findTests :: FilePath -> IO [Test]
 findTests src = do
