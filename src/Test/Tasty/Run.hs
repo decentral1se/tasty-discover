@@ -5,6 +5,7 @@ module Test.Tasty.Run (
     run
 
   -- for experimentation/testing
+  , stringifyTestList
   , getListOfTests
   , getTestFiles
   , findTests
@@ -69,16 +70,17 @@ run processor_args = do
         exitFailure
 
       Right conf -> do
-        tests <- findTests src
-        writeFile dst (tmpModule src conf tests)
+        stringed <- stringifyTestList $ getListOfTests src
+        tests    <- findTests src
+        writeFile dst (tmpModule src conf tests stringed)
 
     _ -> do
       hPutStrLn stderr (usage name)
       exitFailure
 
 
-tmpModule :: FilePath -> Config -> [Test] -> String
-tmpModule src conf tests =
+tmpModule :: FilePath -> Config -> [Test] -> String -> String
+tmpModule src conf tests stringed =
   ( "{-# LINE 1 " . shows src . " #-}\n"
   . showString "{-# OPTIONS_GHC -fno-warn-warnings-deprecations #-}\n"
   . showString "{-# LANGUAGE TemplateHaskell #-}\n"
@@ -89,12 +91,15 @@ tmpModule src conf tests =
   . showString "import Test.Tasty.QuickCheck\n"
   . importList tests
   . showString "main :: IO ()\n"
-  . showString "main = $(defaultMainGenerator)"
+  . showString ("main = $(defaultMainGeneratorFor) \"X\" =<< " ++ stringed ++ ")")
   ) "\n"
 
-getListOfTests :: IO [String]
-getListOfTests = do
-    allFiles <- getTestFiles $ findTests "test/Tasty.hs"
+stringifyTestList :: IO [String] -> IO String
+stringifyTestList xs = fmap show xs
+
+getListOfTests :: FilePath -> IO [String]
+getListOfTests src = do
+    allFiles <- getTestFiles $ findTests src
     allTests <- mapM extractTestFunctions allFiles
     return $ concat allTests
 
