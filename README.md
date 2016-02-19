@@ -100,7 +100,15 @@ minimal test project with `tasty-discover` [located here][minimalsetup].
 Pull requests are very welcome! Please submit an issue so we can discuss what
 you would like to do. I test any changes within the `integration-test` file
 directory, which has its own `.cabal` and `stack.yaml` file. Please add some
-sort of test there if you want to add functionality.
+sort of test there if you want to add functionality. Also, see below for some
+things that could be worked on immediately.
+
+### TODO
+  - [ ] Get the Travis CI passing (the tests pass already!)
+  - [ ] Get Hspec and Smallcheck under the `tasty-discover` umbrella
+  - [ ] Make a full release to Hackage/Stackage (currently candidate)
+  - [ ] `stack haddock` works but the documentation isn't appearing on the candidate page?
+
 
 ### Standing on the shoulders of other Haskellers
 This project wouldn't have been possible without the awesome work of the
