@@ -1,8 +1,4 @@
--- | Automatic test discovery with the Tasty framework. Simply write your tests
--- of type Assertion (with hunit) or Bool (with quickcheck) and have
--- tasty-discover do everything else for you. More testing libraries will be
--- added as I get time to do it. I hope this can become a good Tasty framework
--- citizen which enables Haskellers to write less test boilerplate.
+-- | Automatic test discovery with the Tasty framework.
 --
 -- When a, for example, `stack test` gets called, the preprocessor test
 -- file will thread arguments into the `Test.Tasty.Run` module which performs
