@@ -3,7 +3,7 @@ packages:
 - '.'
 - location:
     git: "git@github.com:lwm/tasty-discover.git"
-    commit: "8d2496d"
+    commit: "2fe0f0e"
 extra-deps:
 - "tasty-th-0.1.4"
 flags: {}

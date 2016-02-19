@@ -11,12 +11,6 @@ You can see `tasty-discover` in action with the minimal test project I created [
 This package is largely based on the good work of other Haskellers. See the
 details [in a section below](https://github.com/lwm/tasty-discover/#standing-on-the-shoulders-of-other-haskellers).
 
-### Status
-So far, this package is only a hackage candidate. I'd like to see that change
-shortly but for now, to use this package in your projects, you'll need to get
-it from Github. See the [installation section][installdiscover] for more
-details.
-
 ### The rules are simple
 
   - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. (see below)
@@ -46,6 +40,12 @@ So far, I haven't figured out how to retrieve the test report. I have raised
 [the issue][stackissue] with the stack folks. I would openly welcome any
 contributions on this topic!
 
+### Status
+So far, this package is only a hackage candidate. I'd like to see that change
+shortly but for now, to use this package in your projects, you'll need to get
+it from Github. See the [installation section][installdiscover] for more
+details.
+
 ### Installation
 
 If you are using Stack, you can add the following (taken from the [stack
@@ -56,7 +56,7 @@ packages:
 - '.'
 - location:
     git: "git@github.com:lwm/tasty-discover.git"
-    commit: "8d2496d"
+    commit: "2fe0f0e4"  -- or more recent if you prefer
 ```
 
 Note. `tasty-discover` relies on `tasty-th` version `0.1.4`, so you may need to
