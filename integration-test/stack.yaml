@@ -1,7 +1,9 @@
 resolver: lts-5.3
 packages:
 - '.'
-- '../'
+- location:
+    git: "git@github.com:lwm/tasty-discover.git"
+    commit: "8d2496d"
 extra-deps:
 - "tasty-th-0.1.4"
 flags: {}
