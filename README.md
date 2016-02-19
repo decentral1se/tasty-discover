@@ -3,16 +3,16 @@
 # tasty-discover
 Automatic test discovery and runner for the Tasty framework.
 
-### Quick start
-See the [example project](https://github.com/lwm/tasty-discover/tree/master/tasty-discover-example).
-
 ### Status
 So far, this package is only a hackage candidate. I'd like to see that change
 shortly but for now, to use this package in your projects, you'll need to get
 it from Github. See the [installation section][installdiscover] for more
 details.
 
-### Installation
+### Example project
+See the [example project](https://github.com/lwm/tasty-discover/tree/master/tasty-discover-example).
+
+### Integration
 If you are using [stack](https://github.com/commercialhaskell/stack), you can
 add the following to your `stack.yaml`:
 
@@ -32,8 +32,8 @@ extra-deps:
 - "tasty-th-0.1.4"
 ```
 
-### Full example
-`tasty-discover` expects the following requirements:
+### Getting started
+`tasty-discover` expects the following conventions:
 
   - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. ([example](https://github.com/lwm/tasty-discover/blob/master/tasty-discover-example/test/Tasty.hs))
   - Test files ending with `Test.hs`
@@ -86,9 +86,6 @@ Now, we can run our tests with:
 $ stack test
 ```
 
-There is currently an issue relating to the test output which is being
-investigated via [this issue](https://github.com/lwm/tasty-discover/issues/1).
-
 ### Contributing
 Pull requests are very welcome! Please submit an issue so we can discuss what
 you would like to do. I test any changes within the `tasty-discover-example`
@@ -99,7 +96,6 @@ things that could be worked on immediately.
 ### TODO
   - [ ] Solve current issues
   - [ ] Make a full release to Hackage/Stackage (currently candidate)
-
 
 ### Other Haskellers made this possible
 This project borrows / is heavily influenced from the awesome work of the
@@ -112,7 +108,6 @@ people involved with these projects:
 ### Related documentation
   - [hspec-discover documentation][hspecdiscover]
   - [tasty-th documentation][tastythdocs]
-
 
 [issues]: https://github.com/lwm/tasty-discover/issues
 [stackhaskell]: https://github.com/commercialhaskell/stack
