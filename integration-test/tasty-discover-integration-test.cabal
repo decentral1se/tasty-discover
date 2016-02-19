@@ -1,0 +1,22 @@
+name:                tasty-discover-integration-test
+version:             0.0.1
+synopsis:            Integration test for tasty-discover
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Lib
+  build-depends:       base >= 4.7 && < 5
+  default-language:    Haskell2010
+
+test-suite tasty-travis-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Tasty.hs
+  other-modules:
+    FooTest
+    AllTheFolders.AnotherNestTest
+    Thing.AnotherThing.NestedTest
+  build-depends:       base
+                     , tasty-discover
+  default-language:    Haskell2010
