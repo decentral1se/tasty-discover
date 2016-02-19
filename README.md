@@ -1,53 +1,10 @@
 # tasty-discover
-Automatic test discovery with the Tasty framework. Simply write your tests of
-type `Assertion` (with [hunit][hunit]) or `Bool` (with
-[quickcheck][quickcheck]) and have `tasty-discover` do everything else for you.
-More testing libraries will be added as I get time to do it. I hope this can
-become a good Tasty framework citizen which enables Haskellers to write less
-test boilerplate.
+Automatic test discovery with the Tasty framework.
 
-You can see `tasty-discover` in action with the minimal test project I created [here][minimalsetup].
-
-This package is largely based on the good work of other Haskellers. See the
-details [in a section below](https://github.com/lwm/tasty-discover/#standing-on-the-shoulders-of-other-haskellers).
-
-### The rules are simple
-
-  - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. (see below)
-  - Test files must end with `Test.hs`
-  - Test cases must start with either `prop_`, `case_` or `test_`
-
-### Quick example
-If you'd like to get a running example in a few minutes, run the following
-commands. Otherwise, read below for a more step by step guide.
-
-Firstly, fork this repository and [install stack][installstack]. Then:
-
-```
-$ git clone https://github.com/<your-username>/tasty-discover
-$ cd tasty-discover/integration-test
-$ stack setup && stack build --test
-```
-
-If you're looking for the lovely `tasty` test output, you will have to do the
-following:
-
-```
-$ cat .stack-work/logs/*-test.log
-```
-
-So far, I haven't figured out how to retrieve the test report. I have raised
-[the issue][stackissue] with the stack folks. I would openly welcome any
-contributions on this topic!
-
-### Status
-So far, this package is only a hackage candidate. I'd like to see that change
-shortly but for now, to use this package in your projects, you'll need to get
-it from Github. See the [installation section][installdiscover] for more
-details.
+### Quick start
+See the [example project](https://github.com/lwm/tasty-discover/tree/master/integration-test).
 
 ### Installation
-
 If you are using Stack, you can add the following (taken from the [stack
 FAQ][stackfaq]) to your `stack.yaml`:
 
@@ -68,6 +25,12 @@ extra-deps:
 ```
 
 ### Full example
+`tasty-discover` expects the following requirements:
+
+  - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. (see below)
+  - Test files must end with `Test.hs`
+  - Test cases must start with either `prop_`, `case_` or `test_`
+
 In order to get started, you need to set up your test suite with `Cabal`.
 You'll only need the minimal boilerplate with `tasty-discover`. Add the
 following to your cabal
@@ -117,8 +80,13 @@ $ stack test
 ```
 
 `tasty-discover` then generates the necessary boilerplate to import your test
-files and parses your test function names and runs them! Simple! You can see a
-minimal test project with `tasty-discover` [located here][minimalsetup].
+files and parses your test function names and runs them!
+
+### Status
+So far, this package is only a hackage candidate. I'd like to see that change
+shortly but for now, to use this package in your projects, you'll need to get
+it from Github. See the [installation section][installdiscover] for more
+details.
 
 ### Contributing
 Pull requests are very welcome! Please submit an issue so we can discuss what
@@ -128,6 +96,7 @@ sort of test there if you want to add functionality. Also, see below for some
 things that could be worked on immediately.
 
 ### TODO
+  - [ ] Solve this issue with the missing test output
   - [ ] Get the Travis CI passing (the tests pass already!)
   - [ ] Get Hspec and Smallcheck under the `tasty-discover` umbrella
   - [ ] Make a full release to Hackage/Stackage (currently candidate)
