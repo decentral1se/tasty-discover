@@ -6,6 +6,9 @@ More testing libraries will be added as I get time to do it. I hope this can
 become a good Tasty framework citizen which enables Haskellers to write less
 test boilerplate.
 
+This package is largely based on the good work of other Haskellers. See the
+details [in a section below](https://github.com/lwm/tasty-discover/#standing-on-the-shoulders-of-other-haskellers).
+
 ### The rules are simple
 
   - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. (see below)
