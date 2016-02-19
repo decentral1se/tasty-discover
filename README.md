@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lwm/tasty-discover.svg?branch=master)](https://travis-ci.org/lwm/tasty-discover)
+
 # tasty-discover
 Automatic test discovery and runner for the Tasty framework.
 
