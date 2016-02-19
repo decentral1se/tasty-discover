@@ -18,8 +18,8 @@ add the following to your `stack.yaml`:
 packages:
 - '.'
 - location:
-    git: "git@github.com:lwm/tasty-discover.git"
-    commit: "2fe0f0e4"  -- or more recent if you prefer
+    git: "https://github.com/lwm/tasty-discover.git"
+    commit: "HEAD"
 ```
 
 Note. `tasty-discover` relies on `tasty-th` version `0.1.4`, so you may need to
