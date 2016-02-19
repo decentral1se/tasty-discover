@@ -1,3 +1,7 @@
 module Main (main) where
 
-import Test.Tasty.Discover (main)
+import System.Environment  (getArgs)
+import Test.Tasty.Run      (run)
+
+main :: IO ()
+main = getArgs >>= run

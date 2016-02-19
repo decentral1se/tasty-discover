@@ -50,7 +50,7 @@ import Control.Monad
 import Test.Tasty.Config           (Config, defaultConfig, parseConfig, usage)
 
 -- Tasty
-import Test.Tasty.TH
+import Test.Tasty.TH               (extractTestFunctions)
 
 instance IsString ShowS where
   fromString = showString
@@ -77,10 +77,6 @@ run processor_args = do
       Right conf -> do
         stringed <- stringifyTestList $ getListOfTests src
         tests    <- findTests src
-        print src
-        print conf
-        print tests
-        print stringed
         writeFile dst (tmpModule src conf tests stringed)
 
     _ -> do
@@ -101,13 +97,9 @@ tmpModule src conf tests stringed =
   . showString "{-# OPTIONS_GHC -fno-warn-warnings-deprecations #-}\n"
   . showString "{-# LANGUAGE TemplateHaskell #-}\n"
   . showString "module Main where\n"
-  . showString "import Test.Tasty\n"
-  . showString "import Test.Tasty.TH\n"
-  . showString "import Test.Tasty.HUnit\n"
-  . showString "import Test.Tasty.QuickCheck\n"
+  . showString "import Test.Tasty.Discover\n"
   . importList tests
-  . showString "main :: IO ()\n"
-  . showString ("main = $(defaultMainGeneratorFor) \"X\" =<< " ++ stringed ++ ")")
+  . showString ("main = $(defaultMainGeneratorFor \"Discovered tests\" " ++ stringed ++ ")")
   ) "\n"
 
 -- | A list of test function names as a String
@@ -202,4 +194,4 @@ importList :: [Test] -> ShowS
 importList = foldr (.) "" . map f
   where
     f :: Test -> ShowS
-    f test = "import qualified " . showString (testModule test) . "Test\n"
+    f test = "import " . showString (testModule test) . "Test\n"

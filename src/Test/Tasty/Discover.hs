@@ -1,7 +1,11 @@
-module Test.Tasty.Discover (main) where
+module Test.Tasty.Discover (
+    module Test.Tasty
+  , module Test.Tasty.TH
+  , module Test.Tasty.HUnit
+  , module Test.Tasty.QuickCheck
+) where
 
-import System.Environment  (getArgs)
-import Test.Tasty.Run      (run)
-
-main :: IO ()
-main = getArgs >>= run
+import Test.Tasty
+import Test.Tasty.TH
+import Test.Tasty.HUnit
+import Test.Tasty.QuickCheck

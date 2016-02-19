@@ -17,6 +17,17 @@ description:      Automatically discover and run Tasty framework tests
                   <http://github.com/lwm/tasty-discover>
 
 library
+  ghc-options:
+      -Wall
+  exposed-modules:
+    Test.Tasty.Discover
+  build-depends:
+    base == 4.*
+    , tasty
+    , tasty-th
+    , tasty-hunit
+    , tasty-quickcheck
+  hs-source-dirs:   src
   default-language: Haskell2010
 
 executable tasty-discover
@@ -34,8 +45,6 @@ executable tasty-discover
       base == 4.*
     , filepath
     , directory
-    , tasty
+    , tasty-discover
     , tasty-th
-    , tasty-quickcheck
-    , tasty-hunit
   default-language: Haskell2010
