@@ -13,16 +13,19 @@ details [in a section below](https://github.com/lwm/tasty-discover/#standing-on-
 
 ### Status
 So far, this package is only a hackage candidate. I'd like to see that change
-shortly (with it's improvement!) but for now, to use this package in your
-projects, you'll need to (if you are using stack):
+shortly but for now, to use this package in your projects, you'll need to get
+it from Github.
 
-  - get a local copy by cloning the repository (optionally fork it!)
-  - add the path to the repository in your `stack.yaml`
-    - `packages: "path/to/the/tasty-discover/repo"`
+If you are using Stack, you can add the following (taken from the [stack
+FAQ][stackfaq]) to your `stack.yaml`:
 
-After this step, it will be possible to add `tasty-discover` to your
-`build-depends` section of your cabal file. Read onwards for a more indepth
-look at integrating this package with your project.
+```
+packages:
+- '.'
+- location:
+    git: "git@github.com:lwm/tasty-discover.git"
+    commit: "8d2496d"
+```
 
 ### The rules are simple
 
@@ -150,3 +153,4 @@ Related documentation:
 [minimalsetup]: https://github.com/lwm/tasty-discover/tree/master/integration-test
 [hunit]: https://github.com/hspec/HUnit#readme
 [quickcheck]: https://github.com/nick8325/quickcheck
+[stackfaq]: http://docs.haskellstack.org/en/stable/faq/
