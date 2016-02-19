@@ -7,7 +7,7 @@ suite with `tasty-discover`.
 
 ```
 $ git clone https://github.com/<your-username>/tasty-discover
-$ cd tasty-discover/integration-test
+$ cd tasty-discover/tasty-discover-example
 $ stack setup && stack test
 ```
 

@@ -4,7 +4,7 @@
 Automatic test discovery and runner for the Tasty framework.
 
 ### Quick start
-See the [example project](https://github.com/lwm/tasty-discover/tree/master/integration-test).
+See the [example project](https://github.com/lwm/tasty-discover/tree/master/tasty-discover-example).
 
 ### Status
 So far, this package is only a hackage candidate. I'd like to see that change
@@ -35,7 +35,7 @@ extra-deps:
 ### Full example
 `tasty-discover` expects the following requirements:
 
-  - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. ([example](https://github.com/lwm/tasty-discover/blob/master/integration-test/test/Tasty.hs))
+  - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. ([example](https://github.com/lwm/tasty-discover/blob/master/tasty-discover-example/test/Tasty.hs))
   - Test files ending with `Test.hs`
   - Test cases starting with either `prop_`, `case_` (related to [tasty-th usage](https://github.com/bennofs/tasty-th#usage))
 
@@ -91,9 +91,9 @@ investigated via [this issue](https://github.com/lwm/tasty-discover/issues/1).
 
 ### Contributing
 Pull requests are very welcome! Please submit an issue so we can discuss what
-you would like to do. I test any changes within the `integration-test` file
+you would like to do. I test any changes within the `tasty-discover-example`
 directory, which has its own `.cabal` and `stack.yaml` file. Please add some
-sort of test there if you want to add functionality. Also, see below for some
+tests there if you want to add functionality. Also, see below for some
 things that could be worked on immediately.
 
 ### TODO
@@ -120,7 +120,7 @@ people involved with these projects:
 [stackissue]: https://github.com/commercialhaskell/stack/issues/426#issuecomment-186237534
 [tastythdocs]: https://github.com/bennofs/tasty-th#usage
 [hspecdiscover]: https://hspec.github.io/hspec-discover.html
-[minimalsetup]: https://github.com/lwm/tasty-discover/tree/master/integration-test
+[minimalsetup]: https://github.com/lwm/tasty-discover/tree/master/tasty-discover-example
 [hunit]: https://github.com/hspec/HUnit#readme
 [quickcheck]: https://github.com/nick8325/quickcheck
 [stackfaq]: http://docs.haskellstack.org/en/stable/faq/
