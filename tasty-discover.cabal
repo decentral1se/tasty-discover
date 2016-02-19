@@ -21,6 +21,9 @@ library
       -Wall
   exposed-modules:
     Test.Tasty.Discover
+  other-modules:
+    Test.Tasty.Run
+    Test.Tasty.Config
   build-depends:
     base == 4.*
     , filepath
