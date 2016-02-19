@@ -14,18 +14,8 @@ details [in a section below](https://github.com/lwm/tasty-discover/#standing-on-
 ### Status
 So far, this package is only a hackage candidate. I'd like to see that change
 shortly but for now, to use this package in your projects, you'll need to get
-it from Github.
-
-If you are using Stack, you can add the following (taken from the [stack
-FAQ][stackfaq]) to your `stack.yaml`:
-
-```
-packages:
-- '.'
-- location:
-    git: "git@github.com:lwm/tasty-discover.git"
-    commit: "8d2496d"
-```
+it from Github. See the [installation section][installdiscover] for more
+details.
 
 ### The rules are simple
 
@@ -56,7 +46,28 @@ So far, I haven't figured out how to retrieve the test report. I have raised
 [the issue][stackissue] with the stack folks. I would openly welcome any
 contributions on this topic!
 
-### Walkthrough
+### Installation
+
+If you are using Stack, you can add the following (taken from the [stack
+FAQ][stackfaq]) to your `stack.yaml`:
+
+```
+packages:
+- '.'
+- location:
+    git: "git@github.com:lwm/tasty-discover.git"
+    commit: "8d2496d"
+```
+
+Note. `tasty-discover` relies on `tasty-th` version `0.1.4`, so you may need to
+explicitly set this in your `stack.yaml` like so:
+
+```
+extra-deps:
+- "tasty-th-0.1.4"
+```
+
+### Full example
 In order to get started, you need to set up your test suite with `Cabal`.
 You'll only need the minimal boilerplate with `tasty-discover`. Add the
 following to your cabal
@@ -69,14 +80,6 @@ test-suite your-test-suite-name
   other-modules:       XTest, YTest, Folder.ZTest -- your test files
   build-depends:       base, tasty-discover  -- your dependencies
   default-language:    Haskell2010
-```
-
-Note. `tasty-discover` relies on `tasty-th` version `0.1.4`, so you may need to
-explicitly set this in your `stack.yaml` like so:
-
-```
-extra-deps:
-- "tasty-th-0.1.4"
 ```
 
 Next, create a `test` folder, and place a file in it called `Tasty.hs`.
@@ -154,3 +157,4 @@ Related documentation:
 [hunit]: https://github.com/hspec/HUnit#readme
 [quickcheck]: https://github.com/nick8325/quickcheck
 [stackfaq]: http://docs.haskellstack.org/en/stable/faq/
+[installdiscover]: https://github.com/lwm/tasty-discover#installation
