@@ -1,12 +1,18 @@
 # tasty-discover
-Automatic test discovery with the Tasty framework.
+Automatic test discovery and runner for the Tasty framework.
 
 ### Quick start
 See the [example project](https://github.com/lwm/tasty-discover/tree/master/integration-test).
 
+### Status
+So far, this package is only a hackage candidate. I'd like to see that change
+shortly but for now, to use this package in your projects, you'll need to get
+it from Github. See the [installation section][installdiscover] for more
+details.
+
 ### Installation
-If you are using Stack, you can add the following (taken from the [stack
-FAQ][stackfaq]) to your `stack.yaml`:
+If you are using [stack](https://github.com/commercialhaskell/stack), you can
+add the following to your `stack.yaml`:
 
 ```
 packages:
@@ -27,13 +33,12 @@ extra-deps:
 ### Full example
 `tasty-discover` expects the following requirements:
 
-  - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. (see below)
-  - Test files must end with `Test.hs`
-  - Test cases must start with either `prop_`, `case_` or `test_`
+  - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. ([example](https://github.com/lwm/tasty-discover/blob/master/integration-test/test/Tasty.hs))
+  - Test files ending with `Test.hs`
+  - Test cases starting with either `prop_`, `case_` (related to [tasty-th usage](https://github.com/bennofs/tasty-th#usage))
 
 In order to get started, you need to set up your test suite with `Cabal`.
-You'll only need the minimal boilerplate with `tasty-discover`. Add the
-following to your cabal
+Add the following to your cabal file:
 
 ```
 test-suite your-test-suite-name
@@ -45,14 +50,14 @@ test-suite your-test-suite-name
   default-language:    Haskell2010
 ```
 
-Next, create a `test` folder, and place a file in it called `Tasty.hs`.
+Create a `test` folder, and place a file in it called `Tasty.hs`.
 Inside this file, add the following:
 
 ```
 {-# OPTIONS_GHC -F -pgmF tasty-discover #-}
 ```
 
-Next, let's create a test file. `tasty-discover` can detect test files in
+Create a test file inside `test/`. `tasty-discover` can detect test files in
 whatever directory structure you choose (as long as they sit under your
 `hs-source-dirs`), so there is no restrictions on directory organization.
 However, you must end your test file names with `Test.hs`. So, for example,
@@ -73,20 +78,14 @@ case_length_of_one :: Assertion
 case_length_of_one = 1 @=? length [()]
 ```
 
-Now, we can run our tests back in the project root directory:
+Now, we can run our tests with:
 
 ```
 $ stack test
 ```
 
-`tasty-discover` then generates the necessary boilerplate to import your test
-files and parses your test function names and runs them!
-
-### Status
-So far, this package is only a hackage candidate. I'd like to see that change
-shortly but for now, to use this package in your projects, you'll need to get
-it from Github. See the [installation section][installdiscover] for more
-details.
+There is currently an issue relating to the test output which is being
+investigated via [this issue](https://github.com/lwm/tasty-discover/issues/1).
 
 ### Contributing
 Pull requests are very welcome! Please submit an issue so we can discuss what
@@ -96,22 +95,19 @@ sort of test there if you want to add functionality. Also, see below for some
 things that could be worked on immediately.
 
 ### TODO
-  - [ ] Solve this issue with the missing test output
-  - [ ] Get the Travis CI passing (the tests pass already!)
-  - [ ] Get Hspec and Smallcheck under the `tasty-discover` umbrella
+  - [ ] Solve current issues
   - [ ] Make a full release to Hackage/Stackage (currently candidate)
-  - [ ] `stack haddock` works but the documentation isn't appearing on the candidate page?
 
 
-### Standing on the shoulders of other Haskellers
-This project wouldn't have been possible without the awesome work of the
-people involved with the following projects:
+### Other Haskellers made this possible
+This project borrows / is heavily influenced from the awesome work of the
+people involved with these projects:
 
   - [tasty](https://github.com/feuerbach/tasty)
   - [tasty-th](http://hackage.haskell.org/package/tasty-th)
   - [hspec](https://github.com/hspec/hspec)
 
-Related documentation:
+### Related documentation
   - [hspec-discover documentation][hspecdiscover]
   - [tasty-th documentation][tastythdocs]
 

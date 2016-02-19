@@ -8,16 +8,14 @@ suite with `tasty-discover`.
 ```
 $ git clone https://github.com/<your-username>/tasty-discover
 $ cd tasty-discover/integration-test
-$ stack setup && stack test && cat .stack-work/logs/*-test.log
+$ stack setup && stack test
 ```
 
 As you can see from the example code, the major steps are:
 
-  - define a test suite main in your cabal file
-  - add the preprocessor line to your main file
-
-Then simply write your tests as you want in whatever you location you want (as
-long as it is under `hs-source-dirs`) and `tasty-discover` generates all the
-boilerplate for you!
+  - Define a test suite main in your cabal file
+  - Add the preprocessor line to your main file
+  - End your test file names with `Test.hs`
+  - Name your tests `prop_*` or `case_*`
 
 [rootreadme]: https://github.com/lwm/tasty-discover/blob/master/README.md
