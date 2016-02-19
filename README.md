@@ -9,6 +9,19 @@ test boilerplate.
 This package is largely based on the good work of other Haskellers. See the
 details [in a section below](https://github.com/lwm/tasty-discover/#standing-on-the-shoulders-of-other-haskellers).
 
+### Status
+So far, this package is only a hackage candidate. I'd like to see that change
+shortly (with it's improvement!) but for now, to use this package in your
+projects, you'll need to (if you are using stack):
+
+  - get a local copy by cloning the repository (optionally fork it!)
+  - add the path to the repository in your `stack.yaml`
+    - `packages: "path/to/the/tasty-discover/repo"`
+
+After this step, it will be possible to add `tasty-discover` to your
+`build-depends` section of your cabal file. Read onwards for a more indepth
+look at integrating this package with your project.
+
 ### The rules are simple
 
   - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. (see below)
