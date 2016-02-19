@@ -6,6 +6,8 @@ More testing libraries will be added as I get time to do it. I hope this can
 become a good Tasty framework citizen which enables Haskellers to write less
 test boilerplate.
 
+You can see `tasty-discover` in action with the minimal test project I created [here][minimalsetup].
+
 This package is largely based on the good work of other Haskellers. See the
 details [in a section below](https://github.com/lwm/tasty-discover/#standing-on-the-shoulders-of-other-haskellers).
 
