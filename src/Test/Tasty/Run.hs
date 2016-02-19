@@ -5,6 +5,7 @@ module Test.Tasty.Run (
     run
 
   -- for experimentation/testing
+  , Test
   , stringifyTestList
   , getListOfTests
   , getTestFiles
@@ -46,7 +47,7 @@ import Control.Applicative
 import Control.Monad
 
 -- Config
-import Test.Tasty.Config  (Config, defaultConfig, parseConfig, usage)
+import Test.Tasty.Config           (Config, defaultConfig, parseConfig, usage)
 
 -- Tasty
 import Test.Tasty.TH
@@ -59,6 +60,10 @@ data Test = Test {
 , testModule :: String
 } deriving (Eq, Show)
 
+-- | Accept some args and run the tests
+--
+-- >>> run ["w", "x", "y", "z"]
+-- ...
 run :: [String] -> IO ()
 run processor_args = do
   name <- getProgName
@@ -72,6 +77,10 @@ run processor_args = do
       Right conf -> do
         stringed <- stringifyTestList $ getListOfTests src
         tests    <- findTests src
+        print src
+        print conf
+        print tests
+        print stringed
         writeFile dst (tmpModule src conf tests stringed)
 
     _ -> do
@@ -79,6 +88,13 @@ run processor_args = do
       exitFailure
 
 
+-- | The holy grail. This 'tmpModule' runs your tests
+--
+-- >>> tmpModule "test/Tasty.hs"
+--               Config {configModuleName = Nothing}
+--               [Test {testFile = "test/FooTest.hs", testModule = "Foo"}]
+--               "[\"prop_one\"]"
+-- ...
 tmpModule :: FilePath -> Config -> [Test] -> String -> String
 tmpModule src conf tests stringed =
   ( "{-# LINE 1 " . shows src . " #-}\n"
@@ -94,23 +110,43 @@ tmpModule src conf tests stringed =
   . showString ("main = $(defaultMainGeneratorFor) \"X\" =<< " ++ stringed ++ ")")
   ) "\n"
 
+-- | A list of test function names as a String
+--
+-- >>> stringifyTestList ["prop_one", "prop_two"]
+-- "[\"prop_one\",\"prop_two\"]"
 stringifyTestList :: IO [String] -> IO String
 stringifyTestList xs = fmap show xs
 
+-- | All test function names in 'src'
+--
+-- >>> getListOfTests "test/Tasty.hs"
+-- ["prop_one"]
 getListOfTests :: FilePath -> IO [String]
 getListOfTests src = do
     allFiles <- getTestFiles $ findTests src
     allTests <- mapM extractTestFunctions allFiles
     return $ concat allTests
 
+-- | File paths for test files
+--
+-- >>> getTestFiles $ findTests "test/Tasty.hs"
+-- ["test/FooTest.hs"]
 getTestFiles :: IO [Test] -> IO [FilePath]
 getTestFiles tests = fmap (fmap testFile) tests
 
+-- | All tests that are not the 'src' file
+--
+-- >>> findTests "test/Tasty.hs"
+-- [Test {testFile = "test/FooTest.hs", testModule = "Foo"}]
 findTests :: FilePath -> IO [Test]
 findTests src = do
   let (dir, file) = splitFileName src
   mapMaybe (fileToTest dir) . filter (/= file) <$> getFilesRecursive dir
 
+-- | A test file becomes a Test type
+--
+-- >>> fileToTest "test" "FooTest.hs"
+-- Just (Test {testFile = "test/FooTest.hs", testModule = "Foo"})
 fileToTest :: FilePath -> FilePath -> Maybe Test
 fileToTest dir file = case reverse $ splitDirectories file of
   x:xs -> case stripSuffix "Test.hs" x <|> stripSuffix "Test.lhs" x of
@@ -122,10 +158,10 @@ fileToTest dir file = case reverse $ splitDirectories file of
     stripSuffix :: Eq a => [a] -> [a] -> Maybe [a]
     stripSuffix suffix str = reverse <$> stripPrefix (reverse suffix) (reverse str)
 
--- | @TODO
--- getFilesRecursive "./test"
--- ["SomeTest.hs", "Tasty.hs"]
--- @TODO - this should be Maybe [FilePath]
+-- | All files under 'baseDir'
+--
+-- >>> getFilesRecursive "test/"
+-- ["FooTest.hs", "BarTest.hs"]
 getFilesRecursive :: FilePath -> IO [FilePath]
 getFilesRecursive baseDir = sort <$> go []
   where
@@ -136,28 +172,32 @@ getFilesRecursive baseDir = sort <$> go []
       files <- filterM (doesFileExist . (baseDir </>)) c
       return (files ++ concat dirs)
 
--- | @TODO
--- | See `Cabal.Distribution.ModuleName` (http://git.io/bj34)
+-- | Is 'cs' a valid Haskell module name?
+-- | Reference - `Cabal.Distribution.ModuleName` (http://git.io/bj34)
 --
--- isValidModuleName "ModName"
+-- >>> isValidModuleName "ModName"
 -- True
 --
--- isValidModuleName "modName"
+-- >>> isValidModuleName "modName"
 -- False
 isValidModuleName :: String -> Bool
 isValidModuleName [] = False
 isValidModuleName (c:cs) = isUpper c && all isValidModuleChar cs
 
--- | @TODO
--- isValidModuleChar '-'
+-- | Is 'c' a valid character in a Haskell module name?
+--
+-- >>> isValidModuleChar '-'
 -- False
 --
--- isValidModuleChar 'A'
+-- >>> isValidModuleChar 'A'
 -- True
 isValidModuleChar :: Char -> Bool
 isValidModuleChar c = isAlphaNum c || c == '_' || c == '\''
 
--- | Generate imports for a list of specs.
+-- | Import statements for a list of tests
+--
+-- >>> importList [Test {testFile = "test/SomeOtherTest.hs", testModule = "SomeOther"}]
+-- "import qualified SomeOtherTest\n"
 importList :: [Test] -> ShowS
 importList = foldr (.) "" . map f
   where
