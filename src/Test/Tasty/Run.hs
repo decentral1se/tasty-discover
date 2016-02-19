@@ -1,6 +1,12 @@
 {-# LANGUAGE TypeSynonymInstances, FlexibleInstances, OverloadedStrings #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
+-- | Where we generate the test running boilerplate. Preprocessor arguments
+-- arrive via the main function of `Test.Tasty.Discover`.
+--
+-- If you need to make `tasty-discover` do something new, it most likely needs
+-- to happen here.
+
 module Test.Tasty.Run (
     run
 
@@ -165,7 +171,6 @@ getFilesRecursive baseDir = sort <$> go []
       return (files ++ concat dirs)
 
 -- | Is 'cs' a valid Haskell module name?
--- | Reference - `Cabal.Distribution.ModuleName` (http://git.io/bj34)
 --
 -- >>> isValidModuleName "ModName"
 -- True

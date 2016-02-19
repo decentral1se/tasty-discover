@@ -1,3 +1,6 @@
+-- | Configuration options passed via the `Tasty.hs` preprocessor
+--   file. This implementation is largely borrowed from `hspec-discover`.
+
 module Test.Tasty.Config (
     Config
   , parseConfig

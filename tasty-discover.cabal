@@ -23,6 +23,8 @@ library
     Test.Tasty.Discover
   build-depends:
     base == 4.*
+    , filepath
+    , directory
     , tasty
     , tasty-th
     , tasty-hunit
