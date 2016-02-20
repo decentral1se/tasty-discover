@@ -12,7 +12,6 @@ Automatic test discovery and runner for the [tasty framework][tasty-framework].
 - [Configuration](#configuration)
     - [Define your own test module suffix](#define-your-own-test-module-suffix)
 - [Contributing](#contributing)
-- [TODO](#todo)
 - [Other Haskellers made this possible](#other-haskellers-made-this-possible)
 - [Related documentation](#related-documentation)
 
@@ -117,14 +116,10 @@ See the [integration test example][suffix-example] for more details.
 
 ### Contributing
 Pull requests are very welcome! Please submit an issue so we can discuss what
-you would like to do. I test any changes within the `tasty-discover-example`
-directory, which has its own `.cabal` and `stack.yaml` file. Please add some
-tests there if you want to add functionality. Also, see below for some
-things that could be worked on immediately.
-
-### TODO
-  - [ ] Solve current issues
-  - [ ] Make a full release to Hackage/Stackage (currently candidate)
+you would like to do. I test any changes within the `integration-test`
+directory, which has its own `.cabal` and `stack.yaml` file. Please add
+tests there if you want to add functionality. Check the issues for things
+that can be worked on immediately.
 
 ### Other Haskellers made this possible
 This project borrows / is heavily influenced from the awesome work of the
