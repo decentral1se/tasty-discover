@@ -3,6 +3,20 @@
 # tasty-discover
 Automatic test discovery and runner for the [tasty framework][tasty-framework].
 
+### Table of Contents
+
+- [tasty-discover](#)
+    - [Status](#)
+    - [Examples](#)
+    - [Project integration](#)
+    - [Getting started](#)
+    - [Configuration](#)
+        - [Define your own test module suffix](#)
+    - [Contributing](#)
+    - [TODO](#)
+    - [Other Haskellers made this possible](#)
+    - [Related documentation](#)
+
 ### Status
 So far, this package is only a hackage candidate. I'd like to see that change
 shortly but for now, to use this package in your projects, you'll need to get
