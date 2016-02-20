@@ -1,0 +1,18 @@
+name:                tasty-discover-integration-test
+version:             0.0.1
+synopsis:            Integration test for tasty-discover
+cabal-version:       >=1.10
+
+library
+  default-language: Haskell2010
+
+test-suite configurable-suffix
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test-configurable-module
+  main-is:             Tasty.hs
+  other-modules:
+    FooMySuffix
+    Nested.BarMySuffix
+  build-depends:       base
+                     , tasty-discover
+  default-language:    Haskell2010
