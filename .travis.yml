@@ -24,4 +24,3 @@ install:
 script:
 - cd $TEST_DIR
 - stack --no-terminal test
-- echo .stack-work/logs/*-test.log
