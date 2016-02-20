@@ -49,7 +49,7 @@ extra-deps:
 `tasty-discover` expects the following conventions:
 
   - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. ([example](https://github.com/lwm/tasty-discover/blob/master/tasty-discover-example/test/Tasty.hs))
-  - Test file names ending with `Test.hs` (however, this is configurable, see [configuration][configuration])
+  - Test file names ending with `Test.hs` (this is now configurable, see [configuration][configuration])
   - Test cases starting with either `prop_`, `case_` (related to [tasty-th usage](https://github.com/bennofs/tasty-th#usage))
     - It is also possible to pass `test_` for test groups
 
@@ -74,15 +74,17 @@ Inside this file, add the following:
 ```
 
 Create a test file inside `test/`. `tasty-discover` can detect test files in
-whatever directory structure you choose (as long as they sit in the same directory as the `Tasty.hs` file created above or any subdirectory thereof), so there is no restrictions on directory organization.
-However, you must end your test file names with `Test.hs`. So, for example,
-`EatYourLandlordTest.hs` would be a perfectly acceptable test file name.
+whatever directory structure you choose (as long as they sit in the same
+directory as the `Tasty.hs` file created above or any subdirectory thereof), so
+there is no restrictions on directory organization.  By default, you must end your
+test file names with `Test.hs` for them to be discovered. So, for example, `FooTest.hs`
+would be a perfectly acceptable test file name.
 
 `tasty-discover` exports the `tasty-quickcheck` and `tasty-hunit` modules, so
-we can simple write the following in `test/EatYourLandlordTest.hs`:
+we can simple write the following in `test/FooTest.hs`:
 
 ```
-module EatYourLandlordTest where
+module FooTest where
 
 import Test.Tasty.Discover
 
