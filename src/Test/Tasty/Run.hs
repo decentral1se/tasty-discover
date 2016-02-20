@@ -25,6 +25,7 @@ module Test.Tasty.Run (
   , testFile
   , testModule
   , defaultConfig
+  , parseConfig
   ) where
 
 -- System
@@ -53,7 +54,13 @@ import Control.Applicative
 import Control.Monad
 
 -- Config
-import Test.Tasty.Config           (Config, defaultConfig, parseConfig, usage)
+import Test.Tasty.Config           (
+    Config
+  , configModuleSuffix
+  , defaultConfig
+  , parseConfig
+  , usage
+  )
 
 -- Tasty
 import Test.Tasty.TH               (extractTestFunctions)
@@ -81,8 +88,9 @@ run processor_args = do
         exitFailure
 
       Right conf -> do
-        stringed <- stringifyTestList $ getListOfTests src
-        tests    <- findTests src
+        stringed <- stringifyTestList $ getListOfTests src conf
+        tests    <- findTests src conf
+        putStrLn (tmpModule src conf tests stringed)
         writeFile dst (tmpModule src conf tests stringed)
 
     _ -> do
@@ -104,7 +112,7 @@ tmpModule src conf tests stringed =
   . showString "{-# LANGUAGE TemplateHaskell #-}\n"
   . showString "module Main where\n"
   . showString "import Test.Tasty.Discover\n"
-  . importList tests
+  . importList tests (configModuleSuffix conf)
   . showString ("main = $(defaultMainGeneratorFor \"Discovered tests\" " ++ stringed ++ ")")
   ) "\n"
 
@@ -119,9 +127,9 @@ stringifyTestList xs = fmap show xs
 --
 -- >>> getListOfTests "test/Tasty.hs"
 -- ["prop_one"]
-getListOfTests :: FilePath -> IO [String]
-getListOfTests src = do
-    allFiles <- getTestFiles $ findTests src
+getListOfTests :: FilePath -> Config -> IO [String]
+getListOfTests src conf = do
+    allFiles <- getTestFiles $ findTests src conf
     allTests <- mapM extractTestFunctions allFiles
     return $ concat allTests
 
@@ -136,22 +144,27 @@ getTestFiles tests = fmap (fmap testFile) tests
 --
 -- >>> findTests "test/Tasty.hs"
 -- [Test {testFile = "test/FooTest.hs", testModule = "Foo"}]
-findTests :: FilePath -> IO [Test]
-findTests src = do
+findTests :: FilePath -> Config -> IO [Test]
+findTests src conf = do
   let (dir, file) = splitFileName src
-  mapMaybe (fileToTest dir) . filter (/= file) <$> getFilesRecursive dir
+  mapMaybe (fileToTest dir (configModuleSuffix conf)) . filter (/= file) <$> getFilesRecursive dir
 
 -- | A test file becomes a Test type
 --
 -- >>> fileToTest "test" "FooTest.hs"
 -- Just (Test {testFile = "test/FooTest.hs", testModule = "Foo"})
-fileToTest :: FilePath -> FilePath -> Maybe Test
-fileToTest dir file = case reverse $ splitDirectories file of
-  x:xs -> case stripSuffix "Test.hs" x <|> stripSuffix "Test.lhs" x of
-    Just name | isValidModuleName name && all isValidModuleName xs ->
-      Just . Test (dir </> file) $ (intercalate "." . reverse) (name : xs)
-    _ -> Nothing
-  _ -> Nothing
+fileToTest :: FilePath -> Maybe String -> FilePath -> Maybe Test
+fileToTest dir suffix file = case reverse $ splitDirectories file of
+  x:xs -> case suffix of
+            Just suffix -> case stripSuffix ((++ ".hs") suffix) x <|> stripSuffix ((++ ".lhs") suffix) x of
+              Just name | isValidModuleName name && all isValidModuleName xs ->
+                Just . Test (dir </> file) $ (intercalate "." . reverse) (name : xs)
+              _ -> Nothing
+            _ -> case stripSuffix "Test.hs" x <|> stripSuffix "Test.lhs" x of
+              Just name | isValidModuleName name && all isValidModuleName xs ->
+                Just . Test (dir </> file) $ (intercalate "." . reverse) (name : xs)
+              _ -> Nothing
+  _   -> Nothing
   where
     stripSuffix :: Eq a => [a] -> [a] -> Maybe [a]
     stripSuffix suffix str = reverse <$> stripPrefix (reverse suffix) (reverse str)
@@ -195,8 +208,10 @@ isValidModuleChar c = isAlphaNum c || c == '_' || c == '\''
 --
 -- >>> importList [Test {testFile = "test/SomeOtherTest.hs", testModule = "SomeOther"}]
 -- "import qualified SomeOtherTest\n"
-importList :: [Test] -> ShowS
-importList = foldr (.) "" . map f
+importList :: [Test] -> Maybe String -> ShowS
+importList ts suffix = foldr (.) "" . map f $ ts
   where
     f :: Test -> ShowS
-    f test = "import " . showString (testModule test) . "Test\n"
+    f test = case suffix of
+      Just suffix -> "import " . showString (testModule test) . showString (suffix ++ "\n")
+      _           -> "import " . showString (testModule test) . "Test\n"
