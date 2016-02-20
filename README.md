@@ -1,20 +1,19 @@
 [![Build Status](https://travis-ci.org/lwm/tasty-discover.svg?branch=master)](https://travis-ci.org/lwm/tasty-discover)
 
 # tasty-discover
-Automatic test discovery and runner for the Tasty framework.
+Automatic test discovery and runner for the [tasty framework][tasty-framework].
 
 ### Status
 So far, this package is only a hackage candidate. I'd like to see that change
 shortly but for now, to use this package in your projects, you'll need to get
-it from Github. See the [installation section][installdiscover] for more
+it from Github. See the [installation section][install-discover] for more
 details.
 
 ### Example project
 See the [example project](https://github.com/lwm/tasty-discover/tree/master/tasty-discover-example).
 
 ### Integration
-If you are using [stack](https://github.com/commercialhaskell/stack), you can
-add the following to your `stack.yaml`:
+If you are using [stack][stack-haskell], you can add the following to your `stack.yaml`:
 
 ```
 packages:
@@ -38,6 +37,7 @@ extra-deps:
   - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. ([example](https://github.com/lwm/tasty-discover/blob/master/tasty-discover-example/test/Tasty.hs))
   - Test files ending with `Test.hs`
   - Test cases starting with either `prop_`, `case_` (related to [tasty-th usage](https://github.com/bennofs/tasty-th#usage))
+    - It is also possible to pass `test_` for test groups
 
 In order to get started, you need to set up your test suite with `Cabal`.
 Add the following to your cabal file:
@@ -101,22 +101,19 @@ things that could be worked on immediately.
 This project borrows / is heavily influenced from the awesome work of the
 people involved with these projects:
 
-  - [tasty](https://github.com/feuerbach/tasty)
-  - [tasty-th](http://hackage.haskell.org/package/tasty-th)
-  - [hspec](https://github.com/hspec/hspec)
+  - [tasty][tasty-framework]
+  - [tasty-th][tasty-th]
+  - [hspec][hspec]
 
 ### Related documentation
-  - [hspec-discover documentation][hspecdiscover]
-  - [tasty-th documentation][tastythdocs]
+  - [hspec-discover documentation][hspec-discover]
+  - [tasty-th documentation][tasty-th-docs]
 
 [issues]: https://github.com/lwm/tasty-discover/issues
-[stackhaskell]: https://github.com/commercialhaskell/stack
-[installstack]: https://github.com/commercialhaskell/stack/blob/master/doc/install_and_upgrade.md
-[stackissue]: https://github.com/commercialhaskell/stack/issues/426#issuecomment-186237534
-[tastythdocs]: https://github.com/bennofs/tasty-th#usage
-[hspecdiscover]: https://hspec.github.io/hspec-discover.html
-[minimalsetup]: https://github.com/lwm/tasty-discover/tree/master/tasty-discover-example
-[hunit]: https://github.com/hspec/HUnit#readme
-[quickcheck]: https://github.com/nick8325/quickcheck
-[stackfaq]: http://docs.haskellstack.org/en/stable/faq/
-[installdiscover]: https://github.com/lwm/tasty-discover#installation
+[stack-haskell]: https://github.com/commercialhaskell/stack
+[tasty-th-docs]: https://github.com/bennofs/tasty-th#usage
+[tasty-th]: https://github.com/bennofs/tasty-th
+[hspec]: https://github.com/hspec/hspec
+[hspec-discover]: https://hspec.github.io/hspec-discover.html
+[install-discover]: https://github.com/lwm/tasty-discover#installation
+[tasty-framework]: https://github.com/feuerbach/tasty
