@@ -1,0 +1,19 @@
+name:                tasty-discover-example
+version:             0.0.1
+synopsis:            Example project for tasty-discover
+cabal-version:       >=1.10
+
+library
+  default-language:    Haskell2010
+
+test-suite tasty-travis-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Tasty.hs
+  other-modules:
+    FooTest
+    AllTheFolders.AnotherNestTest
+    Thing.AnotherThing.NestedTest
+  build-depends:       base
+                     , tasty-discover
+  default-language:    Haskell2010

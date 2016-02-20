@@ -6,6 +6,7 @@ module Test.Tasty.Config (
   , parseConfig
   , usage
   , defaultConfig
+  , configModuleSuffix
 ) where
 
 import System.Console.GetOpt (
@@ -16,17 +17,17 @@ import System.Console.GetOpt (
   )
 
 data Config = Config {
-  configModuleName :: Maybe String
+  configModuleSuffix :: Maybe String
 } deriving (Eq, Show)
 
 defaultConfig :: Config
 defaultConfig = Config Nothing
 
 options :: [OptDescr (Config -> Config)]
-options = [Option [] ["module-name"] (ReqArg (\s c -> c {configModuleName = Just s}) "NAME") ""]
+options = [Option [] ["module-suffix"] (ReqArg (\s c -> c {configModuleSuffix = Just s}) "SUFFIX") ""]
 
 usage :: String -> String
-usage prog = "\nUsage: " ++ prog ++ " SRC CUR DST [--module-name=NAME]\n"
+usage prog = "\nUsage: " ++ prog ++ " SRC CUR DST [--module-suffix=SUFFIX]\n"
 
 parseConfig :: String -> [String] -> Either String Config
 parseConfig prog args = case getOpt Permute options args of
