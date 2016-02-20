@@ -5,17 +5,16 @@ Automatic test discovery and runner for the [tasty framework][tasty-framework].
 
 ### Table of Contents
 
-- [tasty-discover](#)
-    - [Status](#)
-    - [Examples](#)
-    - [Project integration](#)
-    - [Getting started](#)
-    - [Configuration](#)
-        - [Define your own test module suffix](#)
-    - [Contributing](#)
-    - [TODO](#)
-    - [Other Haskellers made this possible](#)
-    - [Related documentation](#)
+- [Status](#status)
+- [Examples](#examples)
+- [Project integration](#project-integration)
+- [Getting started](#getting-started)
+- [Configuration](#configuration)
+    - [Define your own test module suffix](#define-your-own-test-module-suffix)
+- [Contributing](#contributing)
+- [TODO](#todo)
+- [Other Haskellers made this possible](#other-haskellers-made-this-possible)
+- [Related documentation](#related-documentation)
 
 ### Status
 So far, this package is only a hackage candidate. I'd like to see that change
