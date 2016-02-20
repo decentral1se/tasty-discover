@@ -11,6 +11,26 @@ $ cd tasty-discover/tasty-discover-example
 $ stack setup && stack test
 ```
 
+You'll get the usual tasty test report:
+
+```
+tasty-discover-integration-test-0.0.1: test (suite: tasty-travis-test)
+
+Discovered tests
+  nine is nine:            OK
+    +++ OK, passed 100 tests.
+  the answer:              OK
+  the number of the beast: OK
+  two is two:              OK
+    +++ OK, passed 100 tests.
+  three is three:          OK
+    +++ OK, passed 100 tests.
+
+All 5 tests passed (0.00s)
+
+Completed 3 action(s).
+```
+
 As you can see from the example code, the major steps are:
 
   - Define a test suite main in your cabal file
