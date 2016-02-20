@@ -31,6 +31,19 @@ All 5 tests passed (0.00s)
 Completed 3 action(s).
 ```
 
+`tasty-discover` accepts the usual tasty args:
+
+```
+lwm$ stack test --test-arguments="--list-tests"
+tasty-discover-integration-test-0.0.1: test (suite: tasty-travis-test, args: --list-tests)
+
+Discovered tests/nine is nine
+Discovered tests/the answer
+Discovered tests/the number of the beast
+Discovered tests/two is two
+Discovered tests/three is three
+```
+
 As you can see from the example code, the major steps are:
 
   - Define a test suite main in your cabal file
