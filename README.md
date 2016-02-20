@@ -9,6 +9,7 @@ Automatic test discovery and runner for the [tasty framework][tasty-framework].
 - [Examples](#examples)
 - [Project integration](#project-integration)
 - [Getting started](#getting-started)
+- [Stack template](#stack-template)
 - [Configuration](#configuration)
     - [Define your own test module suffix](#define-your-own-test-module-suffix)
 - [Contributing](#contributing)
@@ -100,6 +101,27 @@ Now, we can run our tests with:
 $ stack test
 ```
 
+### Stack template
+A `tasty-discover` `stack` template is being maintained [here][tasty-discover-template],
+which you can start a new project with by running:
+
+```
+$ stack new <project-name> tasty-discover
+```
+
+This template accepts a number of parameters, which `stack` helpfully tells us we can:
+
+```
+You can provide them in /home/<username>/.stack/config.yaml, like this:
+templates:
+  params:
+    author-email: value
+    author-name: value
+    category: value
+    copyright: value
+    github-username: value
+```
+
 ### Configuration
 
 #### Define your own test module suffix
@@ -145,3 +167,4 @@ people involved with these projects:
 [example-project]: https://github.com/lwm/tasty-discover/tree/master/tasty-discover-example
 [configuration]: https://github.com/lwm/tasty-discover#configuration
 [suffix-example]: https://github.com/lwm/tasty-discover/tree/master/integration-test/test-configurable-module
+[tasty-discover-template]: https://github.com/commercialhaskell/stack-templates/blob/master/tasty-discover.hsfiles
