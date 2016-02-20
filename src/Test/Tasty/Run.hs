@@ -90,7 +90,6 @@ run processor_args = do
       Right conf -> do
         stringed <- stringifyTestList $ getListOfTests src conf
         tests    <- findTests src conf
-        putStrLn (tmpModule src conf tests stringed)
         writeFile dst (tmpModule src conf tests stringed)
 
     _ -> do
@@ -106,14 +105,20 @@ run processor_args = do
 --               "[\"prop_one\"]"
 -- ...
 tmpModule :: FilePath -> Config -> [Test] -> String -> String
-tmpModule src conf tests stringed =
-  ( "{-# LINE 1 " . shows src . " #-}\n"
+tmpModule src conf tests ts =
+  (
+    "{-# LINE 1 " . shows src . " #-}\n"
   . showString "{-# OPTIONS_GHC -fno-warn-warnings-deprecations #-}\n"
   . showString "{-# LANGUAGE TemplateHaskell #-}\n"
+
   . showString "module Main where\n"
   . showString "import Test.Tasty.Discover\n"
   . importList tests (configModuleSuffix conf)
-  . showString ("main = $(defaultMainGeneratorFor \"Discovered tests\" " ++ stringed ++ ")")
+
+  . showString "main :: IO ()\n"
+  . showString "main = do\n"
+  . showString ("\t$(defaultMainGeneratorFor \"tasty-discover\" " ++ ts ++ ")")
+
   ) "\n"
 
 -- | A list of test function names as a String
@@ -151,23 +156,33 @@ findTests src conf = do
 
 -- | A test file becomes a Test type
 --
--- >>> fileToTest "test" "FooTest.hs"
+-- >>> fileToTest "test" Nothing "FooTest.hs"
 -- Just (Test {testFile = "test/FooTest.hs", testModule = "Foo"})
+--
+-- >>> fileToTest "test" "MySuffix" "FooMySuffix.hs"
+-- Just (Test {testFile = "test/FooMySuffix.hs", testModule = "Foo"})
 fileToTest :: FilePath -> Maybe String -> FilePath -> Maybe Test
 fileToTest dir suffix file = case reverse $ splitDirectories file of
+  -- @TODO - REFACTOR
   x:xs -> case suffix of
-            Just suffix -> case stripSuffix ((++ ".hs") suffix) x <|> stripSuffix ((++ ".lhs") suffix) x of
-              Just name | isValidModuleName name && all isValidModuleName xs ->
-                Just . Test (dir </> file) $ (intercalate "." . reverse) (name : xs)
-              _ -> Nothing
-            _ -> case stripSuffix "Test.hs" x <|> stripSuffix "Test.lhs" x of
-              Just name | isValidModuleName name && all isValidModuleName xs ->
-                Just . Test (dir </> file) $ (intercalate "." . reverse) (name : xs)
-              _ -> Nothing
+            Just suffix' -> case
+                stripSuffix (suffix' ++ ".hs")  x <|>
+                stripSuffix (suffix' ++ ".lhs") x of
+                    Just name | isValidModuleName name && all isValidModuleName xs ->
+                        Just . Test (dir </> file) $
+                            (intercalate "." . reverse) (name : xs)
+                    _ -> Nothing
+            _ -> case
+                stripSuffix "Test.hs" x <|>
+                stripSuffix "Test.lhs" x of
+                    Just name | isValidModuleName name && all isValidModuleName xs ->
+                        Just . Test (dir </> file) $
+                            (intercalate "." . reverse) (name : xs)
+                    _ -> Nothing
   _   -> Nothing
   where
     stripSuffix :: Eq a => [a] -> [a] -> Maybe [a]
-    stripSuffix suffix str = reverse <$> stripPrefix (reverse suffix) (reverse str)
+    stripSuffix suff str = reverse <$> stripPrefix (reverse suff) (reverse str)
 
 -- | All files under 'baseDir'
 --
@@ -213,5 +228,5 @@ importList ts suffix = foldr (.) "" . map f $ ts
   where
     f :: Test -> ShowS
     f test = case suffix of
-      Just suffix -> "import " . showString (testModule test) . showString (suffix ++ "\n")
-      _           -> "import " . showString (testModule test) . "Test\n"
+      Just suffix' -> "import " . showString (testModule test) . showString (suffix' ++ "\n")
+      _            -> "import " . showString (testModule test) . "Test\n"

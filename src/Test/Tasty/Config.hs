@@ -24,7 +24,10 @@ defaultConfig :: Config
 defaultConfig = Config Nothing
 
 options :: [OptDescr (Config -> Config)]
-options = [Option [] ["module-suffix"] (ReqArg (\s c -> c {configModuleSuffix = Just s}) "SUFFIX") ""]
+options = [
+    Option [] ["module-suffix"]
+        (ReqArg (\s c -> c {configModuleSuffix = Just s}) "SUFFIX") ""
+  ]
 
 usage :: String -> String
 usage prog = "\nUsage: " ++ prog ++ " SRC CUR DST [--module-suffix=SUFFIX]\n"
