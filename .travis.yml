@@ -11,7 +11,9 @@ cache:
     - $HOME/.stack/
 
 env:
-- TEST_DIR=$TRAVIS_BUILD_DIR/tasty-discover-example
+  global:
+    - EXAMPLE_DIR=$TRAVIS_BUILD_DIR/tasty-discover-example
+    - INTEGRATION_DIR=$TRAVIS_BUILD_DIR/integration-test
 
 before_install:
 - mkdir -p ~/.local/bin
@@ -22,5 +24,5 @@ install:
 - stack --no-terminal setup
 
 script:
-- cd $TEST_DIR
-- stack --no-terminal test
+- cd $EXAMPLE_DIR && stack build --no-terminal --test
+- cd $INTEGRATION_DIR && stack build --no-terminal --test
