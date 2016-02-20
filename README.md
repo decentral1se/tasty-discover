@@ -9,10 +9,11 @@ shortly but for now, to use this package in your projects, you'll need to get
 it from Github. See the [installation section][install-discover] for more
 details.
 
-### Example project
-See the [example project](https://github.com/lwm/tasty-discover/tree/master/tasty-discover-example).
+### Examples
+See the [example project][example-project]. Also, there are additional
+examples in the [integration tests folder][integration-tests].
 
-### Integration
+### Project integration
 If you are using [stack][stack-haskell], you can add the following to your `stack.yaml`:
 
 ```
@@ -35,7 +36,7 @@ extra-deps:
 `tasty-discover` expects the following conventions:
 
   - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. ([example](https://github.com/lwm/tasty-discover/blob/master/tasty-discover-example/test/Tasty.hs))
-  - Test files ending with `Test.hs`
+  - Test file names ending with `Test.hs` (however, this is configurable, see [configuration][configuration])
   - Test cases starting with either `prop_`, `case_` (related to [tasty-th usage](https://github.com/bennofs/tasty-th#usage))
     - It is also possible to pass `test_` for test groups
 
@@ -85,6 +86,20 @@ Now, we can run our tests with:
 $ stack test
 ```
 
+### Configuration
+
+#### Define your own test module suffix
+If you would prefer to end your test module file names with something other
+than `Test.hs`, you can set the following preprocessor line:
+
+```
+{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --module-suffix=MySuffix #-}
+```
+
+`tasty-discover` will now search for test modules with the `MySuffix.hs`
+ending.  If this option is not present, the default is the `Test.hs` suffix.
+See the [integration test example][suffix-example] for more details.
+
 ### Contributing
 Pull requests are very welcome! Please submit an issue so we can discuss what
 you would like to do. I test any changes within the `tasty-discover-example`
@@ -116,3 +131,7 @@ people involved with these projects:
 [hspec-discover]: https://hspec.github.io/hspec-discover.html
 [install-discover]: https://github.com/lwm/tasty-discover#installation
 [tasty-framework]: https://github.com/feuerbach/tasty
+[integration-tests]: https://github.com/lwm/tasty-discover/tree/master/integration-test
+[example-project]: https://github.com/lwm/tasty-discover/tree/master/tasty-discover-example
+[configuration]: https://github.com/lwm/tasty-discover#configuration
+[suffix-example]: https://github.com/lwm/tasty-discover/tree/master/integration-test/test-configurable-module
