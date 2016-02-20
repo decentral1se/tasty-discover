@@ -60,8 +60,7 @@ Inside this file, add the following:
 ```
 
 Create a test file inside `test/`. `tasty-discover` can detect test files in
-whatever directory structure you choose (as long as they sit under your
-`hs-source-dirs`), so there is no restrictions on directory organization.
+whatever directory structure you choose (as long as they sit in the same directory as the `Tasty.hs` file created above or any subdirectory thereof), so there is no restrictions on directory organization.
 However, you must end your test file names with `Test.hs`. So, for example,
 `EatYourLandlordTest.hs` would be a perfectly acceptable test file name.
 
