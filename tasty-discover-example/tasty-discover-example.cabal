@@ -6,7 +6,7 @@ cabal-version:       >=1.10
 library
   default-language:    Haskell2010
 
-test-suite tasty-travis-test
+test-suite tasty-discover-example-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   main-is:             Tasty.hs
