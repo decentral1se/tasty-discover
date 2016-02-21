@@ -19,7 +19,7 @@ Automatic test discovery and runner for the [tasty framework][tasty-framework].
 ### Status
 So far, this package is only a hackage candidate. I'd like to see that change
 shortly but for now, to use this package in your projects, you'll need to get
-it from Github. See the [installation section][install-discover] for more
+it from Github. See the [project integration][project-integration] for more
 details.
 
 ### Examples
@@ -161,7 +161,7 @@ people involved with these projects:
 [tasty-th]: https://github.com/bennofs/tasty-th
 [hspec]: https://github.com/hspec/hspec
 [hspec-discover]: https://hspec.github.io/hspec-discover.html
-[install-discover]: https://github.com/lwm/tasty-discover#installation
+[project-integration]: https://github.com/lwm/tasty-discover#project-integration
 [tasty-framework]: https://github.com/feuerbach/tasty
 [integration-tests]: https://github.com/lwm/tasty-discover/tree/master/integration-test
 [example-project]: https://github.com/lwm/tasty-discover/tree/master/tasty-discover-example
