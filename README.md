@@ -61,7 +61,7 @@ test-suite your-test-suite-name
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test  -- your test directory
   main-is:             Tasty.hs  -- your `tasty-discover` pre processor
-  other-modules:       XTest, YTest, Folder.ZTest -- your test files
+  other-modules:       FooTest -- your test files
   build-depends:       base, tasty-discover  -- your dependencies
   default-language:    Haskell2010
 ```
