@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/lwm/tasty-discover.svg?branch=master)](https://travis-ci.org/lwm/tasty-discover)
+![GHC Versions](https://img.shields.io/badge/GHC-7.10.2-brightgreen.svg)
+![License](https://img.shields.io/badge/license-GPLv3-brightgreen.svg)
 
 # tasty-discover
 Automatic test discovery and runner for the [tasty framework][tasty-framework].
