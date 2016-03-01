@@ -83,7 +83,7 @@ test file names with `Test.hs` for them to be discovered. So, for example, `FooT
 would be a perfectly acceptable test file name.
 
 `tasty-discover` exports the `tasty-quickcheck` and `tasty-hunit` modules, so
-we can simple write the following in `test/FooTest.hs`:
+we can simply write the following in `test/FooTest.hs`:
 
 ```
 module FooTest where
