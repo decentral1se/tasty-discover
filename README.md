@@ -39,8 +39,7 @@ packages:
     commit: "HEAD"
 ```
 
-Note. `tasty-discover` relies on `tasty-th` version `0.1.4`, so you may need to
-explicitly set this in your `stack.yaml` like so:
+Note. `tasty-discover` relies on `tasty-th-0.1.4`. You may need to explicitly set this in your `stack.yaml`:
 
 ```
 extra-deps:
@@ -51,7 +50,7 @@ extra-deps:
 `tasty-discover` expects the following conventions:
 
   - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. ([example](https://github.com/lwm/tasty-discover/blob/master/tasty-discover-example/test/Tasty.hs))
-  - Test file names ending with `Test.hs` (this is now configurable, see [configuration][configuration])
+  - Test files ending with `Test.hs` (this is now configurable, see [configuration][configuration])
   - Test cases starting with either `prop_`, `case_` (related to [tasty-th usage](https://github.com/bennofs/tasty-th#usage))
     - It is also possible to pass `test_` for test groups
 
@@ -135,20 +134,16 @@ than `Test.hs`, you can set the following preprocessor line:
 ```
 
 `tasty-discover` will now search for test modules with the `MySuffix.hs`
-ending.  If this option is not present, the default is the `Test.hs` suffix.
+file ending. If this option is not present, the default is the `Test.hs` suffix.
 See the [integration test example][suffix-example] for more details.
 
 ### Contributing
 Pull requests are very welcome! Please submit an issue so we can discuss what
 you would like to do. I test any changes within the `integration-test`
-directory, which has its own `.cabal` and `stack.yaml` file. Please add
-tests there if you want to add functionality. Check the issues for things
-that can be worked on immediately.
+directory, which has its own `.cabal` and `stack.yaml` file. Check the issues
+for things that can be worked on immediately.
 
 ### Other Haskellers made this possible
-This project borrows / is heavily influenced from the awesome work of the
-people involved with these projects:
-
   - [tasty][tasty-framework]
   - [tasty-th][tasty-th]
   - [hspec][hspec]
