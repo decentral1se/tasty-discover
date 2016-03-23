@@ -126,7 +126,7 @@ tmpModule src conf tests ts =
 -- >>> stringifyTestList ["prop_one", "prop_two"]
 -- "[\"prop_one\",\"prop_two\"]"
 stringifyTestList :: IO [String] -> IO String
-stringifyTestList xs = fmap show xs
+stringifyTestList = fmap show
 
 -- | All test function names in 'src'
 --
@@ -143,7 +143,7 @@ getListOfTests src conf = do
 -- >>> getTestFiles $ findTests "test/Tasty.hs"
 -- ["test/FooTest.hs"]
 getTestFiles :: IO [Test] -> IO [FilePath]
-getTestFiles tests = fmap (fmap testFile) tests
+getTestFiles = fmap (fmap testFile)
 
 -- | All tests that are not the 'src' file
 --
