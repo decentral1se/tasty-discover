@@ -16,9 +16,8 @@ module Test.Tasty.Discover (
   , module Test.Tasty.Run
 ) where
 
-import Test.Tasty
-import Test.Tasty.TH
-import Test.Tasty.HUnit
-import Test.Tasty.QuickCheck
-
-import Test.Tasty.Run
+import           Test.Tasty
+import           Test.Tasty.HUnit
+import           Test.Tasty.QuickCheck
+import           Test.Tasty.TH
+import           Test.Tasty.Run

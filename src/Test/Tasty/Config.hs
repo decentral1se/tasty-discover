@@ -9,12 +9,7 @@ module Test.Tasty.Config (
   , configModuleSuffix
 ) where
 
-import System.Console.GetOpt (
-    getOpt
-  , OptDescr(Option)
-  , ArgDescr(ReqArg)
-  , ArgOrder(Permute)
-  )
+import Test.Tasty.Prelude
 
 data Config = Config {
   configModuleSuffix :: Maybe String

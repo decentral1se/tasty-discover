@@ -1,4 +1,6 @@
-{-# LANGUAGE TypeSynonymInstances, FlexibleInstances, OverloadedStrings #-}
+{-# LANGUAGE FlexibleInstances    #-}
+{-# LANGUAGE OverloadedStrings    #-}
+{-# LANGUAGE TypeSynonymInstances #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 -- | Where we generate the test running boilerplate. Preprocessor arguments
@@ -9,61 +11,28 @@
 
 module Test.Tasty.Run (
     run
-
-  -- for experimentation/testing
   , Test
-  , stringifyTestList
+  , defaultConfig
+  , fileToTest
+  , findTests
+  , getFilesRecursive
   , getListOfTests
   , getTestFiles
-  , findTests
-  , tmpModule
-  , fileToTest
-  , getFilesRecursive
-  , isValidModuleName
-  , isValidModuleChar
   , importList
+  , isValidModuleChar
+  , isValidModuleName
+  , parseConfig
+  , stringifyTestList
   , testFile
   , testModule
-  , defaultConfig
-  , parseConfig
+  , tmpModule
   ) where
 
--- System
-import System.IO
-import System.Exit
-import System.Environment         (getProgName)
-import System.Directory           (
-    doesFileExist
-  , doesDirectoryExist
-  , getDirectoryContents
-  )
-import System.FilePath            (
-    splitDirectories
-  , splitFileName
-  , (</>)
-  )
+import           Test.Tasty.Prelude
 
--- Data
-import Data.String
-import Data.Maybe
-import Data.List                   (sort, intercalate, stripPrefix)
-import Data.Char                   (isAlphaNum, isUpper)
+import           Test.Tasty.Config (Config, configModuleSuffix, defaultConfig,
+                                    parseConfig, usage)
 
--- Control
-import Control.Applicative
-import Control.Monad
-
--- Config
-import Test.Tasty.Config           (
-    Config
-  , configModuleSuffix
-  , defaultConfig
-  , parseConfig
-  , usage
-  )
-
--- Tasty
-import Test.Tasty.TH               (extractTestFunctions)
 
 instance IsString ShowS where
   fromString = showString
