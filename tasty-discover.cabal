@@ -22,8 +22,10 @@ library
   exposed-modules:
     Test.Tasty.Discover
   other-modules:
-    Test.Tasty.Run
     Test.Tasty.Config
+    Test.Tasty.Parse
+    Test.Tasty.Prelude
+    Test.Tasty.Run
   build-depends:
     base == 4.*
     , filepath
@@ -43,8 +45,10 @@ executable tasty-discover
   main-is:
       Main.hs
   other-modules:
-      Test.Tasty.Discover
       Test.Tasty.Config
+      Test.Tasty.Discover
+      Test.Tasty.Parse
+      Test.Tasty.Prelude
       Test.Tasty.Run
   build-depends:
       base == 4.*
@@ -53,6 +57,17 @@ executable tasty-discover
     , tasty-discover
     , tasty-th
   default-language: Haskell2010
+
+test-suite tasty-discover-unit-tests
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Tasty.hs
+  other-modules:
+    ParseTest
+  build-depends:
+      base == 4.*
+    , tasty-discover
+  default-language:    Haskell2010
 
 Source-repository head
   type:     git

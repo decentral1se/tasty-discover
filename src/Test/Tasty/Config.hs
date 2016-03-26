@@ -1,15 +1,13 @@
--- | Configuration options passed via the `Tasty.hs` preprocessor
---   file. This implementation is largely borrowed from `hspec-discover`.
+-- | The configuration type and it's CLI options definition.
 
 module Test.Tasty.Config (
-    Config
-  , parseConfig
-  , usage
+    Config(Config)
   , defaultConfig
   , configModuleSuffix
+  , options
 ) where
 
-import Test.Tasty.Prelude
+import           Test.Tasty.Prelude
 
 data Config = Config {
   configModuleSuffix :: Maybe String
@@ -23,14 +21,3 @@ options = [
     Option [] ["module-suffix"]
         (ReqArg (\s c -> c {configModuleSuffix = Just s}) "SUFFIX") ""
   ]
-
-usage :: String -> String
-usage prog = "\nUsage: " ++ prog ++ " SRC CUR DST [--module-suffix=SUFFIX]\n"
-
-parseConfig :: String -> [String] -> Either String Config
-parseConfig prog args = case getOpt Permute options args of
-    (opts, [], []) -> Right $ foldl (flip id) defaultConfig opts
-    (_, _, err:_)  -> formatError err
-    (_, arg:_, _)  -> formatError ("unexpected argument `" ++ arg ++ "'\n")
-  where
-    formatError err = Left (prog ++ ": " ++ err ++ usage prog)

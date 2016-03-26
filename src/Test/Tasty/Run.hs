@@ -26,12 +26,13 @@ module Test.Tasty.Run (
   , testFile
   , testModule
   , tmpModule
+  , Config(Config, configModuleSuffix)
   ) where
 
 import           Test.Tasty.Prelude
 
-import           Test.Tasty.Config (Config, configModuleSuffix, defaultConfig,
-                                    parseConfig, usage)
+import           Test.Tasty.Config (Config(Config), configModuleSuffix, defaultConfig)
+import           Test.Tasty.Parse  (parseConfig)
 
 
 instance IsString ShowS where
@@ -62,7 +63,7 @@ run processor_args = do
         writeFile dst (tmpModule src conf tests stringed)
 
     _ -> do
-      hPutStrLn stderr (usage name)
+      hPutStrLn stderr name
       exitFailure
 
 

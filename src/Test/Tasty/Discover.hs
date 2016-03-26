@@ -10,14 +10,14 @@
 
 module Test.Tasty.Discover (
     module Test.Tasty
-  , module Test.Tasty.TH
   , module Test.Tasty.HUnit
   , module Test.Tasty.QuickCheck
   , module Test.Tasty.Run
+  , module Test.Tasty.TH
 ) where
 
 import           Test.Tasty
 import           Test.Tasty.HUnit
 import           Test.Tasty.QuickCheck
-import           Test.Tasty.TH
 import           Test.Tasty.Run
+import           Test.Tasty.TH
