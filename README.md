@@ -25,8 +25,9 @@ it from Github. See the [project integration][project-integration] for more
 details.
 
 ### Examples
-See the [example project][example-project]. Also, there are additional
-examples in the [integration tests folder][integration-tests].
+  - Basic example: [tasty-discover-example/][example-project]
+  - Unit tests: [test/][test-folder] folder.
+  - Integration tests: [integration-test/][integration-tests]
 
 ### Project integration
 If you are using [stack][stack-haskell], you can add the following to your `stack.yaml`:
@@ -165,3 +166,4 @@ for things that can be worked on immediately.
 [configuration]: https://github.com/lwm/tasty-discover#configuration
 [suffix-example]: https://github.com/lwm/tasty-discover/tree/master/integration-test/test-configurable-module
 [tasty-discover-template]: https://github.com/commercialhaskell/stack-templates/blob/master/tasty-discover.hsfiles
+[test-folder]: https://github.com/lwm/tasty-discover/tree/master/test
