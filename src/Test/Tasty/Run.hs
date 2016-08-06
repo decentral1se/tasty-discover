@@ -80,7 +80,6 @@ tmpModule src conf tests ts =
   . importList tests (configModuleSuffix conf)
 
   . showString "main :: IO ()\n"
-  . showString "main = do\n"
-  . showString ("\t$(defaultMainGeneratorFor \"tasty-discover\" " ++ ts ++ ")")
+  . showString ("main = do $(defaultMainGeneratorFor \"tasty-discover\" " ++ ts ++ ")")
 
   ) "\n"
