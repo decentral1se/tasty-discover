@@ -1,9 +1,9 @@
 -- | Automatic test discovery with the Tasty framework.
 --
--- When a, for example, `stack test` gets called, the preprocessor test
--- file will thread arguments into the `Test.Tasty.Run` module which performs
--- all the boilerplate generation. So, if you wanna hack on `tasty-discover`,
--- please check it out below.
+-- When `stack test` gets called, the preprocessor file will thread arguments
+-- into the `Test.Tasty.Run` module which performs all the boilerplate
+-- generation. So, if you wanna hack on `tasty-discover`, please check it out
+-- below.
 --
 -- For more practical usage, please refer to the Github documentation.
 -- https://github.com/lwm/tasty-discover
