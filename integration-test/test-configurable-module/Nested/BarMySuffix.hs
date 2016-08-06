@@ -1,3 +1,4 @@
 module Nested.BarMySuffix where
 
-prop_another = 10 == 10
+prop_life :: Bool
+prop_life = 42 == (42 :: Integer)

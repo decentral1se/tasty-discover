@@ -26,6 +26,6 @@ install:
 - stack --no-terminal install
 
 script:
-- cd $UNIT_TEST_DIR   && stack build --no-terminal --test
-- cd $EXAMPLE_DIR     && stack build --no-terminal --test
-- cd $INTEGRATION_DIR && stack build --no-terminal --test
+- cd $UNIT_TEST_DIR   && stack build --no-terminal --test --pedantic
+- cd $EXAMPLE_DIR     && stack build --no-terminal --test --pedantic
+- cd $INTEGRATION_DIR && stack build --no-terminal --test --pedantic
