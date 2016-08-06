@@ -11,8 +11,8 @@ category:         Testing
 stability:        experimental
 bug-reports:      https://github.com/lwm/tasty-discover/issues
 homepage:         https://github.com/lwm/tasty-discover/
-synopsis:         Automatically discover and run Tasty framework tests
-description:      Automatically discover and run Tasty framework tests
+synopsis:         Automatically discover and run Tasty framework tests.
+description:      Automatically discover and run Tasty framework tests.
                   .
                   <http://github.com/lwm/tasty-discover>
 
@@ -26,6 +26,8 @@ library
     Test.Tasty.Parse
     Test.Tasty.Prelude
     Test.Tasty.Run
+    Test.Tasty.Util
+    Test.Tasty.Type
   build-depends:
     base == 4.*
     , filepath
@@ -50,6 +52,8 @@ executable tasty-discover
       Test.Tasty.Parse
       Test.Tasty.Prelude
       Test.Tasty.Run
+      Test.Tasty.Util
+      Test.Tasty.Type
   build-depends:
       base == 4.*
     , filepath
