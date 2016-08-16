@@ -15,6 +15,7 @@ Automatic test discovery and runner for the [tasty framework][tasty-framework].
 - [Configuration](#configuration)
     - [Define your own test module suffix](#define-your-own-test-module-suffix)
 - [Contributing](#contributing)
+    - [Testing](#testing)
 - [Other Haskellers made this possible](#other-haskellers-made-this-possible)
 - [Related documentation](#related-documentation)
 
@@ -111,7 +112,7 @@ which you can start a new project with by running:
 $ stack new <project-name> tasty-discover
 ```
 
-This template accepts a number of parameters, which `stack` helpfully tells us we can:
+This template accepts a number of parameters, which `stack` helpfully tells us, we can:
 
 ```
 You can provide them in /home/<username>/.stack/config.yaml, like this:
@@ -140,9 +141,23 @@ See the [integration test example][suffix-example] for more details.
 
 ### Contributing
 Pull requests are very welcome! Please submit an issue so we can discuss what
-you would like to do. I test any changes within the `integration-test`
-directory, which has its own `.cabal` and `stack.yaml` file. Check the issues
-for things that can be worked on immediately.
+you would like to do. You can simply fork this repository, and open a pull request.
+Check the issues for things that can be worked on immediately.
+
+#### Testing
+`tasty-discover` uses `tasty-discover` to test itself. I'd like to see your
+changes tested in the `integration-test` and/or `test/` folders, where
+applicable. If you think the feature is applicable to a wide audience, you
+could add it to the `tasty-discover-example` as well.
+
+You can run the tests as follows:
+
+```
+$ make test             # all tests
+$ make unit_test        # only unit tests
+$ make integration_test # only integration tests
+$ make example_test     # only the example code tests
+```
 
 ### Other Haskellers made this possible
   - [tasty][tasty-framework]
