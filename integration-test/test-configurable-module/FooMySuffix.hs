@@ -1,4 +1,4 @@
 module FooMySuffix where
 
-prop_beast :: Bool
-prop_beast = 666 == (666 :: Integer)
+prop_theNumberOfTheBeast :: Bool
+prop_theNumberOfTheBeast = 666 == (666 :: Integer)
