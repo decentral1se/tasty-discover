@@ -1,4 +1,4 @@
 module AllTheFolders.AnotherNestTest where
 
-prop_nine_is_nine :: Bool
-prop_nine_is_nine = 9 == (9 :: Integer)
+prop_nineIsNine :: Bool
+prop_nineIsNine = 9 == (9 :: Integer)

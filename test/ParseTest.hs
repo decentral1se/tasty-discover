@@ -6,26 +6,26 @@ import           Test.Tasty.Discover (Assertion,
                                       Config (Config, configModuleSuffix),
                                       parseConfig, (@?=))
 
-case_parse_config :: Assertion
-case_parse_config =
+case_parseConfig :: Assertion
+case_parseConfig =
     parseConfig "foo" ["--module-suffix=MySuffix"]
     @?=
     Right Config {configModuleSuffix=Just "MySuffix"}
 
-case_parse_config_missing_arg :: Assertion
-case_parse_config_missing_arg =
+case_parseConfigMissingArg :: Assertion
+case_parseConfigMissingArg =
     parseConfig "foo" ["--module-suffix"]
     @?=
     Left "foo: option `--module-suffix' requires an argument SUFFIX\n"
 
-case_parse_config_empty_arg :: Assertion
-case_parse_config_empty_arg =
+case_parseConfigEmptyArg :: Assertion
+case_parseConfigEmptyArg =
     parseConfig "foo" []
     @?=
     Right (Config Nothing)
 
-case_parse_config_invalid_arg :: Assertion
-case_parse_config_invalid_arg =
+case_parseConfigInvalidArg :: Assertion
+case_parseConfigInvalidArg =
     parseConfig "foo" ["a"]
     @?=
     Left "foo: unexpected argument `a`\n"
