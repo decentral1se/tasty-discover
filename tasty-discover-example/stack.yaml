@@ -1,4 +1,4 @@
-resolver: lts-5.3
+resolver: nightly-2016-08-17
 packages:
 - '.'
 - location:
@@ -7,5 +7,3 @@ packages:
   extra-dep: true
 extra-deps:
 - "tasty-th-0.1.4"
-flags: {}
-extra-package-dbs: []
