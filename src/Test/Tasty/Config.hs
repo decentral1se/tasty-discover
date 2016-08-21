@@ -1,4 +1,4 @@
--- | The configuration type and it's CLI options definition.
+-- | Preprocessor configuration.
 
 module Test.Tasty.Config (
   Config(Config)
@@ -8,11 +8,14 @@ module Test.Tasty.Config (
 ) where
 
 import System.Console.GetOpt (ArgDescr (ReqArg), OptDescr (Option))
+
 import Test.Tasty.Type (Config (Config), Config (configModuleSuffix))
 
+-- | An empty configuration.
 defaultConfig :: Config
 defaultConfig = Config Nothing
 
+-- | @TODO
 options :: [OptDescr (Config -> Config)]
 options = [
     Option [] ["module-suffix"]

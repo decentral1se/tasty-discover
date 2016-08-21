@@ -18,7 +18,7 @@ import Test.Tasty.Parse (parseConfig)
 import Test.Tasty.Util (importList, findTests, stringifyTestList, getListOfTests)
 import Test.Tasty.Type (Config, Config(configModuleSuffix), Test)
 
--- | Accept some args and run the tests
+-- | Accept some args and run the tests.
 --
 -- >>> run ["w", "x", "y", "z"]
 -- ...
@@ -42,7 +42,7 @@ run processor_args = do
       exitFailure
 
 
--- | The holy grail. This 'tmpModule' runs your tests
+-- | The holy grail. This 'tmpModule' runs your tests.
 --
 -- >>> tmpModule "test/Tasty.hs"
 --               Config {configModuleName = Nothing}
@@ -55,12 +55,9 @@ tmpModule src conf tests ts =
     "{-# LINE 1 " . shows src . " #-}\n"
   . showString "{-# OPTIONS_GHC -fno-warn-warnings-deprecations #-}\n"
   . showString "{-# LANGUAGE TemplateHaskell #-}\n"
-
   . showString "module Main where\n"
   . showString "import Test.Tasty.Discover\n"
   . importList tests (configModuleSuffix conf)
-
   . showString "main :: IO ()\n"
   . showString ("main = do $(defaultMainGeneratorFor \"tasty-discover\" " ++ ts ++ ")")
-
   ) "\n"

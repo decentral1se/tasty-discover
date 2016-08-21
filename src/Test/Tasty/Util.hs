@@ -26,10 +26,11 @@ import Test.Tasty.TH (extractTestFunctions)
 import Test.Tasty.Config (Config, Config(configModuleSuffix))
 import Test.Tasty.Type
 
+-- | @TODO
 instance IsString ShowS where
   fromString = showString
 
--- | Import statements for a list of tests
+-- | Import statements for a list of tests.
 --
 -- >>> importList [Test {testFile = "test/SomeOtherTest.hs", testModule = "SomeOther"}]
 -- "import qualified SomeOtherTest\n"
@@ -63,7 +64,7 @@ isValidModuleName :: String -> Bool
 isValidModuleName [] = False
 isValidModuleName (c:cs) = isUpper c && all isValidModuleChar cs
 
--- | All files under 'baseDir'
+-- | All files under 'baseDir'.
 --
 -- >>> getFilesRecursive "test/"
 -- ["FooTest.hs", "BarTest.hs"]
@@ -77,7 +78,7 @@ getFilesRecursive baseDir = sort <$> go []
       files <- filterM (doesFileExist . (baseDir </>)) c
       return (files ++ concat dirs)
 
--- | A test file becomes a Test type
+-- | A test file becomes a Test type.
 --
 -- >>> fileToTest "test" Nothing "FooTest.hs"
 -- Just (Test {testFile = "test/FooTest.hs", testModule = "Foo"})
@@ -107,7 +108,7 @@ fileToTest dir suffix file = case reverse $ splitDirectories file of
     stripSuffix :: Eq a => [a] -> [a] -> Maybe [a]
     stripSuffix suff str = reverse <$> stripPrefix (reverse suff) (reverse str)
 
--- | All tests that are not the 'src' file
+-- | All tests that are not the 'src' file.
 --
 -- >>> findTests "test/Tasty.hs"
 -- [Test {testFile = "test/FooTest.hs", testModule = "Foo"}]
@@ -116,14 +117,14 @@ findTests src conf = do
   let (dir, file) = splitFileName src
   mapMaybe (fileToTest dir (configModuleSuffix conf)) . filter (/= file) <$> getFilesRecursive dir
 
--- | A list of test function names as a String
+-- | A list of test function names as a String.
 --
 -- >>> stringifyTestList ["prop_one", "prop_two"]
 -- "[\"prop_one\",\"prop_two\"]"
 stringifyTestList :: IO [String] -> IO String
 stringifyTestList = fmap show
 
--- | All test function names in 'src'
+-- | All test function names in 'src'.
 --
 -- >>> getListOfTests "test/Tasty.hs"
 -- ["prop_one"]
@@ -133,7 +134,7 @@ getListOfTests src conf = do
     allTests <- mapM extractTestFunctions allFiles
     return $ concat allTests
 
--- | File paths for test files
+-- | File paths for test files.
 --
 -- >>> getTestFiles $ findTests "test/Tasty.hs"
 -- ["test/FooTest.hs"]
