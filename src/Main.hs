@@ -1,10 +1,10 @@
--- | The main module which threads the preprocessor arguments
---   into the test generator logic.
+-- | Main module which passes preprocessor arguments to `Test.Tasty.Run`.
 
-module Main (main) where
+module Main where
 
-import           Test.Tasty.Prelude
-import           Test.Tasty.Run     (run)
+import System.Environment (getArgs)
+
+import Test.Tasty.Run (run)
 
 main :: IO ()
 main = getArgs >>= run

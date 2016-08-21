@@ -1,41 +1,22 @@
+-- | Test discovering and runner boilerplate generator.
+
 {-# LANGUAGE FlexibleInstances    #-}
 {-# LANGUAGE OverloadedStrings    #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
--- | Where we generate the test running boilerplate. Preprocessor arguments
--- arrive via the main function of `Test.Tasty.Discover`.
---
--- If you need to make `tasty-discover` do something new, it most likely needs
--- to happen here.
-
 module Test.Tasty.Run (
-    run
-  , Test
-  , defaultConfig
-  , fileToTest
-  , findTests
-  , getFilesRecursive
-  , getListOfTests
-  , getTestFiles
-  , importList
-  , isValidModuleChar
-  , isValidModuleName
-  , parseConfig
-  , stringifyTestList
-  , testFile
-  , testModule
-  , tmpModule
-  , Config(Config, configModuleSuffix)
-  ) where
+  run
+, tmpModule
+) where
 
-import           Test.Tasty.Config (Config(Config), configModuleSuffix, defaultConfig)
-import           Test.Tasty.Parse  (parseConfig)
-import           Test.Tasty.Prelude
-import           Test.Tasty.Type
-import           Test.Tasty.Util (importList, isValidModuleChar, isValidModuleName,
-                                  getFilesRecursive, fileToTest, findTests,
-                                  stringifyTestList, getListOfTests, getTestFiles)
+import System.Environment (getProgName)
+import System.IO (hPutStrLn, stderr)
+import System.Exit (exitFailure)
+
+import Test.Tasty.Parse (parseConfig)
+import Test.Tasty.Util (importList, findTests, stringifyTestList, getListOfTests)
+import Test.Tasty.Type (Config, Config(configModuleSuffix), Test)
 
 -- | Accept some args and run the tests
 --
