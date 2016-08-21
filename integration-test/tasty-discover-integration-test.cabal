@@ -14,6 +14,7 @@ test-suite configurable-suffix
   other-modules:
     FooMySuffix
     Nested.BarMySuffix
-  build-depends:       base
-                     , tasty-discover
+  build-depends:
+    base
+    , tasty-discover
   default-language:    Haskell2010
