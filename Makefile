@@ -14,7 +14,7 @@ integration_test:
 
 example_test:
 	cd $(EXAMPLE_DIR) \
-	&& stack test tasty-discover-example:example-test\
+	&& stack test tasty-discover-example:example-test \
 	&& cd -
 
 test:
