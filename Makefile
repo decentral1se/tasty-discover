@@ -5,16 +5,16 @@ EXAMPLE_DIR:=./tasty-discover-example/
 STACK_TEST:=stack test --pedantic
 
 unit_test:
-	stack test tasty-discover:unit-tests
+	$(STACK_TEST) tasty-discover:unit-tests
 
 integration_test:
 	cd $(INTEGRATION_DIR) \
-	&& stack test tasty-discover-integration-test:configurable-suffix \
+	&& $(STACK_TEST) tasty-discover-integration-test:configurable-suffix \
 	&& cd -
 
 example_test:
 	cd $(EXAMPLE_DIR) \
-	&& stack test tasty-discover-example:example-test \
+	&& $(STACK_TEST) tasty-discover-example:example-test \
 	&& cd -
 
 test:
