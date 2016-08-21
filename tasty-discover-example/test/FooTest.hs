@@ -1,6 +1,12 @@
 module FooTest where
 
-import Test.Tasty.Discover (Assertion, (@?=))
+import Test.Tasty.Discover (Assertion, (@?=), TestTree, testCase)
+
+test_allMyTestsGrouped :: [TestTree]
+test_allMyTestsGrouped =
+    [ testCase "Testing the meaning of life." case_theAnswer
+    , testCase "Testing the number of the beast." case_theNumberOfTheBeast
+    ]
 
 case_theAnswer :: Assertion
 case_theAnswer = 42 @?= (42 :: Integer)
