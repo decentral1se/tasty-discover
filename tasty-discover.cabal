@@ -24,7 +24,6 @@ library
   other-modules:
     Test.Tasty.Config
     Test.Tasty.Parse
-    Test.Tasty.Prelude
     Test.Tasty.Run
     Test.Tasty.Util
     Test.Tasty.Type
@@ -50,7 +49,6 @@ executable tasty-discover
       Test.Tasty.Config
       Test.Tasty.Discover
       Test.Tasty.Parse
-      Test.Tasty.Prelude
       Test.Tasty.Run
       Test.Tasty.Util
       Test.Tasty.Type

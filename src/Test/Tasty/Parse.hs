@@ -1,11 +1,12 @@
--- | Parser for the GHC preprocessor definition found, typically, in a `Tasty.hs`.
+-- | Parser for the GHC preprocessor definition.
+--   Typically found in a `Tasty.hs`.
 
 module Test.Tasty.Parse (
-    parseConfig
+  parseConfig
 ) where
 
-import           Test.Tasty.Config  (Config, defaultConfig, options)
-import           Test.Tasty.Prelude
+import System.Console.GetOpt (ArgOrder (Permute), getOpt)
+import Test.Tasty.Config  (Config, defaultConfig, options)
 
 parseConfig :: String -> [String] -> Either String Config
 parseConfig prog args = case getOpt Permute options args of

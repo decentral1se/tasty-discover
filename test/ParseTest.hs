@@ -2,9 +2,8 @@
 
 module ParseTest where
 
-import           Test.Tasty.Discover (Assertion,
-                                      Config (Config, configModuleSuffix),
-                                      parseConfig, (@?=))
+import Test.Tasty.Discover (parseConfig, Config(Config, configModuleSuffix),
+                            Assertion, (@?=))
 
 case_parseConfig :: Assertion
 case_parseConfig =

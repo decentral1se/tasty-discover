@@ -1,17 +1,14 @@
 -- | The configuration type and it's CLI options definition.
 
 module Test.Tasty.Config (
-    Config(Config)
-  , defaultConfig
-  , configModuleSuffix
-  , options
+  Config(Config)
+, defaultConfig
+, configModuleSuffix
+, options
 ) where
 
-import           Test.Tasty.Prelude
-
-data Config = Config {
-  configModuleSuffix :: Maybe String
-} deriving (Eq, Show)
+import System.Console.GetOpt (ArgDescr (ReqArg), OptDescr (Option))
+import Test.Tasty.Type (Config (Config), Config (configModuleSuffix))
 
 defaultConfig :: Config
 defaultConfig = Config Nothing

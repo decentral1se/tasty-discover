@@ -1,24 +1,30 @@
+-- | Utility functions.
+
 {-# LANGUAGE FlexibleInstances    #-}
 {-# LANGUAGE OverloadedStrings    #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
--- | Utility functions mainly used in the `Test.Tasty.Run` module.
-
 module Test.Tasty.Util (
-    importList
-  , isValidModuleChar
-  , isValidModuleName
-  , getFilesRecursive
-  , fileToTest
-  , findTests
-  , stringifyTestList
-  , getListOfTests
-  , getTestFiles
-  ) where
+  importList
+, findTests
+, stringifyTestList
+, getListOfTests
+, getTestFiles
+) where
 
-import Test.Tasty.Prelude
+import Control.Applicative ((<|>))
+import Control.Monad (filterM)
+import Data.Char (isAlphaNum, isUpper)
+import Data.List (intercalate, sort, stripPrefix)
+import Data.Maybe (mapMaybe)
+import Data.String (IsString, fromString)
+import System.Directory (doesDirectoryExist, doesFileExist, getDirectoryContents)
+import System.FilePath (splitDirectories, splitFileName, (</>))
+
+import Test.Tasty.TH (extractTestFunctions)
+
+import Test.Tasty.Config (Config, Config(configModuleSuffix))
 import Test.Tasty.Type
-import Test.Tasty.Config (Config, configModuleSuffix)
 
 instance IsString ShowS where
   fromString = showString
