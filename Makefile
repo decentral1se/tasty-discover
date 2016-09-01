@@ -17,9 +17,6 @@ example_test:
 	&& $(STACK_TEST) tasty-discover-example:example-test \
 	&& cd -
 
-test:
-	$(MAKE) unit_test \
-	&& $(MAKE) integration_test \
-	&& $(MAKE) example_test
+test: unit_test integration_test example_test
 
 .PHONY: unit_test integration_test example_test test
