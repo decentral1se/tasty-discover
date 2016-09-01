@@ -1,4 +1,4 @@
-name:                tasty-discover-example
+name:                example
 version:             0.0.1
 synopsis:            Example project for tasty-discover
 cabal-version:       >=1.10

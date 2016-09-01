@@ -1,6 +1,6 @@
 ROOT_DIR:=.
 INTEGRATION_DIR:=./integration-test/
-EXAMPLE_DIR:=./tasty-discover-example/
+EXAMPLE_DIR:=./example/
 
 STACK_TEST:=stack test --pedantic
 
@@ -14,7 +14,7 @@ integration_test:
 
 example_test:
 	cd $(EXAMPLE_DIR) \
-	&& $(STACK_TEST) tasty-discover-example:example-test \
+	&& $(STACK_TEST) example:example-test \
 	&& cd -
 
 test: unit_test integration_test example_test
