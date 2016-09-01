@@ -26,7 +26,7 @@ it from Github. See the [project integration][project-integration] for more
 details.
 
 ### Examples
-  - Basic example: [tasty-discover-example/][example-project]
+  - Basic example: [example/][example-project]
   - Unit tests: [test/][test-folder] folder.
   - Integration tests: [integration-test/][integration-tests]
 
@@ -51,7 +51,7 @@ extra-deps:
 ### Getting started
 `tasty-discover` expects the following conventions:
 
-  - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. ([example](https://github.com/lwm/tasty-discover/blob/master/tasty-discover-example/test/Tasty.hs))
+  - Cabal test suite `main-is` must point to a file with the necessary GHC preprocessor line. ([example](https://github.com/lwm/tasty-discover/blob/master/example/test/Tasty.hs))
   - Test files ending with `Test.hs` (this is now configurable, see [configuration][configuration])
   - Test cases starting with either `prop_`, `case_` (related to [tasty-th usage](https://github.com/bennofs/tasty-th#usage))
     - It is also possible to pass `test_` for test groups
@@ -146,9 +146,9 @@ Check the issues for things that can be worked on immediately.
 
 #### Testing
 `tasty-discover` uses `tasty-discover` to test itself. I'd like to see your
-changes tested in the `integration-test` and/or `test/` folders, where
+changes tested in the `integration-test/` and/or `test/` folders, where
 applicable. If you think the feature is applicable to a wide audience, you
-could add it to the `tasty-discover-example` as well.
+could add it to the `example/` folder as well.
 
 You can run the tests as follows:
 
@@ -177,7 +177,7 @@ $ make example_test     # only the example code tests
 [project-integration]: https://github.com/lwm/tasty-discover#project-integration
 [tasty-framework]: https://github.com/feuerbach/tasty
 [integration-tests]: https://github.com/lwm/tasty-discover/tree/master/integration-test
-[example-project]: https://github.com/lwm/tasty-discover/tree/master/tasty-discover-example
+[example-project]: https://github.com/lwm/tasty-discover/tree/master/example
 [configuration]: https://github.com/lwm/tasty-discover#configuration
 [suffix-example]: https://github.com/lwm/tasty-discover/tree/master/integration-test/test-configurable-module
 [tasty-discover-template]: https://github.com/commercialhaskell/stack-templates/blob/master/tasty-discover.hsfiles
