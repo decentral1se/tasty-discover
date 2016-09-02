@@ -12,5 +12,6 @@ data Test = Test {
 --   Constructor values are parsed from the preprocessor file.
 data Config = Config {
   configModuleSuffix :: Maybe String
+, noModuleSuffix     :: Bool
 } deriving (Eq, Show)
 
