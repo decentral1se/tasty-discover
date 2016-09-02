@@ -113,9 +113,12 @@ fileToTest dir suffix file = case reverse $ splitDirectories file of
 -- >>> findTests "test/Tasty.hs"
 -- [Test {testFile = "test/FooTest.hs", testModule = "Foo"}]
 findTests :: FilePath -> Config -> IO [Test]
-findTests src conf = do
+findTests src conf =
   let (dir, file) = splitFileName src
-  mapMaybe (fileToTest dir (configModuleSuffix conf)) . filter (/= file) <$> getFilesRecursive dir
+      suffix      = configModuleSuffix conf
+      tests       = mapMaybe $ fileToTest dir suffix
+  in
+    tests . filter (/= file) <$> getFilesRecursive dir
 
 -- | A list of test function names as a String.
 --
