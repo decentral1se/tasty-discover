@@ -10,6 +10,7 @@ unit_test:
 integration_test:
 	cd $(INTEGRATION_DIR) \
 	&& $(STACK_TEST) tasty-discover-integration-test:configurable-suffix \
+	&& $(STACK_TEST) tasty-discover-integration-test:no-module-suffix \
 	&& cd -
 
 example_test:
