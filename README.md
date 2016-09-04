@@ -128,6 +128,8 @@ templates:
 
 ### Configuration
 
+See the [integration tests][Integration-tests] for more details.
+
 #### Define your own test module suffix
 If you would prefer to end your test module file names with something other
 than `Test.hs`, you can set the following preprocessor line:
@@ -136,9 +138,8 @@ than `Test.hs`, you can set the following preprocessor line:
 {-# OPTIONS_GHC -F -pgmF tasty-discover -optF --module-suffix=MySuffix #-}
 ```
 
-`tasty-discover` will now search for test modules with the `MySuffix.hs`
-file ending. If this option is not present, the default is the `Test.hs` suffix.
-See the [integration test example][suffix-example] for more details.
+`tasty-discover` will now search for test modules with the `MySuffix.hs` file
+ending. If this option is not present, the default is the `Test.hs` suffix.
 
 #### Omit test module suffix
 If you would prefer to avoid the test file suffix naming convention, you can
@@ -149,8 +150,7 @@ set the following preprocessor line:
 ```
 
 `tasty-discover` will now search for tests in all files under `hs-source-dirs`
-regardless of suffix. See the [integration test example][no-module-example] for
-more details.
+regardless of suffix.
 
 ### Contributing
 Pull requests are very welcome! Please submit an issue so we can discuss what
@@ -192,7 +192,5 @@ $ make example_test     # only the example code tests
 [integration-tests]: https://github.com/lwm/tasty-discover/tree/master/integration-test
 [example-project]: https://github.com/lwm/tasty-discover/tree/master/example
 [configuration]: https://github.com/lwm/tasty-discover#configuration
-[suffix-example]: https://github.com/lwm/tasty-discover/tree/master/integration-test/test-configurable-module
-[no-module-example]: https://github.com/lwm/tasty-discover/tree/master/integration-test/test-no-module-suffix
 [tasty-discover-template]: https://github.com/commercialhaskell/stack-templates/blob/master/tasty-discover.hsfiles
 [test-folder]: https://github.com/lwm/tasty-discover/tree/master/test
