@@ -14,6 +14,7 @@ Automatic test discovery and runner for the [tasty framework][tasty-framework].
 - [Stack template](#stack-template)
 - [Configuration](#configuration)
     - [Define your own test module suffix](#define-your-own-test-module-suffix)
+    - [Omit test module suffix](#omit-test-module-suffix)
 - [Contributing](#contributing)
     - [Testing](#testing)
 - [Other Haskellers made this possible](#other-haskellers-made-this-possible)
@@ -139,6 +140,18 @@ than `Test.hs`, you can set the following preprocessor line:
 file ending. If this option is not present, the default is the `Test.hs` suffix.
 See the [integration test example][suffix-example] for more details.
 
+#### Omit test module suffix
+If you would prefer to remove the test file suffix naming constraint, you can
+set the following preprocessor line:
+
+```
+{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --no-module-suffix #-}
+```
+
+`tasty-discover` will now search for tests in all files under `hs-source-dirs`
+regardless of suffix. See the [integration test example][no-module-example] for
+more details.
+
 ### Contributing
 Pull requests are very welcome! Please submit an issue so we can discuss what
 you would like to do. You can simply fork this repository, and open a pull request.
@@ -180,5 +193,6 @@ $ make example_test     # only the example code tests
 [example-project]: https://github.com/lwm/tasty-discover/tree/master/example
 [configuration]: https://github.com/lwm/tasty-discover#configuration
 [suffix-example]: https://github.com/lwm/tasty-discover/tree/master/integration-test/test-configurable-module
+[suffix-example]: https://github.com/lwm/tasty-discover/tree/master/integration-test/test-no-module-suffix
 [tasty-discover-template]: https://github.com/commercialhaskell/stack-templates/blob/master/tasty-discover.hsfiles
 [test-folder]: https://github.com/lwm/tasty-discover/tree/master/test
