@@ -16,7 +16,7 @@ import System.Exit (exitFailure)
 
 import Test.Tasty.Parse (parseConfig)
 import Test.Tasty.Util (importList, findTests, stringifyTestList, getListOfTests)
-import Test.Tasty.Type (Config, Config(configModuleSuffix), Test)
+import Test.Tasty.Type (Config, Test)
 
 -- | Accept some args and run the tests.
 --
@@ -57,7 +57,7 @@ tmpModule src conf tests ts =
   . showString "{-# LANGUAGE TemplateHaskell #-}\n"
   . showString "module Main where\n"
   . showString "import Test.Tasty.Discover\n"
-  . importList tests (configModuleSuffix conf)
+  . importList tests conf
   . showString "main :: IO ()\n"
   . showString ("main = do $(defaultMainGeneratorFor \"tasty-discover\" " ++ ts ++ ")")
   ) "\n"

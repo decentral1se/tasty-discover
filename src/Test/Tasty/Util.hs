@@ -20,10 +20,11 @@ import Data.Maybe (mapMaybe)
 import Data.String (IsString, fromString)
 import System.Directory (doesDirectoryExist, doesFileExist, getDirectoryContents)
 import System.FilePath (splitDirectories, splitFileName, (</>))
+import System.FilePath.Posix (splitExtension)
 
 import Test.Tasty.TH (extractTestFunctions)
 
-import Test.Tasty.Config (Config, Config(configModuleSuffix))
+import Test.Tasty.Config (Config(..))
 import Test.Tasty.Type
 
 -- | @TODO
@@ -34,13 +35,17 @@ instance IsString ShowS where
 --
 -- >>> importList [Test {testFile = "test/SomeOtherTest.hs", testModule = "SomeOther"}]
 -- "import qualified SomeOtherTest\n"
-importList :: [Test] -> Maybe String -> ShowS
-importList ts suffix = foldr (.) "" . map f $ ts
+importList :: [Test] -> Config -> ShowS
+importList ts config =
+    foldr (.) "" . map f $ ts
   where
     f :: Test -> ShowS
-    f test = case suffix of
-      Just suffix' -> "import " . showString (testModule test) . showString (suffix' ++ "\n")
-      _            -> "import " . showString (testModule test) . "Test\n"
+    f test = if (noModuleSuffix config) then
+      "import " . showString (testModule test) . "\n"
+    else
+      case (configModuleSuffix config) of
+        Just suffix' -> "import " . showString (testModule test) . showString (suffix' ++ "\n")
+        _            -> "import " . showString (testModule test) . "Test\n"
 
 
 -- | Is 'c' a valid character in a Haskell module name?
@@ -85,28 +90,46 @@ getFilesRecursive baseDir = sort <$> go []
 --
 -- >>> fileToTest "test" "MySuffix" "FooMySuffix.hs"
 -- Just (Test {testFile = "test/FooMySuffix.hs", testModule = "Foo"})
-fileToTest :: FilePath -> Maybe String -> FilePath -> Maybe Test
-fileToTest dir suffix file = case reverse $ splitDirectories file of
-  -- @TODO - REFACTOR
-  x:xs -> case suffix of
-            Just suffix' -> case
-                stripSuffix (suffix' ++ ".hs")  x <|>
-                stripSuffix (suffix' ++ ".lhs") x of
-                    Just name | isValidModuleName name && all isValidModuleName xs ->
-                        Just . Test (dir </> file) $
-                            (intercalate "." . reverse) (name : xs)
-                    _ -> Nothing
-            _ -> case
-                stripSuffix "Test.hs" x <|>
-                stripSuffix "Test.lhs" x of
-                    Just name | isValidModuleName name && all isValidModuleName xs ->
-                        Just . Test (dir </> file) $
-                            (intercalate "." . reverse) (name : xs)
-                    _ -> Nothing
-  _   -> Nothing
-  where
-    stripSuffix :: Eq a => [a] -> [a] -> Maybe [a]
-    stripSuffix suff str = reverse <$> stripPrefix (reverse suff) (reverse str)
+fileToTest :: FilePath -> Config -> FilePath -> Maybe Test
+fileToTest dir conf file =
+    let
+        suffix :: Maybe String
+        suffix   = configModuleSuffix conf
+
+        noModule :: Bool
+        noModule = noModuleSuffix conf
+
+        files :: [FilePath]
+        files    = reverse $ splitDirectories file
+    in
+      case noModule of
+        True  ->  catchAll files
+        False ->  case suffix of
+          Just suffix' -> filterBySuffix suffix' files
+          Nothing      -> filterBySuffix "Test" files
+    where
+      filterBySuffix :: String -> [FilePath] -> Maybe Test
+      filterBySuffix suffix files =
+        case files of
+          x:xs ->  case
+            stripSuffix (suffix ++ ".hs") x <|> stripSuffix (suffix ++ ".lhs") x of
+              Just name | isValidModuleName name && all isValidModuleName xs ->
+                Just . Test (dir </> file) $
+                  (intercalate "." . reverse) (name : xs)
+              _ -> Nothing
+          _    -> Nothing
+
+      stripSuffix :: Eq a => [a] -> [a] -> Maybe [a]
+      stripSuffix suff str = reverse <$> stripPrefix (reverse suff) (reverse str)
+
+      catchAll :: [FilePath] -> Maybe Test
+      catchAll (x:xs) =
+        let name = fst $ splitExtension x in
+          if isValidModuleName name && all isValidModuleName xs then
+            Just . Test (dir </> file) $ (intercalate "." . reverse) (name : xs)
+          else Nothing
+      catchAll _ =
+        Nothing
 
 -- | All tests that are not the 'src' file.
 --
@@ -115,8 +138,7 @@ fileToTest dir suffix file = case reverse $ splitDirectories file of
 findTests :: FilePath -> Config -> IO [Test]
 findTests src conf =
   let (dir, file) = splitFileName src
-      suffix      = configModuleSuffix conf
-      tests       = mapMaybe $ fileToTest dir suffix
+      tests       = mapMaybe $ fileToTest dir conf
   in
     tests . filter (/= file) <$> getFilesRecursive dir
 
