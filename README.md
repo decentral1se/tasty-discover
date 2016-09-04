@@ -80,7 +80,7 @@ Inside this file, add the following:
 Create a test file inside `test/`. `tasty-discover` can detect test files in
 whatever directory structure you choose (as long as they sit in the same
 directory as the `Tasty.hs` file created above or any subdirectory thereof), so
-there is no restrictions on directory organization.  By default, you must end your
+there is no restrictions on directory organization. By default, you must end your
 test file names with `Test.hs` for them to be discovered. So, for example, `FooTest.hs`
 would be a perfectly acceptable test file name.
 
@@ -141,7 +141,7 @@ file ending. If this option is not present, the default is the `Test.hs` suffix.
 See the [integration test example][suffix-example] for more details.
 
 #### Omit test module suffix
-If you would prefer to remove the test file suffix naming constraint, you can
+If you would prefer to avoid the test file suffix naming convention, you can
 set the following preprocessor line:
 
 ```
@@ -193,6 +193,6 @@ $ make example_test     # only the example code tests
 [example-project]: https://github.com/lwm/tasty-discover/tree/master/example
 [configuration]: https://github.com/lwm/tasty-discover#configuration
 [suffix-example]: https://github.com/lwm/tasty-discover/tree/master/integration-test/test-configurable-module
-[suffix-example]: https://github.com/lwm/tasty-discover/tree/master/integration-test/test-no-module-suffix
+[no-module-example]: https://github.com/lwm/tasty-discover/tree/master/integration-test/test-no-module-suffix
 [tasty-discover-template]: https://github.com/commercialhaskell/stack-templates/blob/master/tasty-discover.hsfiles
 [test-folder]: https://github.com/lwm/tasty-discover/tree/master/test
