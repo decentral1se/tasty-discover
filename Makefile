@@ -4,6 +4,9 @@ EXAMPLE_DIR:=./example/
 
 STACK_TEST:=stack test --pedantic
 
+install_and_cover:
+	stack install --coverage
+
 unit_test:
 	$(STACK_TEST) tasty-discover:unit-tests
 

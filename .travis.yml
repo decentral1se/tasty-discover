@@ -14,10 +14,15 @@ before_install:
 - mkdir -p ~/.local/bin
 - export PATH=$HOME/.local/bin:$PATH
 - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+- apt-get install -y curl libcurl4-gnutls-dev  # codecov-haskell deps
 
 install:
-- stack --no-terminal setup
-- stack --no-terminal install
+- stack setup --no-terminal
+- stack install --no-terminal codecov-haskell
 
 script:
+- stack install --coverage
 - make test
+
+after_success:
+- codecov-haskell unit-tests
