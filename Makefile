@@ -20,4 +20,11 @@ example_test:
 
 test: unit_test integration_test example_test
 
-.PHONY: unit_test integration_test example_test test
+hlint:
+	hlint src/ test/
+
+hlint_refactor:
+	find src/ test/ -name "*.hs" \
+	-exec hlint --refactor --refactor-options -i {} \;
+
+.PHONY: unit_test integration_test example_test test hlint hlint_refactor
