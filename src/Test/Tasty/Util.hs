@@ -37,13 +37,13 @@ instance IsString ShowS where
 -- "import qualified SomeOtherTest\n"
 importList :: [Test] -> Config -> ShowS
 importList ts config =
-    foldr (.) "" . map f $ ts
+    foldr ((.) . f) "" ts
   where
     f :: Test -> ShowS
-    f test = if (noModuleSuffix config) then
+    f test = if noModuleSuffix config then
       "import " . showString (testModule test) . "\n"
     else
-      case (configModuleSuffix config) of
+      case configModuleSuffix config of
         Just suffix' -> "import " . showString (testModule test) . showString (suffix' ++ "\n")
         _            -> "import " . showString (testModule test) . "Test\n"
 
@@ -102,9 +102,9 @@ fileToTest dir conf file =
         files :: [FilePath]
         files    = reverse $ splitDirectories file
     in
-      case noModule of
-        True  ->  catchAll files
-        False ->  case suffix of
+      if noModule
+      then catchAll files
+      else case suffix of
           Just suffix' -> filterBySuffix suffix' files
           Nothing      -> filterBySuffix "Test" files
     where
