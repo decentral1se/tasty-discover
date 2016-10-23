@@ -3,8 +3,8 @@ sudo: required
 language: haskell
 
 ghc:
-- 7.10.3
 - 7.8.4
+- 7.10.3
 - 8.0.1
 
 branches:
@@ -22,7 +22,9 @@ before_install:
 
 install:
 - stack --no-terminal setup
-- stack --no-terminal install
+- stack --no-terminal install hlint
 
 script:
+- stack install --no-terminal tasty-discover
 - make test
+- make hlint
