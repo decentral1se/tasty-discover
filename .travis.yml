@@ -21,9 +21,10 @@ before_install:
 - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
 
 install:
-- stack --no-terminal setup
-- stack --no-terminal install
+- stack setup
+- stack install hlint
 
 script:
+- stack install tasty-discover
 - make test
 - make hlint
