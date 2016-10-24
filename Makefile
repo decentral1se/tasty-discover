@@ -2,7 +2,7 @@ ROOT_DIR:=.
 INTEGRATION_DIR:=./integration-test/
 EXAMPLE_DIR:=./example/
 
-STACK_TEST:=stack test --pedantic
+STACK_TEST:=stack test --no-terminal --haddock --no-haddock-deps
 
 unit_test:
 	$(STACK_TEST) tasty-discover:unit-tests

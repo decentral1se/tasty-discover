@@ -67,6 +67,7 @@ test-suite unit-tests
   other-modules:
     ParseTest
     RunnerTest
+    UtilTest
   build-depends:
       base == 4.*
     , tasty-discover
