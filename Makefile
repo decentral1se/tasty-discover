@@ -7,6 +7,9 @@ STACK_TEST:=stack test --pedantic
 unit_test:
 	$(STACK_TEST) tasty-discover:unit-tests
 
+doctest:
+	stack test tasty-discover:doctest
+
 integration_test:
 	cd $(INTEGRATION_DIR) \
 	&& $(STACK_TEST) tasty-discover-integration-test:configurable-suffix \
@@ -18,7 +21,7 @@ example_test:
 	&& $(STACK_TEST) example:example-test \
 	&& cd -
 
-test: unit_test integration_test example_test
+test: unit_test integration_test example_test doctest
 
 hlint:
 	hlint src/ test/
@@ -27,4 +30,4 @@ hlint_refactor:
 	find src/ test/ -name "*.hs" \
 	-exec hlint --refactor --refactor-options -i {} \;
 
-.PHONY: unit_test integration_test example_test test hlint hlint_refactor
+.PHONY: unit_test integration_test example_test test hlint hlint_refactor doctest

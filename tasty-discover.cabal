@@ -71,6 +71,17 @@ test-suite unit-tests
     , tasty-discover
   default-language:    Haskell2010
 
+test-suite doctest
+  type:               exitcode-stdio-1.0
+  hs-source-dirs:     src/Test/Tasty/
+  main-is:            Doctest.hs
+  build-depends:
+      base == 4.*
+    , tasty-discover
+    , doctest
+    , doctest-discover
+  default-language:   Haskell2010
+
 Source-repository head
   type:     git
   location: git://github.com/lwm/tasty-discover.git

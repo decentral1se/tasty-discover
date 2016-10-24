@@ -1,0 +1,4 @@
+{
+  "ignore": ["Main.hs"],
+  "sourceFolders": ["src/Test/Tasty"]
+}

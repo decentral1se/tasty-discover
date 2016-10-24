@@ -28,3 +28,4 @@ script:
 - stack install --no-terminal tasty-discover
 - make test
 - make hlint
+- make doctest
