@@ -7,6 +7,7 @@ import Test.Tasty as Discover
 import Test.Tasty.HUnit as Discover
 import Test.Tasty.QuickCheck as Discover
 import Test.Tasty.TH as Discover
+import Test.Tasty.Hspec as Discover
 
 -- `tasty-discover` modules
 import Test.Tasty.Run as Discover

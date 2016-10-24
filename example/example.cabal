@@ -13,6 +13,7 @@ test-suite example-test
   main-is:             Tasty.hs
   other-modules:
     FooTest
+    BarTest
     AllTheFolders.AnotherNestTest
     Thing.AnotherThing.NestedTest
   build-depends:
