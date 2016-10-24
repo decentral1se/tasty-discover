@@ -8,7 +8,12 @@ module Test.Tasty.Util (
   importList
 , findTests
 , getListOfTests
-, getTestFiles
+
+-- Testing purposes
+, fileToTest
+, getFilesRecursive
+, isValidModuleChar
+, isValidModuleName
 ) where
 
 import Control.Applicative ((<|>))
@@ -76,9 +81,7 @@ fileToTest dir conf file =
         files :: [FilePath]
         files    = reverse $ splitDirectories file
     in
-      if noModule
-      then catchAll files
-      else case suffix of
+      if noModule then catchAll files else case suffix of
           Just suffix' -> filterBySuffix suffix' files
           Nothing      -> filterBySuffix "Test" files
     where
@@ -102,24 +105,19 @@ fileToTest dir conf file =
           if isValidModuleName name && all isValidModuleName xs then
             Just . Test (dir </> file) $ (intercalate "." . reverse) (name : xs)
           else Nothing
-      catchAll _ =
-        Nothing
+      catchAll _ = Nothing
 
--- | All tests that are not the 'src' file.
+-- | All test modules under 'dir'.
 findTests :: FilePath -> Config -> IO [Test]
-findTests src conf =
-  let (dir, file) = splitFileName src
-      tests       = mapMaybe $ fileToTest dir conf
+findTests path config =
+  let (dir, file) = splitFileName path
+      tests       = mapMaybe $ fileToTest dir config
   in
     tests . filter (/= file) <$> getFilesRecursive dir
 
 -- | All test function names in 'src'.
 getListOfTests :: FilePath -> Config -> IO [String]
 getListOfTests src conf = do
-    allFiles <- getTestFiles $ findTests src conf
+    allFiles <- fmap testFile <$> findTests src conf
     allTests <- mapM extractTestFunctions allFiles
     return $ concat allTests
-
--- | File paths for test files.
-getTestFiles :: IO [Test] -> IO [FilePath]
-getTestFiles = fmap (fmap testFile)
