@@ -66,6 +66,7 @@ test-suite unit-tests
   main-is:             Tasty.hs
   other-modules:
     ParseTest
+    UtilTest
   build-depends:
       base == 4.*
     , tasty-discover
