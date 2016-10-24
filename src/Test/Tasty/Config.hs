@@ -8,13 +8,13 @@ module Test.Tasty.Config (
 
 import System.Console.GetOpt (ArgDescr (ReqArg, NoArg) , OptDescr (Option))
 
-import Test.Tasty.Type (Config (..))
+import Test.Tasty.Type (Config(..))
 
--- | An empty configuration.
+-- | The empty configuration.
 defaultConfig :: Config
 defaultConfig = Config Nothing False
 
--- | @TODO
+-- | All configuration options.
 options :: [OptDescr (Config -> Config)]
 options = [
     Option [] ["module-suffix"]

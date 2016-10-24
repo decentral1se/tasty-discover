@@ -1,4 +1,4 @@
--- | Test discovering and runner boilerplate generator.
+-- | Test discovery and runner boilerplate generator.
 
 {-# LANGUAGE FlexibleInstances    #-}
 {-# LANGUAGE OverloadedStrings    #-}
@@ -15,13 +15,10 @@ import System.IO (hPutStrLn, stderr)
 import System.Exit (exitFailure)
 
 import Test.Tasty.Parse (parseConfig)
-import Test.Tasty.Util (importList, findTests, stringifyTestList, getListOfTests)
+import Test.Tasty.Util (importList, findTests, getListOfTests)
 import Test.Tasty.Type (Config, Test)
 
--- | Accept some args and run the tests.
---
--- >>> run ["w", "x", "y", "z"]
--- ...
+-- | Parse preprocessor arguments and write the test runner module.
 run :: [String] -> IO ()
 run processor_args = do
   name <- getProgName
@@ -33,7 +30,7 @@ run processor_args = do
         exitFailure
 
       Right conf -> do
-        stringed <- stringifyTestList $ getListOfTests src conf
+        stringed <- show <$> getListOfTests src conf
         tests    <- findTests src conf
         writeFile dst (tmpModule src conf tests stringed)
 
@@ -42,13 +39,7 @@ run processor_args = do
       exitFailure
 
 
--- | The holy grail. This 'tmpModule' runs your tests.
---
--- >>> tmpModule "test/Tasty.hs"
---               Config {configModuleName = Nothing}
---               [Test {testFile = "test/FooTest.hs", testModule = "Foo"}]
---               "[\"prop_one\"]"
--- ...
+-- | Generate the test runner module.
 tmpModule :: FilePath -> Config -> [Test] -> String -> String
 tmpModule src conf tests ts =
   (
