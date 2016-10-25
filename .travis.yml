@@ -2,12 +2,7 @@
 
 sudo: false
 
-language: haskell
-
-ghc:
-- 7.8.4
-- 7.10.3
-- 8.0.1
+language: c
 
 cache:
   directories:
@@ -19,7 +14,7 @@ before_install:
 - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
 
 install:
-- stack build --copy-bins --install-ghc hlint tasty-discover
+- stack build --copy-bins --install-ghc --no-terminal hlint tasty-discover
 
 script:
 - make test
