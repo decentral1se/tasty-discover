@@ -4,9 +4,15 @@ sudo: false
 
 language: c
 
+addons:
+  apt:
+    packages:
+    - libgmp-dev
+
 cache:
   directories:
-    - $HOME/.stack/
+  - $HOME/.ghc
+  - $HOME/.stack
 
 before_install:
 - mkdir -p ~/.local/bin
