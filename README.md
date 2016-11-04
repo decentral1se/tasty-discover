@@ -8,5 +8,5 @@ Automatic test discovery and runner for the [tasty framework].
 
 Please refer to [the documentation] to get started.
 
-[tasty-framework]: https://github.com/feuerbach/tasty
+[tasty framework]: https://github.com/feuerbach/tasty
 [the documentation]: http://tasty-discover.readthedocs.io/en/latest/
