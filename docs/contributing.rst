@@ -75,7 +75,7 @@ There are several helper commands, you can review them all with:
 
     λ make help
 
-Documentation can be found in the source/ folder.
+Documentation can be found in the docs/ folder.
 
 .. _reStructured Text: http://openalea.gforge.inria.fr/doc/openalea/doc/_build/html/source/sphinx/rest_syntax.html
 .. _readthedocs.org: https://readthedocs.org/
