@@ -29,4 +29,3 @@ script:
 - make test
 - make hlint
 - make html
-- make haddock
