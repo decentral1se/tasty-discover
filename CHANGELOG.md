@@ -1,11 +1,21 @@
+1.0.0
+=====
+
+* Move documentation to RTD.
+* Release on Hackage and Stackage
+* Tag 1.0.0 on Github
+
 0.0.3
 =====
-add `--no-module-suffix` option
+
+* Add `--no-module-suffix` option
 
 0.0.2
 =====
-add `--module-suffix` option
+
+* Add `--module-suffix` option
 
 0.0.1
 =====
-tasty-discover initial release
+
+* tasty-discover initial release

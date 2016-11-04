@@ -2,7 +2,9 @@
 
 sudo: false
 
-language: c
+language: python
+
+python: "3.5"
 
 addons:
   apt:
@@ -21,7 +23,10 @@ before_install:
 
 install:
 - stack build --copy-bins --install-ghc --no-terminal hlint tasty-discover
+- pip install -U pip -r requirements.txt
 
 script:
 - make test
 - make hlint
+- make html
+- make haddock
