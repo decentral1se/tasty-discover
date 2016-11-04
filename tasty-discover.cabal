@@ -1,5 +1,5 @@
 name:             tasty-discover
-version:          0.0.3
+version:          1.0.0
 license:          GPL
 license-file:     LICENSE
 copyright:        (c) 2016 Luke Murphy
@@ -8,7 +8,7 @@ maintainer:       Luke Murphy <lukewm@riseup.net>
 build-type:       Simple
 cabal-version:    >= 1.10
 category:         Testing
-stability:        experimental
+stability:        stable
 bug-reports:      https://github.com/lwm/tasty-discover/issues
 homepage:         https://github.com/lwm/tasty-discover/
 synopsis:         Automatically discover and run Tasty framework tests.
