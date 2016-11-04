@@ -52,8 +52,8 @@ clean:
 
 .PHONY: html
 html:
-	$(SPHINXBUILD) -b html $(BUILDDIR)/html
+	$(SPHINXBUILD) -b html docs/ $(BUILDDIR)/html
 
 .PHONY: live_html
 live_html:
-	$(SPHINXBUILD) -b html $(BUILDDIR)/html
+	$(SPHINXBUILD) -b html docs/ $(BUILDDIR)/html

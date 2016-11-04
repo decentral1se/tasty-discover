@@ -2,7 +2,7 @@ Contributing
 ============
 
 All Contributions Welcome!
-----------------------
+--------------------------
 
 If you find anything to be improved or a bug, please go ahead and submit a pull
 request via Github. Check the issues for things that can be worked on

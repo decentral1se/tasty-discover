@@ -1,5 +1,3 @@
-.. tasty-discover documentation master file
-
 tasty-discover
 ==============
 

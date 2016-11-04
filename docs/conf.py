@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-extensions = []
-
 templates_path = ['_templates']
 
 source_suffix = '.rst'
@@ -18,9 +16,7 @@ version = '1.0.0'
 
 release = '1.0.0'
 
-language = None
-
-exclude_patterns = []
+exclude_patterns = ['test', 'example', 'integration-test', 'src']
 
 pygments_style = 'sphinx'
 

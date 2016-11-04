@@ -17,7 +17,7 @@ tasty-discover expects the following conventions in order to discover and run yo
 .. note:: Test file suffixes are configurable or not necessary depending on your setup.
           Please refer to `the configuration`_ for more information.
 
-.. _the configuration: TODO
+.. _the configuration: http://tasty-discover.readthedocs.io/en/latest/configuration.html
 
 Project Example
 ---------------
