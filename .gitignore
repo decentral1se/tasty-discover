@@ -1,4 +1,11 @@
+# Stack
 .stack-work/
 *.tix
 *.mix
+
+# Sphinx
 build/
+
+# Cabal
+dist/
+tasty-discover*/
