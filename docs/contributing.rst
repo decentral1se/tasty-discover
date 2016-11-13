@@ -1,16 +1,18 @@
 Contributing
 ============
 
-All Contributions Welcome!
---------------------------
+Overview
+--------
 
-If you find anything to be improved or a bug, please go ahead and submit a pull
-request via Github. Check the issues for things that can be worked on
-immediately.
+If you find anything to be improved or a bug, please submit an issue via
+Github. If you can fix it, please go ahead and submit a patch. Check the
+issues for things that can be worked on immediately, if you're looking for to
+help out.
 
 I use Stack to maintain tasty-discover, therefore, most of the development
-environment relies on it. If you use Cabal and want to add Cabal specific
-commands, please do!
+environment relies on it. Cabal testing is done in the `.travis.yml`_ file.
+
+.. _.travis.yml: https://github.com/lwm/tasty-discover/blob/master/.travis.yml
 
 Continuous Integration
 ----------------------
@@ -32,7 +34,8 @@ example/ folder as well, so any new user will see it immediately.
 
 You can run the tests as follows:
 
-.. note:: The Makefile is configured to run the tests via Stack.
+.. note:: The Makefile is configured to run the tests via Stack. If you'd like
+          to add Cabal commands, be my guest, it would be very much appreciated.
 
 .. code-block:: bash
 
