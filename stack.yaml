@@ -1,5 +1,7 @@
 resolver: nightly-2016-08-17
+
 packages:
 - '.'
+
 extra-deps:
 - "tasty-th-0.1.4"
