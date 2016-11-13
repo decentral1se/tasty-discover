@@ -1,7 +1,7 @@
 name:             tasty-discover
 version:          1.0.0
-license:          GPL
-license-file:     LICENSE
+license:          GPL-3
+license-file:     LICENSE.md
 copyright:        (c) 2016 Luke Murphy
 author:           Luke Murphy <lukewm@riseup.net>
 maintainer:       Luke Murphy <lukewm@riseup.net>
