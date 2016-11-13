@@ -17,7 +17,7 @@ environment relies on it. Cabal testing is done in the `.travis.yml`_ file.
 Continuous Integration
 ----------------------
 
-tasty-discover uses `Travis CI`_ for integration.
+tasty-discover uses `Travis CI`_ for continuous integration testing.
 
 You can see the current status here_.
 
@@ -34,8 +34,7 @@ example/ folder as well, so any new user will see it immediately.
 
 You can run the tests as follows:
 
-.. note:: The Makefile is configured to run the tests via Stack. If you'd like
-          to add Cabal commands, be my guest, it would be very much appreciated.
+.. note:: The Makefile is configured to build with Stack.
 
 .. code-block:: bash
 
@@ -54,11 +53,9 @@ If you forget which, you can always get a quick feedback with:
 Documentation
 -------------
 
-tasty-discover documentation is written with `reStructured Text`_ and graciously
-hosted for free by readthedocs.org_. If you need to make a change, you'll need to have
-a Python 3.5 environment on your machine.
-
-You can get up and running with the following commands:
+tasty-discover documentation is written with `reStructured Text`_ and
+graciously hosted for free by readthedocs.org_. You can get up and running with
+the following commands:
 
 .. code-block:: bash
 
