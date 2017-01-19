@@ -1,7 +1,4 @@
-resolver: nightly-2016-08-17
+resolver: lts-7.16
 
 packages:
 - '.'
-
-extra-deps:
-- "tasty-th-0.1.4"
