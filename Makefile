@@ -34,7 +34,8 @@ unit_test:
 integration_test:
 	cd $(INTEGRATION_DIR) && \
 	$(TEST) tasty-discover-integration-test:configurable-suffix && \
-	$(TEST) tasty-discover-integration-test:no-module-suffix
+	$(TEST) tasty-discover-integration-test:no-module-suffix    && \
+	$(TEST) tasty-discover-integration-test:ignore-module
 
 .PHONY: example_test
 example_test:
