@@ -12,7 +12,7 @@ import Test.Tasty.Type (Config(..))
 
 -- | The empty configuration.
 defaultConfig :: Config
-defaultConfig = Config Nothing False
+defaultConfig = Config Nothing False []
 
 -- | All configuration options.
 options :: [OptDescr (Config -> Config)]
@@ -21,4 +21,6 @@ options = [
       (ReqArg (\s c -> c {configModuleSuffix = Just s}) "SUFFIX") ""
   , Option [] ["no-module-suffix"]
       (NoArg $ \c -> c {noModuleSuffix = True}) ""
+  , Option [] ["ignore-module"]
+      (ReqArg (\s c -> c {ignoredModules = s : ignoredModules c}) "FILE") ""
   ]

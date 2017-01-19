@@ -9,7 +9,10 @@ case_parseConfig :: Assertion
 case_parseConfig =
     parseConfig "foo" ["--module-suffix=MySuffix"]
     @?=
-    Right Config {configModuleSuffix=Just "MySuffix" , noModuleSuffix=False}
+    Right Config { configModuleSuffix=Just "MySuffix"
+                 , noModuleSuffix=False
+                 , ignoredModules=[]
+                 }
 
 case_parseConfigMissingArg :: Assertion
 case_parseConfigMissingArg =
@@ -21,7 +24,7 @@ case_parseConfigEmptyArg :: Assertion
 case_parseConfigEmptyArg =
     parseConfig "foo" []
     @?=
-    Right (Config Nothing False)
+    Right (Config Nothing False [])
 
 case_parseConfigInvalidArg :: Assertion
 case_parseConfigInvalidArg =
@@ -33,7 +36,7 @@ case_parseConfigBooleanArg :: Assertion
 case_parseConfigBooleanArg  =
     parseConfig "foo" ["--no-module-suffix"]
     @?=
-    Right Config {configModuleSuffix=Nothing, noModuleSuffix=True}
+    Right Config {configModuleSuffix=Nothing, noModuleSuffix=True, ignoredModules= []}
 
 case_parseConfigInvalidArgCombination :: Assertion
 case_parseConfigInvalidArgCombination =

@@ -30,3 +30,13 @@ regardless of suffix.
 .. note:: See the `integration tests`_ folder for examples of each configuration in practice.
 
 .. _integration tests: https://github.com/lwm/tasty-discover/tree/master/integration-test
+
+Ignore specific modules
+-----------------------
+
+If you would like to ignore some specific modules pass the module name to
+tasty-discover using the `--ignore-module` flag.
+
+::
+
+    {-# OPTIONS_GHC -F -pgmF tasty-discover -optF --ignore-module=Some.Module #-}

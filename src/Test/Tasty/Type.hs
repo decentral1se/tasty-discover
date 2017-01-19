@@ -13,5 +13,6 @@ data Test = Test {
 data Config = Config {
   configModuleSuffix :: Maybe String
 , noModuleSuffix     :: Bool
+, ignoredModules     :: [FilePath]
 } deriving (Eq, Show)
 

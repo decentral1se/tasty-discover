@@ -14,7 +14,7 @@ case_getListOfTests = do
 
 case_getListOfTestsWithSuffix :: Assertion
 case_getListOfTestsWithSuffix = do
-  let config = Config (Just "DoesntExist") False
+  let config = Config (Just "DoesntExist") False []
   result <- getListOfTests "test/tmpdir/" config
   result @?= []
 

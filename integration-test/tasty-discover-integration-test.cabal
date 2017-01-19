@@ -30,3 +30,15 @@ test-suite no-module-suffix
       base
     , tasty-discover
   default-language:    Haskell2010
+
+test-suite ignore-module
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test-ignore-module
+  main-is:             Tasty.hs
+  other-modules:
+    IgnoreMe
+    IgnoreMe.Too
+  build-depends:
+      base
+    , tasty-discover
+  default-language:    Haskell2010

@@ -91,18 +91,30 @@ fileToTest dir conf file =
           x:xs ->  case
             stripSuffix (suffix ++ ".hs") x <|> stripSuffix (suffix ++ ".lhs") x of
               Just name | isValidModuleName name && all isValidModuleName xs ->
-                Just . Test (dir </> file) $
-                  (intercalate "." . reverse) (name : xs)
+                let pathComponents = reverse (name : xs)
+                    moduleName = intercalate "." pathComponents
+                in if isIgnoredModule pathComponents
+                     then Nothing
+                     else Just . Test (dir </> file) $ moduleName
               _ -> Nothing
           _    -> Nothing
+
+      isIgnoredModule :: [FilePath] -> Bool
+      isIgnoredModule pathComponents =
+        let moduleName = intercalate "." pathComponents
+        in moduleName `elem` ignoredModules conf
 
       stripSuffix :: Eq a => [a] -> [a] -> Maybe [a]
       stripSuffix suff str = reverse <$> stripPrefix (reverse suff) (reverse str)
 
       catchAll :: [FilePath] -> Maybe Test
       catchAll (x:xs) =
-        let name = fst $ splitExtension x in
-          if isValidModuleName name && all isValidModuleName xs then
+        let name = fst $ splitExtension x
+            pathComponents = reverse (name : xs)
+        in
+          if isValidModuleName name
+             && all isValidModuleName xs
+             && not (isIgnoredModule pathComponents) then
             Just . Test (dir </> file) $ (intercalate "." . reverse) (name : xs)
           else Nothing
       catchAll _ = Nothing
