@@ -35,7 +35,8 @@ Ignore specific modules
 -----------------------
 
 If you would like to ignore some specific modules pass the module name to
-tasty-discover using the `--ignore-module` flag.
+tasty-discover using the `--ignore-module` flag. Multiple modules can be
+ignored by passing this flag more than once.
 
 ::
 
