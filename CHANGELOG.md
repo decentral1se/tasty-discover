@@ -1,3 +1,8 @@
+1.1.0
+=====
+
+* Add `--ignore-module` option. Thanks to @expipiplus1 for the PR.
+
 1.0.1
 =====
 
