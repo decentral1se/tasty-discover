@@ -1,6 +1,7 @@
 module FooTest where
 
-import Test.Tasty.Discover (Assertion, (@?=), TestTree, testCase)
+import Test.Tasty (TestTree)
+import Test.Tasty.HUnit (Assertion, (@?=), testCase)
 
 test_allMyTestsGrouped :: [TestTree]
 test_allMyTestsGrouped =

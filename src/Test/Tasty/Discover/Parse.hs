@@ -1,13 +1,13 @@
 -- | Parser for the GHC preprocessor definition.
 
-module Test.Tasty.Parse (
+module Test.Tasty.Discover.Parse (
   parseConfig
 ) where
 
 import Data.Maybe (isJust)
 import System.Console.GetOpt (ArgOrder (Permute), getOpt)
 
-import Test.Tasty.Config  (Config(..), defaultConfig, options)
+import Test.Tasty.Discover.Config  (Config(..), defaultConfig, options)
 
 -- | Preprocessor configuration parser.
 parseConfig :: String -> [String] -> Either String Config

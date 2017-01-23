@@ -2,7 +2,8 @@
 
 module UtilTest where
 
-import Test.Tasty.Discover (Assertion, (@?=), defaultConfig, getListOfTests,
+import Test.Tasty.HUnit (Assertion, (@?=))
+import Test.Tasty.Discover (defaultConfig, getListOfTests,
                             findTests, fileToTest, getFilesRecursive,
                             isValidModuleChar, isValidModuleName,
                             Config(..), Test(..))

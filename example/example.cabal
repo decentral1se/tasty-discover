@@ -18,5 +18,9 @@ test-suite example-test
     Thing.AnotherThing.NestedTest
   build-depends:
     base
+    , tasty
     , tasty-discover
+    , tasty-hspec
+    , tasty-hunit
+    , tasty-quickcheck
   default-language:    Haskell2010

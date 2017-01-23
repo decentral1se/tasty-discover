@@ -30,20 +30,15 @@ library
   exposed-modules:
     Test.Tasty.Discover
   other-modules:
-    Test.Tasty.Config
-    Test.Tasty.Parse
-    Test.Tasty.Run
-    Test.Tasty.Util
-    Test.Tasty.Type
+    Test.Tasty.Discover.Config
+    Test.Tasty.Discover.Parse
+    Test.Tasty.Discover.Run
+    Test.Tasty.Discover.Util
+    Test.Tasty.Discover.Type
   build-depends:
       base == 4.*
     , filepath
     , directory
-    , tasty
-    , tasty-th
-    , tasty-hunit
-    , tasty-quickcheck
-    , tasty-hspec
   hs-source-dirs: src
   default-language: Haskell2010
 
@@ -51,22 +46,14 @@ executable tasty-discover
   ghc-options:
       -Wall
   hs-source-dirs:
-      src
+      exe
   main-is:
       Main.hs
-  other-modules:
-      Test.Tasty.Config
-      Test.Tasty.Discover
-      Test.Tasty.Parse
-      Test.Tasty.Run
-      Test.Tasty.Util
-      Test.Tasty.Type
   build-depends:
       base == 4.*
     , filepath
     , directory
     , tasty-discover
-    , tasty-th
   default-language: Haskell2010
 
 test-suite unit-tests
@@ -79,6 +66,8 @@ test-suite unit-tests
     UtilTest
   build-depends:
       base == 4.*
+    , tasty
+    , tasty-hunit
     , tasty-discover
   default-language:    Haskell2010
 

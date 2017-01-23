@@ -67,6 +67,8 @@ script:
   case "$BUILD" in
     cabal)
       cabal install
+      cabal build
+      cabal install --enable-tests
       cabal test
       ;;
     stack)
