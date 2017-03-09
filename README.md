@@ -10,5 +10,7 @@ Automatic test discovery and runner for the [tasty framework].
 
 Please refer to [the documentation] to get started.
 
+PS. There's also [tasty-auto](https://github.com/minad/tasty-auto).
+
 [tasty framework]: https://github.com/feuerbach/tasty
 [the documentation]: http://tasty-discover.readthedocs.io/en/latest/
