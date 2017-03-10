@@ -19,6 +19,9 @@ Versioning].
 ### Removed
 - RTD documentation (moving to Haddock).
 
+### Changed
+- Move all tests into test folder.
+
 ## 1.1.0 [2017-01-19]
 
 ### Added

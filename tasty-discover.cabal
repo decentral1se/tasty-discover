@@ -1,4 +1,4 @@
--- This file has been generated from package.yaml by hpack version 0.14.1.
+-- This file has been generated from package.yaml by hpack version 0.17.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -24,14 +24,14 @@ extra-source-files:
     example/test/FooTest.hs
     example/test/Tasty.hs
     example/test/Thing/AnotherThing/NestedTest.hs
-    integration-test/test-configurable-module/FooMySuffix.hs
-    integration-test/test-configurable-module/Nested/BarMySuffix.hs
-    integration-test/test-configurable-module/Tasty.hs
-    integration-test/test-no-module-suffix/Nested/AnotherBar.hs
-    integration-test/test-no-module-suffix/SomeFoo.hs
-    integration-test/test-no-module-suffix/Tasty.hs
-    test/tmpdir/FooTest.hs
-    test/tmpdir/README.md
+    test/integration-test/test-configurable-module/FooMySuffix.hs
+    test/integration-test/test-configurable-module/Nested/BarMySuffix.hs
+    test/integration-test/test-configurable-module/Tasty.hs
+    test/integration-test/test-no-module-suffix/Nested/AnotherBar.hs
+    test/integration-test/test-no-module-suffix/SomeFoo.hs
+    test/integration-test/test-no-module-suffix/Tasty.hs
+    test/unit-test/tmpdir/FooTest.hs
+    test/unit-test/tmpdir/README.md
 
 source-repository head
   type: git
@@ -86,7 +86,7 @@ test-suite unit-tests
   type: exitcode-stdio-1.0
   main-is: Tasty.hs
   hs-source-dirs:
-      test
+      test/unit-test
   build-depends:
       base ==4.*
     , tasty-discover

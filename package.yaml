@@ -13,15 +13,15 @@ git: "git://github.com/lwm/tasty-discover.git"
 bug-reports: "https://github.com/lwm/tasty-discover/issues"
 stability: "Experimental"
 extra-source-files:
-- "integration-test/test-configurable-module/*.hs"
-- "integration-test/test-configurable-module/Nested/*.hs"
-- "integration-test/test-no-module-suffix/*.hs"
-- "integration-test/test-no-module-suffix/Nested/*.hs"
+- "test/integration-test/test-configurable-module/*.hs"
+- "test/integration-test/test-configurable-module/Nested/*.hs"
+- "test/integration-test/test-no-module-suffix/*.hs"
+- "test/integration-test/test-no-module-suffix/Nested/*.hs"
 - "example/test/*.hs"
 - "example/test/AllTheFolders/*.hs"
 - "example/test/Thing/AnotherThing/*.hs"
-- "test/tmpdir/*.hs"
-- "test/tmpdir/*.md"
+- "test/unit-test/tmpdir/*.hs"
+- "test/unit-test/tmpdir/*.md"
 dependencies:
 - "base ==4.*"
 library:
@@ -50,6 +50,6 @@ executables:
 tests:
   unit-tests:
     main: "Tasty.hs"
-    source-dirs: "test"
+    source-dirs: "test/unit-test"
     dependencies:
     - "tasty-discover"
