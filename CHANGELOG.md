@@ -1,33 +1,51 @@
-1.1.0
-=====
+# Change Log
 
-* Add `--ignore-module` option. Thanks to @expipiplus1 for the PR.
+All notable changes to this project will be documented in this file.
 
-1.0.1
-=====
+The format is based on [Keep a Changelog] and this project adheres to [Semantic
+Versioning].
 
-* Fix sdist `extra-source-files` issue. (See #58).
-* Slim down LICENSE.md and mark as GPL-3 in Cabal file.
-* Add Cabal testing on Travis CI.
-* Add documentation testing on Travis CI.
+[Keep a Changelog]: http://keepachangelog.com/
+[Semantic Versioning]: http://semver.org/).
 
-1.0.0
-=====
+## 2.0.0 [Unreleased]
 
-* Move documentation to RTD.
-* Release on Hackage and Stackage.
+### Added
+- Use hpack format.
 
-0.2.0
-=====
+### Fixed
+- Re-license to MIT.
 
-* Add `--no-module-suffix` option.
+## 1.1.0 [2017-01-19]
 
-0.1.0
-=====
+### Added
+- `--ignore-module` configuration option.
 
-* Add `--module-suffix` option.
+## 1.0.1 [2017-11-13]
 
-0.0.1
-=====
+### Added
+- Cabal testing on Travis CI.
+- Documentation testing on Travis CI.
 
-* tasty-discover initial release.
+### Fixed
+- Include missing `extra-source-files`.
+- Slim down LICENSE.md and mark as GPL-3 in Cabal file.
+
+## 1.0.0 [2016-11-04]
+
+### Added
+- Documentation to RTD.
+- Release on Hackage and Stackage.
+
+## 0.0.3 [2016-09-20]
+
+### Added
+- `--no-module-suffix` configuration option.
+
+## 0.0.2 [2016-02-20]
+
+### Added
+- `--module-suffix` configuration option.
+
+## 0.0.1 [2016-02-13]
+- tasty-discover initial release.
