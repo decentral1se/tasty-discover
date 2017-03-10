@@ -11,23 +11,20 @@ cache:
 matrix:
   include:
   - env: BUILD=cabal
-    compiler: "GHC 8.0.1"
+    compiler: "GHC 8.0.2"
     addons: {apt: {packages: [cabal-install-1.24,ghc-8.0.1,happy-1.19.5,alex-3.1.7], sources: [hvr-ghc]}}
 
   - env: BUILD=stack
-    compiler: "Stack default"
+    compiler: "GHC-8.0.2"
     addons: {apt: {packages: [libgmp-dev]}}
 
   - env: BUILD=hlint
-    compiler: "Stack default"
+    compiler: "GHC-8.0.2"
     addons: {apt: {packages: [libgmp-dev]}}
 
   - env: BUILD=sdist
-    compiler: "Stack default"
+    compiler: "GHC-8.0.2"
     addons: {apt: {packages: [libgmp-dev]}}
-
-  - env: BUILD=docs
-    addons: {apt: {packages: [python3], sources: [deadsnakes]}}
 
 before_install:
 - export PATH=/opt/ghc/$GHCVER/bin:/opt/cabal/$CABALVER/bin:$HOME/.local/bin:/opt/alex/$ALEXVER/bin:/opt/happy/$HAPPYVER/bin:$HOME/.cabal/bin:$PATH
@@ -50,15 +47,8 @@ before_install:
 install:
 - |
   set -ex
-  case "$BUILD" in
-    cabal)
-      cabal --version
-      travis_retry cabal update
-      ;;
-    docs)
-      pip install --user -U pip -r requirements.txt
-      ;;
-  esac
+  cabal --version
+  travis_retry cabal update
   set +ex
 
 script:
@@ -78,8 +68,6 @@ script:
     sdist)
       make test_sdist
       ;;
-    docs)
-      make html
   esac
   set +ex
 
