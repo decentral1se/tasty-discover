@@ -1,3 +1,9 @@
+1.1.1
+=====
+
+* Add versioning bounds for Hackage.
+
+
 1.1.0
 =====
 
