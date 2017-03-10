@@ -9,28 +9,28 @@ import Test.Tasty.Discover (Assertion, (@?=), defaultConfig, getListOfTests,
 
 case_getListOfTests :: Assertion
 case_getListOfTests = do
-  result <- getListOfTests "test/tmpdir/" defaultConfig
+  result <- getListOfTests "test/unit-test/tmpdir/" defaultConfig
   result @?= ["case_foo"]
 
 case_getListOfTestsWithSuffix :: Assertion
 case_getListOfTestsWithSuffix = do
   let config = Config (Just "DoesntExist") False []
-  result <- getListOfTests "test/tmpdir/" config
+  result <- getListOfTests "test/unit-test/tmpdir/" config
   result @?= []
 
 case_findTests :: Assertion
 case_findTests = do
-  result <- findTests "test/tmpdir/" defaultConfig
-  result @?= [Test {testFile="test/tmpdir/FooTest.hs", testModule="Foo"}]
+  result <- findTests "test/unit-test/tmpdir/" defaultConfig
+  result @?= [Test {testFile="test/unit-test/tmpdir/FooTest.hs", testModule="Foo"}]
 
 case_fileToTest :: Assertion
 case_fileToTest = do
-  let result = fileToTest "test/tmpdir/" defaultConfig "FooTest.hs"
-  result @?= Just Test {testFile="test/tmpdir/FooTest.hs", testModule="Foo"}
+  let result = fileToTest "test/unit-test/tmpdir/" defaultConfig "FooTest.hs"
+  result @?= Just Test {testFile="test/unit-test/tmpdir/FooTest.hs", testModule="Foo"}
 
 case_getFilesRecursive :: Assertion
 case_getFilesRecursive = do
-  result <- getFilesRecursive "test/tmpdir/"
+  result <- getFilesRecursive "test/unit-test/tmpdir/"
   result @?= ["FooTest.hs", "README.md"]
 
 case_isValidModuleChar :: Assertion

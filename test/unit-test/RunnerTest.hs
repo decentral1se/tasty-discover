@@ -6,12 +6,12 @@ import Test.Tasty.Discover (Assertion, (@?), defaultConfig, getListOfTests)
 
 case_unitTestsDiscovered :: Assertion
 case_unitTestsDiscovered = do
-  unitTests <- getListOfTests "test" defaultConfig
+  unitTests <- getListOfTests "test/unit-test" defaultConfig
   (return $ null unitTests :: IO Bool) @? "Couldn't find any unit tests."
 
 case_integrationTestsDiscovered :: Assertion
 case_integrationTestsDiscovered = do
-  integrationTests <- getListOfTests "integration-test/" defaultConfig
+  integrationTests <- getListOfTests "test/integration-test/" defaultConfig
   (return $ null integrationTests :: IO Bool) @? "Couldn't find any integration tests."
 
 case_exampleTestsDiscovered :: Assertion

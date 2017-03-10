@@ -1,5 +1,5 @@
-INTEGRATION_DIR:=./integration-test/
-EXAMPLE_DIR:=./example/
+INTEGRATION_DIR:=test/integration-test/
+EXAMPLE_DIR:=example/
 TEST:=stack build \
 	--copy-bins --install-ghc \
 	--test --no-terminal \
