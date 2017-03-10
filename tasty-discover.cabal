@@ -1,42 +1,48 @@
-name:             tasty-discover
-version:          1.1.0
-license:          GPL-3
-license-file:     LICENSE.md
-copyright:        (c) 2016 Luke Murphy
-author:           Luke Murphy <lukewm@riseup.net>
-maintainer:       Luke Murphy <lukewm@riseup.net>
-build-type:       Simple
-cabal-version:    >= 1.22
-category:         Testing
-stability:        Stable
-bug-reports:      https://github.com/lwm/tasty-discover/issues
-homepage:         https://github.com/lwm/tasty-discover/
-synopsis:         Test discovery for the tasty framework.
-description:      Test discovery for the tasty framework.
+-- This file has been generated from package.yaml by hpack version 0.14.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           tasty-discover
+version:        1.1.0
+synopsis:       Test discovery for the tasty framework.
+description:    Test discovery for the tasty framework.
+category:       Testing
+stability:      Experimental
+homepage:       https://github.com/lwm/tasty-discover/
+bug-reports:    https://github.com/lwm/tasty-discover/issues
+author:         Luke Murphy <lukewm@riseup.net>
+maintainer:     Luke Murphy <lukewm@riseup.net>
+copyright:      (c) 2016 Luke Murphy
+license:        GPL-3
+license-file:   LICENSE.md
+build-type:     Simple
+cabal-version:  >= 1.10
+
 extra-source-files:
-    integration-test/test-configurable-module/*.hs
-    integration-test/test-configurable-module/Nested/*.hs
-    integration-test/test-no-module-suffix/*.hs
-    integration-test/test-no-module-suffix/Nested/*.hs
-    example/test/*.hs
-    example/test/AllTheFolders/*.hs
-    example/test/Thing/AnotherThing/*.hs
-    test/tmpdir/*.hs
-    test/tmpdir/*.md
+    example/test/AllTheFolders/AnotherNestTest.hs
+    example/test/BarTest.hs
+    example/test/FooTest.hs
+    example/test/Tasty.hs
+    example/test/Thing/AnotherThing/NestedTest.hs
+    integration-test/test-configurable-module/FooMySuffix.hs
+    integration-test/test-configurable-module/Nested/BarMySuffix.hs
+    integration-test/test-configurable-module/Tasty.hs
+    integration-test/test-no-module-suffix/Nested/AnotherBar.hs
+    integration-test/test-no-module-suffix/SomeFoo.hs
+    integration-test/test-no-module-suffix/Tasty.hs
+    test/tmpdir/FooTest.hs
+    test/tmpdir/README.md
+
+source-repository head
+  type: git
+  location: git://github.com/lwm/tasty-discover.git
 
 library
-  ghc-options:
-      -Wall
-  exposed-modules:
-    Test.Tasty.Discover
-  other-modules:
-    Test.Tasty.Config
-    Test.Tasty.Parse
-    Test.Tasty.Run
-    Test.Tasty.Util
-    Test.Tasty.Type
+  hs-source-dirs:
+      src
+  ghc-options: -Wall
   build-depends:
-      base == 4.*
+      base ==4.*
     , filepath
     , directory
     , tasty
@@ -44,44 +50,48 @@ library
     , tasty-hunit
     , tasty-quickcheck
     , tasty-hspec
-  hs-source-dirs: src
+  exposed-modules:
+      Test.Tasty.Discover
+  other-modules:
+      Main
+      Test.Tasty.Config
+      Test.Tasty.Parse
+      Test.Tasty.Run
+      Test.Tasty.Type
+      Test.Tasty.Util
+      Paths_tasty_discover
   default-language: Haskell2010
 
 executable tasty-discover
-  ghc-options:
-      -Wall
+  main-is: Main.hs
   hs-source-dirs:
       src
-  main-is:
-      Main.hs
+  ghc-options: -Wall
+  build-depends:
+      base ==4.*
+    , filepath
+    , directory
+    , tasty-discover
+    , tasty-th
   other-modules:
       Test.Tasty.Config
       Test.Tasty.Discover
       Test.Tasty.Parse
       Test.Tasty.Run
-      Test.Tasty.Util
       Test.Tasty.Type
-  build-depends:
-      base == 4.*
-    , filepath
-    , directory
-    , tasty-discover
-    , tasty-th
+      Test.Tasty.Util
   default-language: Haskell2010
 
 test-suite unit-tests
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test
-  main-is:             Tasty.hs
-  other-modules:
-    ParseTest
-    RunnerTest
-    UtilTest
+  type: exitcode-stdio-1.0
+  main-is: Tasty.hs
+  hs-source-dirs:
+      test
   build-depends:
-      base == 4.*
+      base ==4.*
     , tasty-discover
-  default-language:    Haskell2010
-
-Source-repository head
-  type:     git
-  location: git://github.com/lwm/tasty-discover.git
+  other-modules:
+      ParseTest
+      RunnerTest
+      UtilTest
+  default-language: Haskell2010
