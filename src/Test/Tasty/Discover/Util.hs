@@ -2,9 +2,8 @@
 
 {-# LANGUAGE FlexibleInstances    #-}
 {-# LANGUAGE OverloadedStrings    #-}
-{-# OPTIONS_GHC -fno-warn-orphans #-}
 
-module Test.Tasty.Util (
+module Test.Tasty.Discover.Util (
   importList
 , findTests
 , getListOfTests
@@ -19,33 +18,27 @@ module Test.Tasty.Util (
 import Control.Applicative ((<|>))
 import Control.Monad (filterM)
 import Data.Char (isAlphaNum, isUpper)
-import Data.List (intercalate, sort, stripPrefix)
+import Data.List (intercalate, sort, stripPrefix, nub, isPrefixOf)
 import Data.Maybe (mapMaybe)
-import Data.String (IsString, fromString)
 import System.Directory (doesDirectoryExist, doesFileExist, getDirectoryContents)
 import System.FilePath (splitDirectories, splitFileName, (</>))
 import System.FilePath.Posix (splitExtension)
 
-import Test.Tasty.TH (extractTestFunctions)
-
-import Test.Tasty.Config (Config(..))
-import Test.Tasty.Type
-
-instance IsString ShowS where
-  fromString = showString
+import Test.Tasty.Discover.Config (Config(..))
+import Test.Tasty.Discover.Type
 
 -- | Import statements for a list of tests.
 importList :: [Test] -> Config -> ShowS
 importList ts config =
-    foldr ((.) . f) "" ts
+    foldr ((.) . f) id ts
   where
     f :: Test -> ShowS
     f test = if noModuleSuffix config then
-      "import " . showString (testModule test) . "\n"
+      showString "import " . showString (testModule test) . showString "\n"
     else
       case configModuleSuffix config of
-        Just suffix' -> "import " . showString (testModule test) . showString (suffix' ++ "\n")
-        _            -> "import " . showString (testModule test) . "Test\n"
+        Just suffix' -> showString "import " . showString (testModule test) . showString (suffix' ++ "\n")
+        _            -> showString "import " . showString (testModule test) . showString "Test\n"
 
 
 -- | Is 'c' a valid character in a Haskell module name?
@@ -133,3 +126,11 @@ getListOfTests src conf = do
     allFiles <- fmap testFile <$> findTests src conf
     allTests <- mapM extractTestFunctions allFiles
     return $ concat allTests
+
+-- | Retrieves all function names from the given file that would be discovered by 'testGroupGenerator'.
+extractTestFunctions :: FilePath -> IO [String]
+extractTestFunctions filePath = do
+  file <- readFile filePath
+  let functions = map fst . concatMap lex . lines $ file
+      filtered pat = filter (pat `isPrefixOf`) functions
+  return . nub $ concat [filtered "prop_", filtered "case_", filtered "test_", filtered "spec_"]

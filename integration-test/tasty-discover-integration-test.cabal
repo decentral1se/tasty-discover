@@ -16,7 +16,9 @@ test-suite configurable-suffix
     Nested.BarMySuffix
   build-depends:
       base
+    , tasty
     , tasty-discover
+    , tasty-quickcheck
   default-language:    Haskell2010
 
 test-suite no-module-suffix
@@ -28,7 +30,9 @@ test-suite no-module-suffix
     Nested.AnotherBar
   build-depends:
       base
+    , tasty
     , tasty-discover
+    , tasty-quickcheck
   default-language:    Haskell2010
 
 test-suite ignore-module
@@ -40,5 +44,6 @@ test-suite ignore-module
     IgnoreMe.Too
   build-depends:
       base
+    , tasty
     , tasty-discover
   default-language:    Haskell2010

@@ -2,7 +2,8 @@
 
 module RunnerTest where
 
-import Test.Tasty.Discover (Assertion, (@?), defaultConfig, getListOfTests)
+import Test.Tasty.HUnit (Assertion, (@?))
+import Test.Tasty.Discover (defaultConfig, getListOfTests)
 
 case_unitTestsDiscovered :: Assertion
 case_unitTestsDiscovered = do

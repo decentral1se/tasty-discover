@@ -1,6 +1,6 @@
 -- | Types.
 
-module Test.Tasty.Type where
+module Test.Tasty.Discover.Type where
 
 -- | A test type. Corresponds to a test file path and module name.
 data Test = Test {

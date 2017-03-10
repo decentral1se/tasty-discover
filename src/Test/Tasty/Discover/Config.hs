@@ -1,6 +1,6 @@
 -- | Preprocessor configuration.
 
-module Test.Tasty.Config (
+module Test.Tasty.Discover.Config (
   Config(..)
 , defaultConfig
 , options
@@ -8,7 +8,7 @@ module Test.Tasty.Config (
 
 import System.Console.GetOpt (ArgDescr (ReqArg, NoArg) , OptDescr (Option))
 
-import Test.Tasty.Type (Config(..))
+import Test.Tasty.Discover.Type (Config(..))
 
 -- | The empty configuration.
 defaultConfig :: Config
