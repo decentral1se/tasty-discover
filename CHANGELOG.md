@@ -16,6 +16,9 @@ Versioning].
 ### Fixed
 - Re-license to MIT.
 
+### Removed
+- RTD documentation (moving to Haddock).
+
 ## 1.1.0 [2017-01-19]
 
 ### Added
