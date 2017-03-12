@@ -10,14 +10,19 @@ Versioning].
 
 ## 2.0.0 [Unreleased]
 
+This release has all the breaking changes one could hope for. Please
+review the [Upgrade Notes](TODO) if you're coming from `< 2.0.0`.
+
 ### Added
 - Use hpack format.
+- Use generator style test discovery from tasty-auto.
 
 ### Fixed
 - Re-license to MIT.
 
 ### Removed
-- RTD documentation (moving to Haddock).
+- RTD documentation.
+- TemplateHaskell dependency
 
 ### Changed
 - Move all tests into test folder.
