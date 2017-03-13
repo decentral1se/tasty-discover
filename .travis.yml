@@ -47,8 +47,17 @@ before_install:
 install:
 - |
   set -ex
-  cabal --version
-  travis_retry cabal update
+  case "$BUILD" in
+    cabal)
+      cabal update
+      cabal install
+      ;;
+    stack)
+      stack setup --upgrade-cabal
+      stack install hpack
+      stack install
+      ;;
+  esac
   set +ex
 
 script:
@@ -56,7 +65,6 @@ script:
   set -ex
   case "$BUILD" in
     cabal)
-      cabal install
       cabal test
       ;;
     stack)
