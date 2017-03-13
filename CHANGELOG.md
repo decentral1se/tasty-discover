@@ -16,6 +16,7 @@ review the [Upgrade Notes](TODO) if you're coming from `< 2.0.0`.
 ### Added
 - Use hpack format.
 - Use generator style test discovery from tasty-auto.
+- New configuration options: debug, ingredients and module name.
 
 ### Fixed
 - Re-license to MIT.

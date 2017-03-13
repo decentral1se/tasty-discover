@@ -11,8 +11,9 @@ tests:
     source-dirs: "test"
     dependencies:
     - "base"
-    - "tasty-discover"
     - "tasty"
+    - "tasty-discover"
     - "tasty-hspec"
-    - "tasty-quickcheck"
     - "tasty-hunit"
+    - "tasty-quickcheck"
+    - "tasty-smallcheck"

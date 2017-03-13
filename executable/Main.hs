@@ -2,6 +2,7 @@
 module Main where
 
 import Control.Monad (when)
+import Data.Maybe (fromMaybe)
 import Test.Tasty.Config (parseConfig)
 import Test.Tasty.Discover (findTests, generateTestDriver)
 import Test.Tasty.Type (Config(..))
@@ -22,7 +23,9 @@ main = do
           exitFailure
         Right config -> do
           tests <- findTests src config
-          let output = generateTestDriver "Main" [] src tests
+          let ingredients = tastyIngredients config
+              moduleName  = fromMaybe "Main" (generatedModuleName config)
+              output      = generateTestDriver moduleName ingredients src tests
           when (debug config) $ hPutStrLn stderr output
           writeFile dst output
     _ -> do

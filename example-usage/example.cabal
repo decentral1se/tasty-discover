@@ -21,8 +21,9 @@ test-suite example-test
     , tasty
     , tasty-discover
     , tasty-hspec
-    , tasty-quickcheck
     , tasty-hunit
+    , tasty-quickcheck
+    , tasty-smallcheck
   other-modules:
       AllTheFolders.AnotherNestTest
       BarTest
