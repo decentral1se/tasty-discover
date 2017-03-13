@@ -8,9 +8,6 @@ example_test:
 	cd example-usage/ && $(TEST) --install-ghc
 .PHONY: example_test
 
-test: unit_test example_test
-.PHONY: test
-
 hlint-install:
 	stack install hlint
 .PHONY: hlint-install

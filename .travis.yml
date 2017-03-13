@@ -67,7 +67,7 @@ script:
       cabal test
       ;;
     stack)
-      make test
+      make unit_test
       ;;
     hlint)
       make hlint
