@@ -8,90 +8,67 @@ synopsis:       Test discovery for the tasty framework.
 description:    Test discovery for the tasty framework.
 category:       Testing
 stability:      Experimental
-homepage:       https://github.com/lwm/tasty-discover/
+homepage:       https://github.com/lwm/tasty-discover#readme
 bug-reports:    https://github.com/lwm/tasty-discover/issues
 author:         Luke Murphy <lukewm@riseup.net>
 maintainer:     Luke Murphy <lukewm@riseup.net>
-copyright:      (c) 2016 Luke Murphy
+copyright:      2016 Luke Murphy
 license:        MIT
 license-file:   LICENSE.md
 build-type:     Simple
 cabal-version:  >= 1.10
 
-extra-source-files:
-    example/test/AllTheFolders/AnotherNestTest.hs
-    example/test/BarTest.hs
-    example/test/FooTest.hs
-    example/test/Tasty.hs
-    example/test/Thing/AnotherThing/NestedTest.hs
-    test/integration-test/test-configurable-module/FooMySuffix.hs
-    test/integration-test/test-configurable-module/Nested/BarMySuffix.hs
-    test/integration-test/test-configurable-module/Tasty.hs
-    test/integration-test/test-no-module-suffix/Nested/AnotherBar.hs
-    test/integration-test/test-no-module-suffix/SomeFoo.hs
-    test/integration-test/test-no-module-suffix/Tasty.hs
-    test/unit-test/tmpdir/FooTest.hs
-    test/unit-test/tmpdir/README.md
-
 source-repository head
   type: git
-  location: git://github.com/lwm/tasty-discover.git
+  location: https://github.com/lwm/tasty-discover
 
 library
   hs-source-dirs:
-      src
+      library
   ghc-options: -Wall
   build-depends:
-      base ==4.*
-    , filepath
-    , directory
-    , tasty
-    , tasty-th
-    , tasty-hunit
-    , tasty-quickcheck
-    , tasty-hspec
+      base       >= 4.8 && < 5
+    , directory  >= 1.1 && < 1.4
+    , filepath   >= 1.3 && < 1.5
   exposed-modules:
-      Test.Tasty.Discover
-  other-modules:
-      Main
       Test.Tasty.Config
-      Test.Tasty.Parse
-      Test.Tasty.Run
+      Test.Tasty.Discover
+      Test.Tasty.Generator
       Test.Tasty.Type
-      Test.Tasty.Util
-      Paths_tasty_discover
   default-language: Haskell2010
 
 executable tasty-discover
-  main-is: Main.hs
-  hs-source-dirs:
-      src
+  main-is: executable/Main.hs
   ghc-options: -Wall
   build-depends:
-      base ==4.*
-    , filepath
-    , directory
+      base       >= 4.8 && < 5
+    , directory  >= 1.1 && < 1.4
+    , filepath   >= 1.3 && < 1.5
     , tasty-discover
-    , tasty-th
-  other-modules:
-      Test.Tasty.Config
-      Test.Tasty.Discover
-      Test.Tasty.Parse
-      Test.Tasty.Run
-      Test.Tasty.Type
-      Test.Tasty.Util
   default-language: Haskell2010
 
-test-suite unit-tests
+test-suite test
   type: exitcode-stdio-1.0
   main-is: Tasty.hs
   hs-source-dirs:
-      test/unit-test
+      test
+  ghc-options: -Wall
   build-depends:
-      base ==4.*
+      base       >= 4.8 && < 5
+    , directory  >= 1.1 && < 1.4
+    , filepath   >= 1.3 && < 1.5
+    , base
+    , tasty
     , tasty-discover
+    , tasty-hspec
+    , tasty-hunit
+    , tasty-quickcheck
+    , tasty-smallcheck
   other-modules:
-      ParseTest
-      RunnerTest
-      UtilTest
+      CaseTest
+      PropTest
+      SCPropTest
+      SubMod.PropTest
+      TestSpec
+      TreeTest
   default-language: Haskell2010
