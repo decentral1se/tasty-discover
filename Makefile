@@ -1,23 +1,18 @@
-EXAMPLE_DIR:=example-usage/
-TEST:=stack build \
-	--install-ghc --test \
-  --no-terminal \
-	--haddock --no-haddock-deps
-
 TEST:=stack build --test --haddock --no-haddock-deps
+
 unit_test:
 	$(TEST) tasty-discover:test
 .PHONY: unit_test
 
 example_test:
-	cd $(EXAMPLE_DIR) && $(TEST)
+	cd example-usage/ && $(TEST) --install-ghc
 .PHONY: example_test
 
 test: unit_test example_test
 .PHONY: test
 
 hlint-install:
-	stack install --install-ghc hlint
+	stack install hlint
 .PHONY: hlint-install
 
 hlint: hlint-install
@@ -25,7 +20,7 @@ hlint: hlint-install
 .PHONY: hlint
 
 hlint-apply-refact: hlint-install
-	stack install --install-ghc apply-refact
+	stack install apply-refact
 .PHONY: hlint-apply-refact
 
 HLINT=hlint --refactor --refactor-options -i {} \;

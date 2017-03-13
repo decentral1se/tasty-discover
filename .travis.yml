@@ -52,9 +52,8 @@ install:
       cabal update
       cabal install
       ;;
-    stack)
+    *)
       stack setup --upgrade-cabal
-      stack install hpack
       stack install
       ;;
   esac
