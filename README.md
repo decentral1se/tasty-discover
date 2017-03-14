@@ -23,6 +23,57 @@ Automatic test discovery and runner for the [tasty framework].
     - `spec_`: [Hspec](http://hackage.haskell.org/package/tasty-hspec) specifications.
     - `test_`: [Tasty](http://hackage.haskell.org/package/tasty) TestTrees.
 
+# Examples
+
+``` haskell
+{-# LANGUAGE ScopedTypeVariables #-}
+
+module ExampleTest where
+
+import Test.Tasty
+import Test.Tasty.HUnit
+import Test.Tasty.Hspec
+import Test.Tasty.QuickCheck
+
+-- HUnit test case
+case_List_comparison_with_different_length :: IO ()
+case_List_comparison_with_different_length = [1, 2, 3] `compare` [1,2] @?= GT
+
+-- QuickCheck property
+prop_Addition_is_commutative :: Int -> Int -> Bool
+prop_Addition_is_commutative a b = a + b == b + a
+
+-- SmallSheck property
+scprop_sortReverse :: [Int] -> Bool
+scprop_sortReverse list = sort list == sort (reverse list)
+
+-- Hspec specification
+spec_Prelude :: Spec
+spec_Prelude = do
+  describe "Prelude.head" $ do
+    it "returns the first element of a list" $ do
+      head [23 ..] `shouldBe` (23 :: Int)
+
+-- Tasty TestTree
+test_Multiplication :: [TestTree]
+test_Multiplication =
+  [ testProperty "Multiplication commutes" $ \(a :: Int) (b :: Int) -> a * b == b * a
+  , testProperty "One is identity" $ \(a :: Int) -> a * 1 == a
+  ]
+
+-- Tasty IO TestTree
+test_Generate_Tree :: IO TestTree
+test_Generate_Tree = do
+  input <- pure "Some input"
+  pure $ testCase input $ pure ()
+
+-- Tasty IO [TestTree]
+test_Generate_Trees :: IO [TestTree]
+test_Generate_Trees = do
+  inputs <- pure ["First input", "Second input"]
+  pure $ map (\s -> testCase s $ pure ()) inputs
+```
+
 # Configuration
 
 Pass configuration options within your `Tasty.hs` like so:
