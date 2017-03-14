@@ -10,7 +10,7 @@ Automatic test discovery and runner for the [tasty framework].
 
 # Getting Started
 
-![](http://i.imgur.com/gpdHc6x.gif | =200x200)
+![Usage GIF](http://i.imgur.com/gpdHc6x.gif | =200x200)
 
 5 steps to tasty test discovery satori:
   - Create a `Tasty.hs` in the `hs-source-dirs` of your test suite.
