@@ -4,10 +4,6 @@ unit_test:
 	$(TEST) tasty-discover:test
 .PHONY: unit_test
 
-example_test:
-	cd example-usage/ && $(TEST) --install-ghc
-.PHONY: example_test
-
 hlint-install:
 	stack install hlint
 .PHONY: hlint-install
