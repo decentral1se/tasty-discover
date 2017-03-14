@@ -1,7 +1,0 @@
-resolver: lts-8.5
-packages:
-- '.'
-- location:
-    git: "https://github.com/lwm/tasty-discover.git"
-    commit: "HEAD"
-  extra-dep: true
