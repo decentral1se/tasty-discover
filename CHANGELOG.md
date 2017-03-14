@@ -24,6 +24,7 @@ review the [Upgrade Notes](TODO) if you're coming from `< 2.0.0`.
 ### Removed
 - RTD documentation.
 - TemplateHaskell dependency
+- Example project and integration test project.
 
 ### Changed
 - Move all tests into test folder.
