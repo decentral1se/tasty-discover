@@ -10,9 +10,6 @@ Versioning].
 
 ## 2.0.0 [2017-03-15]
 
-This release has all the breaking changes one could hope for. Please
-review the [Upgrade Notes](TODO) if you're coming from `< 2.0.0`.
-
 ### Added
 - Use hpack format.
 - Use generator style test discovery from tasty-auto.
