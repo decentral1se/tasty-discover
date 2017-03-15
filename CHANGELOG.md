@@ -8,7 +8,7 @@ Versioning].
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/).
 
-## 2.0.0 [Unreleased]
+## 2.0.0 [2017-03-15]
 
 This release has all the breaking changes one could hope for. Please
 review the [Upgrade Notes](TODO) if you're coming from `< 2.0.0`.
@@ -17,6 +17,7 @@ review the [Upgrade Notes](TODO) if you're coming from `< 2.0.0`.
 - Use hpack format.
 - Use generator style test discovery from tasty-auto.
 - New configuration options: debug, ingredients and module name.
+- Unit tests for all functionality.
 
 ### Fixed
 - Re-license to MIT.
