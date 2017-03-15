@@ -64,11 +64,10 @@ test-suite test
     , tasty-hunit
     , tasty-quickcheck
     , tasty-smallcheck
+    , tasty-html
   other-modules:
-      CaseTest
-      PropTest
-      SCPropTest
+      ConfigTest
+      DiscoverTest
+      SubMod.FooBaz
       SubMod.PropTest
-      TestSpec
-      TreeTest
   default-language: Haskell2010

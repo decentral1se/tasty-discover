@@ -37,48 +37,38 @@ generateTestDriver modname is src tests =
         ]
       ]
 
-filterHidden :: String -> Bool
-filterHidden file = head file /= '.'
+addSuffixes :: [String] -> [String]
+addSuffixes modules = (++) <$> modules <*> [".lhs", ".hs"]
 
-filterIgnored :: String -> [FilePath] -> Bool
-filterIgnored file ignore' = file `elem` ignore'
+isHidden :: FilePath -> Bool
+isHidden filename = head filename /= '.'
 
-filesBySuffix :: FilePath -> [FilePath] -> [String] -> IO [FilePath]
-filesBySuffix dir ignore suffixes = do
-  let unWanted file = filterHidden file || filterIgnored file ignore
-  entries <- filter unWanted <$> getDirectoryContents dir
+filesBySuffix :: FilePath -> [String] -> IO [FilePath]
+filesBySuffix dir suffixes = do
+  entries <- filter isHidden <$> getDirectoryContents dir
   found <- for entries $ \entry -> do
     let dir' = dir </> entry
     dirExists <- doesDirectoryExist dir'
     if dirExists then
-      map (entry </>) <$> filesBySuffix dir' ignore suffixes
+      map (entry </>) <$> filesBySuffix dir' suffixes
     else
       pure []
   pure $ filter (\x -> any (`isSuffixOf` x) suffixes) entries ++ concat found
 
-allFiles :: FilePath -> IO [FilePath]
-allFiles dir = do
-  entries <- filter filterHidden <$> getDirectoryContents dir
-  found <- for entries $ \entry -> do
-    let dir' = dir </> entry
-    dirExists <- doesDirectoryExist dir'
-    if dirExists then
-      map (entry </>) <$> allFiles dir'
-    else
-      pure []
-  pure $ entries ++ concat found
+isIgnored :: [FilePath] -> String -> Bool
+isIgnored ignores filename = filename `notElem` addSuffixes ignores
 
 findTests :: FilePath -> Config -> IO [Test]
 findTests src config = do
-  let dir = takeDirectory src
+  let dir      = takeDirectory src
       suffixes = testFileSuffixes (moduleSuffix config)
-      ignore = ignoredModules config
+      ignores  = ignoredModules config
   files <-
-    if noModuleSuffix config then
-      allFiles dir
-    else
-      filesBySuffix dir ignore suffixes
-  concat <$> traverse (extract dir) files
+    if noModuleSuffix config
+    then filter isHidden <$> getDirectoryContents dir
+    else filesBySuffix dir suffixes
+  let files' = filter (isIgnored ignores) files
+  concat <$> traverse (extract dir) files'
   where
     extract dir file = extractTests file <$> readFile (dir </> file)
 
@@ -91,12 +81,11 @@ extractTests file = mkTestDeDuped . isKnownPrefix . parseTest
     parseTest     = map fst . concatMap lex . lines
 
 testFileSuffixes :: Maybe String -> [String]
-testFileSuffixes suffix = (++) <$> suffixes <*> [".lhs", ".hs"]
+testFileSuffixes suffix = addSuffixes suffixes
   where
-    defaults = ["Spec", "Test"]
     suffixes = case suffix of
-      Just s  -> defaults ++ [s]
-      Nothing -> defaults
+      Just suffix' -> [suffix']
+      Nothing -> ["Spec", "Test"]
 
 showImports :: [String] -> String
 showImports mods = unlines $ nub $ map (\m -> "import qualified " ++ m ++ "\n") mods
