@@ -34,7 +34,6 @@ library
       Test.Tasty.Config
       Test.Tasty.Discover
       Test.Tasty.Generator
-      Test.Tasty.Type
   default-language: Haskell2010
 
 executable tasty-discover

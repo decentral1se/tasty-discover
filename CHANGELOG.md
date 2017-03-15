@@ -8,6 +8,13 @@ Versioning].
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/).
 
+## 2.0.1 [UNRELEASED]
+
+### Removed
+- [#83]: The `Test.Tasty.Type` module.
+
+[#83]: https://github.com/lwm/tasty-discover/pull/83
+
 ## 2.0.0 [2017-03-15]
 
 ### Added
