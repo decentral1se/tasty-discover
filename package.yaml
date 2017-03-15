@@ -40,3 +40,4 @@ tests:
     - "tasty-hunit"
     - "tasty-quickcheck"
     - "tasty-smallcheck"
+    - "tasty-html"
