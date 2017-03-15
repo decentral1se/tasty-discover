@@ -78,8 +78,12 @@ test_Generate_Trees = do
 
 Pass configuration options within your `Tasty.hs` like so:
 
-```haskell
-{-# OPTIONS_GHC -F -pgmF tasty-discover -optF [OPTIONS] #-}
+``` haskell
+{-#
+ OPTIONS_GHC -F -pgmF tasty-discover
+ -optF <OPTION>
+ -optF <OPTION>
+#-}
 ```
 
 ## No Arguments
@@ -95,16 +99,6 @@ Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --moduleSuffix=FooBar #-
   - `--generated-module`: The name of the generated test module.
   - `--ignore-module`: Which test modules to ignore from discovery.
   - `--ingredient`: Tasty ingredients to add to your test runner.
-
-So, for example, we might end up with:
-
-``` haskell
-{-#
- OPTIONS_GHC -F -pgmF tasty-discover
- -optF --module-suffix=FooBar
- -optF --debug
-#-}
-```
 
 # Change Log
 See the [Change log] for the latest changes.
