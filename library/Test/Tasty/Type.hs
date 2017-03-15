@@ -12,6 +12,9 @@ data Test = Test
   , testFunction :: String
   } deriving Show
 
+instance Eq Test where
+  t1 == t2 = testModule t1 == testModule t2 && testFunction t1 == testFunction t2
+
 mkTest :: FilePath -> String -> Test
 mkTest = Test . chooser pathSeparator '.' . dropExtension
   where chooser c1 c2 = map $ \c3 -> if c3 == c1 then c2 else c3
