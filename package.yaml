@@ -1,5 +1,5 @@
 name: "tasty-discover"
-version: "1.1.0"
+version: "2.0.0"
 synopsis: "Test discovery for the tasty framework."
 description: "Test discovery for the tasty framework."
 author: "Luke Murphy <lukewm@riseup.net>"
