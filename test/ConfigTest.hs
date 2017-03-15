@@ -3,7 +3,8 @@ module ConfigTest where
 import Data.List (isInfixOf)
 import Test.Tasty.Discover (findTests, generateTestDriver)
 import Test.Tasty.HUnit
-import Test.Tasty.Type
+import Test.Tasty.Config
+import Test.Tasty.Generator (mkTest)
 
 case_noModuleSuffixEmptyList :: IO ()
 case_noModuleSuffixEmptyList = do

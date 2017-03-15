@@ -5,8 +5,9 @@ import Data.List (isPrefixOf, isSuffixOf, nub, intercalate, dropWhileEnd)
 import System.Directory (getDirectoryContents, doesDirectoryExist)
 import Data.Traversable (for)
 import System.FilePath ((</>), takeDirectory)
-import Test.Tasty.Generator (generators, showSetup, getGenerators)
-import Test.Tasty.Type (Config(..), Generator(..), Test(..), mkTest)
+import Test.Tasty.Generator (Generator(..), Test(..), mkTest,
+                             generators, showSetup, getGenerators)
+import Test.Tasty.Config (Config(..))
 
 generateTestDriver :: String -> [String] -> FilePath -> [Test] -> String
 generateTestDriver modname is src tests =

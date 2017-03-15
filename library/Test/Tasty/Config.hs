@@ -1,10 +1,24 @@
 -- Configuration options module.
-module Test.Tasty.Config (parseConfig, defaultConfig) where
+module Test.Tasty.Config
+  ( Config(..)
+  , parseConfig
+  , defaultConfig
+  ) where
 
 import System.Console.GetOpt (ArgDescr(ReqArg, NoArg) , OptDescr(Option),
                               ArgOrder(Permute), getOpt)
 import Data.Maybe (isJust)
-import Test.Tasty.Type (Config(..))
+
+type Ingredient = String
+
+data Config = Config
+  { moduleSuffix        :: Maybe String
+  , generatedModuleName :: Maybe String
+  , ignoredModules      :: [FilePath]
+  , tastyIngredients    :: [Ingredient]
+  , noModuleSuffix      :: Bool
+  , debug               :: Bool
+  } deriving (Show)
 
 -- | The default configuration
 defaultConfig :: Config

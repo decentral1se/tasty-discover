@@ -1,14 +1,33 @@
 module Test.Tasty.Generator
-  ( generators
+  ( Generator(..)
+  , generators
   , showSetup
   , getGenerator
   , getGenerators
+  , Test(..)
+  , mkTest,
   ) where
 
-import Test.Tasty.Type (Test(..), Generator(..))
 import Data.List (find, isPrefixOf, groupBy, sortOn)
 import Data.Function (on)
 import Data.Maybe (fromJust)
+import System.FilePath (pathSeparator, dropExtension)
+
+data Test = Test
+  { testModule   :: String
+  , testFunction :: String
+  } deriving (Eq, Show)
+
+mkTest :: FilePath -> String -> Test
+mkTest = Test . chooser pathSeparator '.' . dropExtension
+  where chooser c1 c2 = map $ \c3 -> if c3 == c1 then c2 else c3
+
+data Generator = Generator
+  { generatorPrefix  :: String
+  , generatorImport  :: String
+  , generatorClass   :: String
+  , generatorSetup   :: Test -> String
+  }
 
 qualifyFunction :: Test -> String
 qualifyFunction t = testModule t ++ "." ++ testFunction t

@@ -3,9 +3,8 @@ module Main where
 
 import Control.Monad (when)
 import Data.Maybe (fromMaybe)
-import Test.Tasty.Config (parseConfig)
+import Test.Tasty.Config (Config(..), parseConfig)
 import Test.Tasty.Discover (findTests, generateTestDriver)
-import Test.Tasty.Type (Config(..))
 import System.Environment (getArgs, getProgName)
 import System.Exit (exitFailure)
 import System.IO (hPutStrLn, stderr)
