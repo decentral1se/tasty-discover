@@ -4,7 +4,12 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/lwm/tasty-discover/master/LICENSE)
 
 # tasty-discover
+
 Automatic test discovery and runner for the [tasty framework].
+
+The successor of [tasty-auto], in order to consolidate feature set into one package.
+
+[tasty-auto]: https://github.com/minad/tasty-auto
 
 [tasty framework]: https://github.com/feuerbach/tasty
 
