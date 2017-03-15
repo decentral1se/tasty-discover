@@ -96,6 +96,16 @@ Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --moduleSuffix=FooBar #-
   - `--ignore-module`: Which test modules to ignore from discovery.
   - `--ingredient`: Tasty ingredients to add to your test runner.
 
+So, for example, we might end up with:
+
+``` haskell
+{-#
+ OPTIONS_GHC -F -pgmF tasty-discover
+ -optF --module-suffix=FooBar
+ -optF --debug
+#-}
+```
+
 # Change Log
 See the [Change log] for the latest changes.
 
