@@ -64,7 +64,6 @@ test-suite test
     , tasty-hunit
     , tasty-quickcheck
     , tasty-smallcheck
-    , tasty-html
   other-modules:
       ConfigTest
       DiscoverTest
