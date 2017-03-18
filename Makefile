@@ -21,24 +21,24 @@ test_sdist: untar_sdist
 
 stylish_haskell_install:
 	stack install stylish-haskell
-.PHONY: stylish-haskell-install
+.PHONY: stylish_haskell_install
 
 STYLISH=stylish-haskell -i {} \;
-stylish: stylish-haskell-install
+stylish_haskell: stylish_haskell_install
 	find library/ executable/ test/ -name "*.hs" -exec $(STYLISH) && git diff --exit-code
-.PHONY: stylish-haskell
+.PHONY: stylish_haskell
 
-hlint-install:
+hlint_install:
 	stack install hlint
-.PHONY: hlint-install
+.PHONY: hlint_install
 
-hlint: hlint-install
+hlint: hlint_install
 	hlint library/ executable/ test/
 .PHONY: hlint
 
-hlint-apply-refact: hlint-install
+hlint_apply_refact: hlint_install
 	stack install apply-refact
-.PHONY: hlint-apply-refact
+.PHONY: hlint_apply_refact
 
 HLINT=hlint --refactor --refactor-options -i {} \;
 hlint_refactor: hlint-apply-refact

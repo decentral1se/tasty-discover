@@ -76,7 +76,7 @@ script:
       make hlint
       ;;
     stylish-haskell)
-      make stylish
+      make stylish_haskell
       ;;
     sdist)
       make test_sdist
