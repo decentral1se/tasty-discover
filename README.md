@@ -57,10 +57,7 @@ spec_prelude = do
 
 -- Tasty TestTree
 test_multiplication :: [TestTree]
-test_multiplication =
-  [ testProperty "Multiplication commutes" $ \(a :: Int) (b :: Int) -> a * b == b * a
-  , testProperty "One is identity" $ \(a :: Int) -> a * 1 == a
-  ]
+test_multiplication = [testProperty "One is identity" $ \(a :: Int) -> a * 1 == a]
 
 -- Tasty IO TestTree
 test_generateTree :: IO TestTree
