@@ -53,8 +53,7 @@ install:
       cabal install
       ;;
     *)
-      stack setup --upgrade-cabal
-      stack install
+      stack setup --upgrade-cabal && stack install
       ;;
   esac
   set +ex
