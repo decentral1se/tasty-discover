@@ -10,6 +10,11 @@ Versioning].
 
 ## 2.0.1 [UNRELEASED]
 
+### Fixed
+- [#86]: Flaky test comparison.
+
+[#86]: https://github.com/lwm/tasty-discover/pull/86
+
 ### Removed
 - [#83]: The `Test.Tasty.Type` module.
 
