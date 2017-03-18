@@ -13,6 +13,11 @@ The format is based on [Keep a Changelog] and this project adheres to
 ### Added
 - Change log is in `extra-source-files` now.
 
+### Fixed
+- [#88]: stylish-haskell automated checking.
+
+[#88]: https://github.com/lwm/tasty-discover/pull/88
+
 ## 2.0.1 [2017-03-18]
 
 ### Fixed
