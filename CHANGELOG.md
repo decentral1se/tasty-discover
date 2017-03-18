@@ -8,7 +8,7 @@ Versioning].
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/).
 
-## 2.0.1 [UNRELEASED]
+## 2.0.1 [2017-03-18]
 
 ### Fixed
 - [#86]: Flaky test comparison.
