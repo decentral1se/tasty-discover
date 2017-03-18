@@ -5,9 +5,10 @@ module Test.Tasty.Config
   , defaultConfig
   ) where
 
-import System.Console.GetOpt (ArgDescr(ReqArg, NoArg) , OptDescr(Option),
-                              ArgOrder(Permute), getOpt)
-import Data.Maybe (isJust)
+import           Data.Maybe            (isJust)
+import           System.Console.GetOpt (ArgDescr (NoArg, ReqArg),
+                                        ArgOrder (Permute), OptDescr (Option),
+                                        getOpt)
 
 type Ingredient = String
 

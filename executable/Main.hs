@@ -1,13 +1,13 @@
 -- | Main executable module.
 module Main where
 
-import Control.Monad (when)
-import Data.Maybe (fromMaybe)
-import Test.Tasty.Config (Config(..), parseConfig)
-import Test.Tasty.Discover (findTests, generateTestDriver)
-import System.Environment (getArgs, getProgName)
-import System.Exit (exitFailure)
-import System.IO (hPutStrLn, stderr)
+import           Control.Monad       (when)
+import           Data.Maybe          (fromMaybe)
+import           System.Environment  (getArgs, getProgName)
+import           System.Exit         (exitFailure)
+import           System.IO           (hPutStrLn, stderr)
+import           Test.Tasty.Config   (Config (..), parseConfig)
+import           Test.Tasty.Discover (findTests, generateTestDriver)
 
 -- | Main function.
 main :: IO ()

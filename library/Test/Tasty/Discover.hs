@@ -1,13 +1,14 @@
 -- | Automatic test discovery and runner for the tasty framework.
 module Test.Tasty.Discover where
 
-import Data.List (isPrefixOf, isSuffixOf, nub, intercalate, dropWhileEnd)
-import System.Directory (getDirectoryContents, doesDirectoryExist)
-import Data.Traversable (for)
-import System.FilePath ((</>), takeDirectory)
-import Test.Tasty.Generator (Generator(..), Test(..), mkTest,
-                             generators, showSetup, getGenerators)
-import Test.Tasty.Config (Config(..))
+import           Data.List            (dropWhileEnd, intercalate, isPrefixOf,
+                                       isSuffixOf, nub)
+import           Data.Traversable     (for)
+import           System.Directory     (doesDirectoryExist, getDirectoryContents)
+import           System.FilePath      (takeDirectory, (</>))
+import           Test.Tasty.Config    (Config (..))
+import           Test.Tasty.Generator (Generator (..), Test (..), generators,
+                                       getGenerators, mkTest, showSetup)
 
 generateTestDriver :: String -> [String] -> FilePath -> [Test] -> String
 generateTestDriver modname is src tests =
@@ -86,7 +87,7 @@ testFileSuffixes suffix = addSuffixes suffixes
   where
     suffixes = case suffix of
       Just suffix' -> [suffix']
-      Nothing -> ["Spec", "Test"]
+      Nothing      -> ["Spec", "Test"]
 
 showImports :: [String] -> String
 showImports mods = unlines $ nub $ map (\m -> "import qualified " ++ m ++ "\n") mods

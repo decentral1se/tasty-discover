@@ -2,11 +2,11 @@
 
 module DiscoverTest where
 
-import Data.List
-import Test.Tasty
-import Test.Tasty.HUnit
-import Test.Tasty.Hspec
-import Test.Tasty.QuickCheck
+import           Data.List
+import           Test.Tasty
+import           Test.Tasty.Hspec
+import           Test.Tasty.HUnit
+import           Test.Tasty.QuickCheck
 
 case_list_comparison_with_different_length :: IO ()
 case_list_comparison_with_different_length = [1 :: Int, 2, 3] `compare` [1,2] @?= GT
