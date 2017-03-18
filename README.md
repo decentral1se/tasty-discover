@@ -1,15 +1,11 @@
 [![Build Status](https://travis-ci.org/lwm/tasty-discover.svg?branch=master)](https://travis-ci.org/lwm/tasty-discover)
-[![Hackage Status](https://img.shields.io/badge/Hackage-2.0.0-brightgreen.svg)](http://hackage.haskell.org/package/tasty-discover)
-[![Stackage Status](https://img.shields.io/badge/Stackage-2.0.0-brightgreen.svg)](https://www.stackage.org/package/tasty-discover/)
+[![Hackage Status](https://img.shields.io/badge/Hackage-2.0.1-brightgreen.svg)](http://hackage.haskell.org/package/tasty-discover)
+[![Stackage Status](https://img.shields.io/badge/Stackage-2.0.1-brightgreen.svg)](https://www.stackage.org/package/tasty-discover/)
 [![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/lwm/tasty-discover/master/LICENSE)
 
 # tasty-discover
 
 Automatic test discovery and runner for the [tasty framework].
-
-The successor of [tasty-auto], in order to consolidate feature set into one package.
-
-[tasty-auto]: https://github.com/minad/tasty-auto
 
 [tasty framework]: https://github.com/feuerbach/tasty
 
