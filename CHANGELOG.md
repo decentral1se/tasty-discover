@@ -8,6 +8,11 @@ Versioning].
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/).
 
+# 2.0.2 [UNRELEASED]
+
+### Added
+- Change log is in `extra-source-files` now.
+
 ## 2.0.1 [2017-03-18]
 
 ### Fixed
