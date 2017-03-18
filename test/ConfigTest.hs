@@ -23,9 +23,9 @@ case_ignoreAModule = do
 case_noModuleSuffix :: IO ()
 case_noModuleSuffix  = do
   actual1 <- findTests "test/SubMod/" defaultConfig
-  actual1 @?= [mkTest "PropTest" "prop_addition_is_associative"]
+  actual1 @?= [mkTest "PropTest" "prop_additionAssociative"]
 
   actual2 <- findTests "test/SubMod/" (defaultConfig { noModuleSuffix = True })
-  let expected = [ mkTest "FooBaz" "prop_addition_is_commutative"
-                 , mkTest "PropTest" "prop_addition_is_associative" ]
+  let expected = [ mkTest "FooBaz" "prop_additionCommutative"
+                 , mkTest "PropTest" "prop_additionAssociative" ]
   assertBool "" $ all (`elem` expected) actual2
