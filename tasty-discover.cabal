@@ -18,6 +18,9 @@ license-file:   LICENSE
 build-type:     Simple
 cabal-version:  >= 1.10
 
+extra-source-files:
+    CHANGELOG.md
+
 source-repository head
   type: git
   location: https://github.com/lwm/tasty-discover
