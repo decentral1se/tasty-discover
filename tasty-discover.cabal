@@ -14,7 +14,7 @@ author:         Luke Murphy <lukewm@riseup.net>
 maintainer:     Luke Murphy <lukewm@riseup.net>
 copyright:      2016 Luke Murphy
 license:        MIT
-license-file:   LICENSE.md
+license-file:   LICENSE
 build-type:     Simple
 cabal-version:  >= 1.10
 
