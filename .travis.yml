@@ -22,6 +22,10 @@ matrix:
     compiler: "GHC-8.0.2"
     addons: {apt: {packages: [libgmp-dev]}}
 
+  - env: BUILD=stylish-haskell
+    compiler: "GHC-8.0.2"
+    addons: {apt: {packages: [libgmp-dev]}}
+
   - env: BUILD=sdist
     compiler: "GHC-8.0.2"
     addons: {apt: {packages: [libgmp-dev]}}
@@ -66,10 +70,13 @@ script:
       cabal test
       ;;
     stack)
-      make unit_test
+      make test
       ;;
     hlint)
       make hlint
+      ;;
+    stylish-haskell)
+      make stylish
       ;;
     sdist)
       make test_sdist
