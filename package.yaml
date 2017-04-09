@@ -1,7 +1,13 @@
 name: "tasty-discover"
-version: "2.0.1"
+version: "2.0.2"
 synopsis: "Test discovery for the tasty framework."
-description: "Test discovery for the tasty framework."
+description: >
+  Prefix your test case names and tasty-discover will discover, collect and run
+  them. All popular test libraries are covered. Configure once and then just
+  write your tests. Avoid forgetting to add test modules to your Cabal/Hpack
+  files. Tasty ingredients are included along with various configuration
+  options for different use cases. Please see the `README.md` below for how to
+  get started.
 author: "Luke Murphy"
 maintainer: "Luke Murphy <lukewm@riseup.net>"
 copyright: "2016 Luke Murphy"
@@ -10,7 +16,9 @@ license-file: "LICENSE"
 github: "lwm/tasty-discover"
 stability: "Experimental"
 category: "Testing"
-extra-source-files: "CHANGELOG.md"
+extra-source-files:
+- "CHANGELOG.md"
+- "README.md"
 
 dependencies:
 - "base       >= 4.8 && < 5"
