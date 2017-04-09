@@ -8,8 +8,8 @@ import           Test.Tasty.Hspec
 import           Test.Tasty.HUnit
 import           Test.Tasty.QuickCheck
 
-case_listCompare :: IO ()
-case_listCompare = [1 :: Int, 2, 3] `compare` [1,2] @?= GT
+unit_listCompare :: IO ()
+unit_listCompare = [1 :: Int, 2, 3] `compare` [1,2] @?= GT
 
 prop_additionCommutative :: Int -> Int -> Bool
 prop_additionCommutative a b = a + b == b + a
