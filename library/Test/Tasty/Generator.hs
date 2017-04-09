@@ -37,13 +37,19 @@ name = chooser '_' ' ' . tail . dropWhile (/= '_') . testFunction
   where chooser c1 c2 = map $ \c3 -> if c3 == c1 then c2 else c3
 
 getGenerator :: Test -> Generator
-getGenerator t = fromJust $ find ((`isPrefixOf` testFunction t) . generatorPrefix) generators
+getGenerator t = fromJust $ getPrefix generators
+  where getPrefix = find ((`isPrefixOf` testFunction t) . generatorPrefix)
 
 getGenerators :: [Test] -> [Generator]
-getGenerators = map head . groupBy  ((==) `on` generatorPrefix) . sortOn generatorPrefix . map getGenerator
+getGenerators =
+  map head .
+  groupBy  ((==) `on` generatorPrefix) .
+  sortOn generatorPrefix .
+  map getGenerator
 
 showSetup :: Test -> String -> String
-showSetup t var = "  " ++ var ++ " <- " ++ generatorSetup (getGenerator t) t ++ "\n"
+showSetup t var = "  " ++ var ++ " <- " ++ setup ++ "\n"
+  where setup = generatorSetup (getGenerator t) t
 
 generators :: [Generator]
 generators =
