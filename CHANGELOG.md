@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
+# 3.0.0 [UNRELEASED]
+
+### Changed
+- [#97]: `case_` is deprecated in favour of `unit_` for HUnit test cases.
+
+[#97]: https://github.com/lwm/tasty-discover/pull/97
+
 # 2.0.3 [2017-04-13]
 
 ### Fixed
