@@ -8,15 +8,17 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
-# 2.0.2 [UNRELEASED]
+# 2.0.2 [2017-04-13]
 
 ### Added
 - Change log is in `extra-source-files` now.
+- [#96]: README is in `extra-source-files` now.
 
 ### Fixed
 - [#88]: stylish-haskell automated checking.
 
 [#88]: https://github.com/lwm/tasty-discover/pull/88
+[#96]: https://github.com/lwm/tasty-discover/pull/96
 
 ## 2.0.1 [2017-03-18]
 
