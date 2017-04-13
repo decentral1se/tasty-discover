@@ -1,7 +1,9 @@
 name: "tasty-discover"
-version: "2.0.2"
+version: "2.0.3"
 synopsis: "Test discovery for the tasty framework."
 description: >
+  Automatic test discovery and runner for the tasty framework.
+
   Prefix your test case names and tasty-discover will discover, collect and run
   them. All popular test libraries are covered. Configure once and then just
   write your tests. Avoid forgetting to add test modules to your Cabal/Hpack

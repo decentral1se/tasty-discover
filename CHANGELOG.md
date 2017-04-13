@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
+# 2.0.3 [2017-04-13]
+
+### Fixed
+- Make the Cabal description more clear for Hackage.
+
 # 2.0.2 [2017-04-13]
 
 ### Added
