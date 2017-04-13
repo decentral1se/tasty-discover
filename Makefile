@@ -44,3 +44,7 @@ HLINT=hlint --refactor --refactor-options -i {} \;
 hlint_refactor: hlint-apply-refact
 	find library/ executable/ test/ -name "*.hs" -exec $(HLINT)
 .PHONY: hlint_refactor
+
+upload:
+	stack upload .
+.PHONY: upload
