@@ -9,6 +9,15 @@ Automatic test discovery and runner for the [tasty framework].
 
 [tasty framework]: https://github.com/feuerbach/tasty
 
+### Table Of Contents
+
+- [Getting Started](#getting-started)
+- [Examples](#examples)
+- [Configuration](#configuration)
+- [Change Log](#change-log)
+- [Contributing](#contributing)
+- [Acknowledgements](#acknowledgements)
+
 # Getting Started
 
 ![Usage GIF](http://i.imgur.com/gpdHc6x.gif)
@@ -99,9 +108,9 @@ Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --moduleSuffix=FooBar #-
   - `--ingredient`: Tasty ingredients to add to your test runner.
 
 # Change Log
-See the [Change log] for the latest changes.
+See the [change log] for the latest changes.
 
-[Change log]: https://github.com/lwm/tasty-discover/blob/master/CHANGELOG.md
+[change log]: https://github.com/lwm/tasty-discover/blob/master/CHANGELOG.md
 
 # Contributing
 All contributions welcome!
