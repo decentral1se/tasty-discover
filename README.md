@@ -29,7 +29,7 @@ Automatic test discovery and runner for the [tasty framework].
   - Write your tests with the following prefixes:
     - `prop_`: [QuickCheck](http://hackage.haskell.org/package/tasty-quickcheck) properties.
     - `scprop_`: [SmallCheck](http://hackage.haskell.org/package/tasty-smallcheck) properties.
-    - `case_`: [HUnit](http://hackage.haskell.org/package/tasty-hunit) test cases.
+    - `unit_`: [HUnit](http://hackage.haskell.org/package/tasty-hunit) test cases.
     - `spec_`: [Hspec](http://hackage.haskell.org/package/tasty-hspec) specifications.
     - `test_`: [Tasty](http://hackage.haskell.org/package/tasty) TestTrees.
 
@@ -46,8 +46,8 @@ import Test.Tasty.Hspec
 import Test.Tasty.QuickCheck
 
 -- HUnit test case
-case_listCompare :: IO ()
-case_listCompare = [1, 2, 3] `compare` [1,2] @?= GT
+unit_listCompare :: IO ()
+unit_listCompare = [1, 2, 3] `compare` [1,2] @?= GT
 
 -- QuickCheck property
 prop_additionCommutative :: Int -> Int -> Bool
