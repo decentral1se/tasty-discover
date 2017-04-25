@@ -68,8 +68,8 @@ quickCheckPropertyGenerator = Generator
   , generatorSetup  = \t -> "pure $ QC.testProperty \"" ++ name t ++ "\" " ++ qualifyFunction t
   }
 
-deprecationMessage :: String
-deprecationMessage =
+unitPrefixDeprecationMessage :: String
+unitPrefixDeprecationMessage =
   error $ concat
     [ "\n\n"
     , "----------------------------------------------------------\n"
@@ -79,13 +79,13 @@ deprecationMessage =
     , "----------------------------------------------------------\n"
     ]
 
--- DEPRECATED: Use `unit_` instead (below)
+-- DEPRECATED: Use `unit_` instead
 hunitTestCaseGeneratorDeprecated :: Generator
 hunitTestCaseGeneratorDeprecated = Generator
   { generatorPrefix = "case_"
-  , generatorImport = deprecationMessage
-  , generatorClass  = deprecationMessage
-  , generatorSetup  = const deprecationMessage
+  , generatorImport = unitPrefixDeprecationMessage
+  , generatorClass  = unitPrefixDeprecationMessage
+  , generatorSetup  = const unitPrefixDeprecationMessage
   }
 
 hunitTestCaseGenerator :: Generator

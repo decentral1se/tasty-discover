@@ -15,6 +15,7 @@ Automatic test discovery and runner for the [tasty framework].
 - [Examples](#examples)
 - [Configuration](#configuration)
 - [Change Log](#change-log)
+- [Deprecation Policy](#deprecation-policy)
 - [Contributing](#contributing)
 - [Acknowledgements](#acknowledgements)
 
@@ -100,7 +101,7 @@ Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --debug #-}`
   - `--debug`: Output the contents of the generated module while testing.
 
 ## With Arguments
-Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --moduleSuffix=FooBar #-}`
+Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --module-suffix=FooBar #-}`
 
   - `--module-suffix`: Which test module suffix you wish to have discovered.
   - `--generated-module`: The name of the generated test module.
@@ -109,6 +110,14 @@ Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --moduleSuffix=FooBar #-
 
 # Change Log
 See the [change log] for the latest changes.
+
+[change log]: https://github.com/lwm/tasty-discover/blob/master/CHANGELOG.md
+
+# Deprecation Policy
+If a breaking change is implemented, you'll see a major version bump, an
+entry in the [change log] and a compile time error with a deprecation
+warning and clear instructions on how to upgrade. Please do complain if we're
+doing this too much.
 
 [change log]: https://github.com/lwm/tasty-discover/blob/master/CHANGELOG.md
 
