@@ -60,17 +60,16 @@ filesBySuffix dir suffixes = do
 isIgnored :: [FilePath] -> String -> Bool
 isIgnored ignores filename = filename `notElem` addSuffixes ignores
 
+filesByModuleGlob :: String -> IO [String]
+filesByModuleGlob dir = undefined
+
 findTests :: FilePath -> Config -> IO [Test]
 findTests src config = do
   let dir      = takeDirectory src
-      suffixes = testFileSuffixes (moduleSuffix config)
-      ignores  = ignoredModules config
-  files <-
-    if noModuleSuffix config
-    then filter isHidden <$> getDirectoryContents dir
-    else filesBySuffix dir suffixes
-  let files' = filter (isIgnored ignores) files
-  concat <$> traverse (extract dir) files'
+      ignores  = fileGlobMatch () dir
+  matchingFiles <- fileGlobMatch pattern dir
+  let filteredFiles = filter (isIgnored ignores) matchingFiles
+  concat <$> traverse (extract dir) filteredFiles
   where
     extract dir file = extractTests file <$> readFile (dir </> file)
 
