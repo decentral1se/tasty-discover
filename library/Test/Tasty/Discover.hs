@@ -48,14 +48,15 @@ isHidden filename = head filename /= '.'
 filesBySuffix :: FilePath -> [String] -> IO [FilePath]
 filesBySuffix dir suffixes = do
   entries <- filter isHidden <$> getDirectoryContents dir
-  found <- for entries $ \entry -> do
+  fmap concat $ for entries $ \entry -> do
     let dir' = dir </> entry
     dirExists <- doesDirectoryExist dir'
     if dirExists then
       map (entry </>) <$> filesBySuffix dir' suffixes
+    else if any (`isSuffixOf` entry) suffixes then
+      pure [entry]
     else
       pure []
-  pure $ filter (\x -> any (`isSuffixOf` x) suffixes) entries ++ concat found
 
 isIgnored :: [FilePath] -> String -> Bool
 isIgnored ignores filename = filename `notElem` addSuffixes ignores
@@ -63,14 +64,10 @@ isIgnored ignores filename = filename `notElem` addSuffixes ignores
 findTests :: FilePath -> Config -> IO [Test]
 findTests src config = do
   let dir      = takeDirectory src
-      suffixes = testFileSuffixes (moduleSuffix config)
+      suffixes = testFileSuffixes config
       ignores  = ignoredModules config
-  files <-
-    if noModuleSuffix config
-    then filter isHidden <$> getDirectoryContents dir
-    else filesBySuffix dir suffixes
-  let files' = filter (isIgnored ignores) files
-  concat <$> traverse (extract dir) files'
+  files <- filter (isIgnored ignores) <$> filesBySuffix dir suffixes
+  concat <$> traverse (extract dir) files
   where
     extract dir file = extractTests file <$> readFile (dir </> file)
 
@@ -82,10 +79,12 @@ extractTests file = mkTestDeDuped . isKnownPrefix . parseTest
     checkPrefix g = (`isPrefixOf` g) . generatorPrefix
     parseTest     = map fst . concatMap lex . lines
 
-testFileSuffixes :: Maybe String -> [String]
-testFileSuffixes suffix = addSuffixes suffixes
+testFileSuffixes :: Config -> [String]
+testFileSuffixes config = if noModuleSuffix config
+    then [""]
+    else addSuffixes suffixes
   where
-    suffixes = case suffix of
+    suffixes = case moduleSuffix config of
       Just suffix' -> [suffix']
       Nothing      -> ["Spec", "Test"]
 
