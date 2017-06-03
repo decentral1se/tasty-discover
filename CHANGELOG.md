@@ -21,7 +21,7 @@ The format is based on [Keep a Changelog] and this project adheres to
 - Added --tree-display configuration option (see pull request [#103]).
 
 ### Changed
-- Deprecate case_ in favour of unit_ for HUnit test cases (see pull request [#97]).
+- Deprecate `case_` in favour of `unit_` for HUnit test cases (see pull request [#97]).
 
 ### Fixed
 - Correctly handle sub-directories when using --no-module-suffix (see pull request [#102]).
