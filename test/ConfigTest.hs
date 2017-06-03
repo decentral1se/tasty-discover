@@ -29,3 +29,8 @@ unit_noModuleSuffix  = do
   let expected = [ mkTest "FooBaz" "prop_additionCommutative"
                  , mkTest "PropTest" "prop_additionAssociative" ]
   assertBool "" $ all (`elem` expected) actual2
+
+unit_noModuleSuffixRecurseDirs :: IO ()
+unit_noModuleSuffixRecurseDirs = do
+  tests <- findTests "test/" (defaultConfig { noModuleSuffix = True })
+  assertBool "" $ elem (mkTest "SubMod/FooBaz" "prop_additionCommutative") tests
