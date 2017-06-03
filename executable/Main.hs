@@ -24,7 +24,7 @@ main = do
           tests <- findTests src config
           let ingredients = tastyIngredients config
               moduleName  = fromMaybe "Main" (generatedModuleName config)
-              output      = generateTestDriver moduleName ingredients src tests
+              output      = generateTestDriver config moduleName ingredients src tests
           when (debug config) $ hPutStrLn stderr output
           writeFile dst output
     _ -> do
