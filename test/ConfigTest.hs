@@ -1,12 +1,13 @@
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 module ConfigTest where
 
-import           Data.List            (isInfixOf)
-import qualified Data.Map.Strict      as M
+import           Data.List             (isInfixOf)
+import qualified Data.Map.Strict       as M
 import           Test.Tasty.Config
-import           Test.Tasty.Discover  (findTests, generateTestDriver, showTests,
-                                       ModuleTree(..), mkModuleTree)
-import           Test.Tasty.Generator (Test(..), mkTest)
+import           Test.Tasty.Discover   (ModuleTree (..), findTests,
+                                        generateTestDriver, mkModuleTree,
+                                        showTests)
+import           Test.Tasty.Generator  (Test (..), mkTest)
 import           Test.Tasty.HUnit
 import           Test.Tasty.QuickCheck
 
