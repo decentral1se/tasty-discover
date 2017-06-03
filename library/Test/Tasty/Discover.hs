@@ -3,6 +3,7 @@ module Test.Tasty.Discover where
 
 import           Data.List            (dropWhileEnd, intercalate, isPrefixOf,
                                        isSuffixOf, nub)
+import qualified Data.Map.Strict      as M
 import           Data.Traversable     (for)
 import           System.Directory     (doesDirectoryExist, getDirectoryContents)
 import           System.FilePath      (takeDirectory, (</>))
@@ -10,8 +11,8 @@ import           Test.Tasty.Config    (Config (..))
 import           Test.Tasty.Generator (Generator (..), Test (..), generators,
                                        getGenerators, mkTest, showSetup)
 
-generateTestDriver :: String -> [String] -> FilePath -> [Test] -> String
-generateTestDriver modname is src tests =
+generateTestDriver :: Config -> String -> [String] -> FilePath -> [Test] -> String
+generateTestDriver config modname is src tests =
   let generators' = getGenerators tests
       testNumVars = map (("t"++) . show) [(0 :: Int)..]
   in
@@ -29,7 +30,7 @@ generateTestDriver modname is src tests =
       , "tests = do\n"
       , unlines $ zipWith showSetup tests testNumVars
       , "  pure $ T.testGroup \"" ++ src ++ "\" ["
-      , intercalate "," $ showTests tests testNumVars
+      , intercalate "," $ showTests config tests testNumVars
       , "]\n"
       , concat
         [ "ingredients :: [T.Ingredient]\n"
@@ -98,5 +99,34 @@ ingredientImport = init . dropWhileEnd (/= '.')
 ingredients :: [String] -> String
 ingredients is = concat $ map (++":") is ++ ["T.defaultIngredients"]
 
-showTests :: [Test] -> [String] -> [String]
-showTests tests testNumVars = zipWith (curry snd) tests testNumVars
+showTests :: Config -> [Test] -> [String] -> [String]
+showTests config tests testNumVars = if treeDisplay config
+  then showModuleTree $ mkModuleTree tests testNumVars
+  else zipWith (curry snd) tests testNumVars
+
+newtype ModuleTree = ModuleTree (M.Map String (ModuleTree, [String]))
+  deriving (Eq, Show)
+
+showModuleTree :: ModuleTree -> [String]
+showModuleTree (ModuleTree mdls) = map showModule $ M.assocs mdls
+  where
+    -- special case, collapse to mdl.submdl
+    showModule (mdl, (ModuleTree subMdls, [])) | M.size subMdls == 1 =
+      let [(subMdl, (subSubTree, testVars))] = M.assocs subMdls
+      in showModule (mdl ++ '.' : subMdl, (subSubTree, testVars))
+    showModule (mdl, (subTree, testVars)) = concat
+      [ "T.testGroup \"", mdl
+      , "\" [", intercalate "," (showModuleTree subTree ++ testVars), "]" ]
+
+mkModuleTree :: [Test] -> [String] -> ModuleTree
+mkModuleTree tests testVars = ModuleTree $
+    foldr go M.empty $ zipWith (\t tVar -> (testModule t, tVar)) tests testVars
+  where
+    go (mdl, tVar) mdls = M.insertWith merge key val mdls
+      where
+        (key, val) = case break (== '.') mdl of
+          (_, []) -> (mdl, (ModuleTree M.empty, [tVar]))
+          (topMdl, '.':subMdl) -> (topMdl, (ModuleTree $ go (subMdl, tVar) M.empty, []))
+          _ -> error "impossible case in mkModuleTree.go.key"
+    merge (ModuleTree mdls1, tVars1) (ModuleTree mdls2, tVars2) =
+      (ModuleTree $ M.unionWith merge mdls1 mdls2, tVars1 ++ tVars2)

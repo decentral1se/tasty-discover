@@ -19,7 +19,7 @@ data Config = Config
   , tastyIngredients    :: [Ingredient]
   , noModuleSuffix      :: Bool
   , debug               :: Bool
-  , moduleTree          :: Bool
+  , treeDisplay         :: Bool
   } deriving (Show)
 
 -- | The default configuration
@@ -62,7 +62,7 @@ options = [
   , Option [] ["debug"]
       (NoArg $ \c -> c {debug = True})
       "Debug output of generated test module"
-  , Option [] ["module-tree"]
-      (NoArg $ \c -> c {moduleTree = True})
-      "Organize test output according module hierarchy"
+  , Option [] ["tree-display"]
+      (NoArg $ \c -> c {treeDisplay = True})
+      "Display test output hierarchically"
   ]
