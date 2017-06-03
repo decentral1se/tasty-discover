@@ -10,10 +10,18 @@ The format is based on [Keep a Changelog] and this project adheres to
 
 # 3.0.0 [UNRELEASED]
 
+### Added
+- [#103]: Added `--tree-display` configuration option.
+
 ### Changed
 - [#97]: `case_` is deprecated in favour of `unit_` for HUnit test cases.
 
+### Fixed
+- [#102]: `--no-module-suffix` incorrectly handling directories.
+
 [#97]: https://github.com/lwm/tasty-discover/pull/97
+[#102]: https://github.com/lwm/tasty-discover/pull/102
+[#103]: https://github.com/lwm/tasty-discover/pull/103
 
 # 2.0.3 [2017-04-13]
 
