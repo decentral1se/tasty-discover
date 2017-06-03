@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
-# 3.0.0 [UNRELEASED]
+# 3.0.0 2017-05-03
 
 ### Added
 - [#103]: Added `--tree-display` configuration option.
