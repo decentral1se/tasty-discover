@@ -63,7 +63,7 @@ prop_mkModuleTree mtree =
   where
     flattenTree (ModuleTree mp) = M.assocs mp >>= flattenModule
     flattenModule (mdl, (subTree, testVars)) = concat
-      [ map (\((Test subMdl _), tVar) -> (Test (mdl ++ '.':subMdl) "-", tVar)) (flattenTree subTree)
+      [ map (\(Test subMdl _, tVar) -> (Test (mdl ++ '.':subMdl) "-", tVar)) (flattenTree subTree)
       , map (\tVar -> (Test mdl "-", tVar)) testVars ]
 
 instance Arbitrary ModuleTree where
