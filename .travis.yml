@@ -54,6 +54,7 @@ install:
   case "$BUILD" in
     cabal)
       cabal update
+      cabal install --dependencies-only --enable-tests
       cabal install
       ;;
     *)
