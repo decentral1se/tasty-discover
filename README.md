@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/lwm/tasty-discover.svg?branch=master)](https://travis-ci.org/lwm/tasty-discover)
-[![Hackage Status](https://img.shields.io/badge/Hackage-3.0.0-brightgreen.svg)](http://hackage.haskell.org/package/tasty-discover)
-[![Stackage Status](https://img.shields.io/badge/Stackage-3.0.0-brightgreen.svg)](https://www.stackage.org/package/tasty-discover/)
+[![Hackage Status](https://img.shields.io/hackage/v/tasty-discover.svg)](http://hackage.haskell.org/package/tasty-discover)
+[![tasty-discover](http://stackage.org/package/tasty-discover/badge/nightly)](http://stackage.org/nightly/package/tasty-discover)
 [![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/lwm/tasty-discover/master/LICENSE)
 
 # tasty-discover
