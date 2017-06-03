@@ -20,8 +20,6 @@ Automatic test discovery and runner for the [tasty framework].
 
 # Getting Started
 
-![Usage GIF](http://i.imgur.com/gpdHc6x.gif)
-
 5 steps to tasty test discovery satori:
   - Create a `Tasty.hs` in the `hs-source-dirs` of your test suite.
   - Set your test suite `main-is` to the `Tasty.hs`.
@@ -90,6 +88,7 @@ Pass configuration options within your `Tasty.hs` like so:
  OPTIONS_GHC -F -pgmF tasty-discover
  -optF <OPTION>
  -optF <OPTION>
+ -- etc.
 #-}
 ```
 
