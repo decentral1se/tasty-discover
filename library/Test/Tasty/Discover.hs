@@ -29,7 +29,7 @@ generateTestDriver modname is src tests =
       , "tests = do\n"
       , unlines $ zipWith showSetup tests testNumVars
       , "  pure $ T.testGroup \"" ++ src ++ "\" ["
-      , intercalate "," $ zipWith (curry snd) tests testNumVars
+      , intercalate "," $ showTests tests testNumVars
       , "]\n"
       , concat
         [ "ingredients :: [T.Ingredient]\n"
@@ -97,3 +97,6 @@ ingredientImport = init . dropWhileEnd (/= '.')
 
 ingredients :: [String] -> String
 ingredients is = concat $ map (++":") is ++ ["T.defaultIngredients"]
+
+showTests :: [Test] -> [String] -> [String]
+showTests tests testNumVars = zipWith (curry snd) tests testNumVars

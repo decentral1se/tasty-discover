@@ -19,11 +19,12 @@ data Config = Config
   , tastyIngredients    :: [Ingredient]
   , noModuleSuffix      :: Bool
   , debug               :: Bool
+  , moduleTree          :: Bool
   } deriving (Show)
 
 -- | The default configuration
 defaultConfig :: Config
-defaultConfig = Config Nothing Nothing [] [] False False
+defaultConfig = Config Nothing Nothing [] [] False False False
 
 -- | Configuration options parser.
 parseConfig :: String -> [String] -> Either String Config
@@ -61,4 +62,7 @@ options = [
   , Option [] ["debug"]
       (NoArg $ \c -> c {debug = True})
       "Debug output of generated test module"
+  , Option [] ["module-tree"]
+      (NoArg $ \c -> c {moduleTree = True})
+      "Organize test output according module hierarchy"
   ]
