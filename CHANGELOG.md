@@ -8,6 +8,15 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
+# 3.0.2 [2017-06-05]
+
+### Fixed
+- Make upper bounds for dependencies looser.
+- Fix typo in README.md option documentation.
+
+### Remove
+- Remove TOC, the hyperlinks weren't working on Hackage.
+
 # 3.0.1 [2017-06-04]
 
 ### Fixed
