@@ -100,7 +100,7 @@ Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --debug #-}`
   - `--tree-display`: Display the test output results hierarchically.
 
 ## With Arguments
-Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --moduleSuffix=FooBar #-}`
+Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --module-suffix=FooBar #-}`
 
   - `--module-suffix`: Which test module suffix you wish to have discovered.
   - `--generated-module`: The name of the generated test module.
