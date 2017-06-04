@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
-# 3.0.1 [2017-05-04]
+# 3.0.1 [2017-06-04]
 
 ### Fixed
 - Fixed CHANGELOG.md rendering for Hackage (see pull request [#106]).
@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog] and this project adheres to
 [#107]: https://github.com/lwm/tasty-discover/pull/107
 [#106]: https://github.com/lwm/tasty-discover/pull/106
 
-# 3.0.0 [2017-05-03]
+# 3.0.0 [2017-06-03]
 
 ### Added
 - Add --tree-display configuration option (see pull request [#103]).
