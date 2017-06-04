@@ -8,17 +8,21 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
-# 3.0.1 [UNRELEASED]
+# 3.0.1 [2017-05-04]
 
 ### Fixed
 - Fixed CHANGELOG.md rendering for Hackage (see pull request [#106]).
 
+### Added
+- Add missing --tree-display documentation note (see pull request [#107]).
+
+[#107]: https://github.com/lwm/tasty-discover/pull/107
 [#106]: https://github.com/lwm/tasty-discover/pull/106
 
-# 3.0.0 2017-05-03
+# 3.0.0 [2017-05-03]
 
 ### Added
-- Added --tree-display configuration option (see pull request [#103]).
+- Add --tree-display configuration option (see pull request [#103]).
 
 ### Changed
 - Deprecate `case_` in favour of `unit_` for HUnit test cases (see pull request [#97]).
@@ -39,7 +43,7 @@ The format is based on [Keep a Changelog] and this project adheres to
 
 ### Added
 - README.md and CHANGELOG.md included for Hackage (see pull request [#96]).
-- Re-added stylish-haskell automated checking (see pull request [#88]).
+- Re-add stylish-haskell automated checking (see pull request [#88]).
 
 [#88]: https://github.com/lwm/tasty-discover/pull/88
 [#96]: https://github.com/lwm/tasty-discover/pull/96
