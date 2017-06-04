@@ -9,15 +9,6 @@ Automatic test discovery and runner for the [tasty framework].
 
 [tasty framework]: https://github.com/feuerbach/tasty
 
-### Table Of Contents
-
-- [Getting Started](#getting-started)
-- [Examples](#examples)
-- [Configuration](#configuration)
-- [Change Log](#change-log)
-- [Contributing](#contributing)
-- [Acknowledgements](#acknowledgements)
-
 # Getting Started
 
 5 steps to tasty test discovery satori:
