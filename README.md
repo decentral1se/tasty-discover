@@ -12,7 +12,7 @@ Automatic test discovery and runner for the [tasty framework].
 # Getting Started
 
 5 steps to tasty test discovery satori:
-  - Create a `Tasty.hs` in the `hs-source-dirs` of your test suite.
+  - Create a [Tasty.hs] in the `hs-source-dirs` of your test suite.
   - Set your test suite `main-is` to the `Tasty.hs`.
   - Create test modules in files with suffix `*Test.hs` or `*Spec.hs`.
   - Write your tests with the following prefixes:
@@ -21,6 +21,8 @@ Automatic test discovery and runner for the [tasty framework].
     - `unit_`: [HUnit](http://hackage.haskell.org/package/tasty-hunit) test cases.
     - `spec_`: [Hspec](http://hackage.haskell.org/package/tasty-hspec) specifications.
     - `test_`: [Tasty](http://hackage.haskell.org/package/tasty) TestTrees.
+
+[Tasty.hs]: https://github.com/lwm/tasty-discover#configuratio://github.com/lwm/tasty-discover#configuration
 
 # Examples
 
@@ -72,7 +74,8 @@ test_generateTrees = do
 
 # Configuration
 
-Pass configuration options within your `Tasty.hs` like so:
+In order to configure the test discovery and running, you'll need to add the
+following in your `Tasty.hs`. You can pass configuration options with `-optF`.
 
 ``` haskell
 {-#
@@ -82,6 +85,10 @@ Pass configuration options within your `Tasty.hs` like so:
  -- etc.
 #-}
 ```
+
+Also see [an example in the package test suite].
+
+[an example in the package test suite]: https://github.com/lwm/tasty-discover/blob/master/test/Tasty.hs
 
 ## No Arguments
 Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --debug #-}`
