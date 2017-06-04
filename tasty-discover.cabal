@@ -32,10 +32,10 @@ library
       library
   ghc-options: -Wall
   build-depends:
-      base       >= 4.8 && < 5
-    , containers >= 0.4
-    , directory  >= 1.1 && < 1.4
-    , filepath   >= 1.3 && < 1.5
+      base       >= 4.8 && < 5.0
+    , containers >= 0.4 && < 1.0
+    , directory  >= 1.1 && < 2.0
+    , filepath   >= 1.3 && < 2.0
   exposed-modules:
       Test.Tasty.Config
       Test.Tasty.Discover
@@ -46,10 +46,10 @@ executable tasty-discover
   main-is: executable/Main.hs
   ghc-options: -Wall
   build-depends:
-      base       >= 4.8 && < 5
-    , containers >= 0.4
-    , directory  >= 1.1 && < 1.4
-    , filepath   >= 1.3 && < 1.5
+      base       >= 4.8 && < 5.0
+    , containers >= 0.4 && < 1.0
+    , directory  >= 1.1 && < 2.0
+    , filepath   >= 1.3 && < 2.0
     , tasty-discover
   default-language: Haskell2010
 
@@ -60,10 +60,10 @@ test-suite test
       test
   ghc-options: -Wall
   build-depends:
-      base       >= 4.8 && < 5
-    , containers >= 0.4
-    , directory  >= 1.1 && < 1.4
-    , filepath   >= 1.3 && < 1.5
+      base       >= 4.8 && < 5.0
+    , containers >= 0.4 && < 1.0
+    , directory  >= 1.1 && < 2.0
+    , filepath   >= 1.3 && < 2.0
     , base
     , tasty
     , tasty-discover
