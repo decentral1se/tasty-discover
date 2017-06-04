@@ -22,7 +22,7 @@ Automatic test discovery and runner for the [tasty framework].
     - `spec_`: [Hspec](http://hackage.haskell.org/package/tasty-hspec) specifications.
     - `test_`: [Tasty](http://hackage.haskell.org/package/tasty) TestTrees.
 
-[Tasty.hs]: https://github.com/lwm/tasty-discover#configuratio://github.com/lwm/tasty-discover#configuration
+[Tasty.hs]: https://github.com/lwm/tasty-discover#configuration
 
 # Examples
 
