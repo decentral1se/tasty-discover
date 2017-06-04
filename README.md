@@ -75,7 +75,9 @@ test_generateTrees = do
 # Configuration
 
 In order to configure the test discovery and running, you'll need to add the
-following in your `Tasty.hs`. You can pass configuration options with `-optF`.
+following in your `Tasty.hs`.
+
+You can pass configuration options with `-optF`:
 
 ``` haskell
 {-#
