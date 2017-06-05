@@ -14,7 +14,7 @@ Automatic test discovery and runner for the [tasty framework].
 There's 3 simple steps:
 
   1. Create a test driver file
-  2. Mark it as the `main-is` in your test suite
+  2. Mark it as the main-is in your test suite
   3. Name your tests with correct prefixes
 
 ## Create Test Driver File
@@ -33,8 +33,8 @@ Here's an example:
 ## Configure Cabal Test Suite
 
 In order for Cabal/Stack to know where your tests are, you'll need to configure
-the `main-is` option of your `test-suite` to point to that file. In the following
-example, the test driver file is called `Test.hs`:
+the main-is option of your test-suite to point to that file. In the following
+example, the test driver file is called Test.hs:
 
 ``` haskell
 test-suite test
@@ -45,7 +45,7 @@ test-suite test
 
 # Write Tests
 
-Create modules with file suffix `Test.hs` and correctly prefix your
+Create modules with file suffix Test.hs and correctly prefix your
 tests with the name that corresponds to the testing library:
 
   - `prop_`: [QuickCheck](http://hackage.haskell.org/package/tasty-quickcheck) properties.
@@ -111,18 +111,18 @@ You configure tasty-discover by passing options to the test driver file.
 
 Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --debug #-}`
 
-  - `--no-module-suffix`: Collect all test modules, regardless of module suffix.
-  - `--debug`: Output the contents of the generated module while testing.
-  - `--tree-display`: Display the test output results hierarchically.
+  - **--no-module-suffix**: Collect all test modules, regardless of module suffix.
+  - **--debug**: Output the contents of the generated module while testing.
+  - **--tree-display**: Display the test output results hierarchically.
 
 ## With Arguments
 
 Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --module-suffix=FooBar #-}`
 
-  - `--module-suffix`: Which test module suffix you wish to have discovered.
-  - `--generated-module`: The name of the generated test module.
-  - `--ignore-module`: Which test modules to ignore from discovery.
-  - `--ingredient`: Tasty ingredients to add to your test runner.
+  - **--module-suffix**: Which test module suffix you wish to have discovered.
+  - **--generated-module**: The name of the generated test module.
+  - **--ignore-module**: Which test modules to ignore from discovery.
+  - **--ingredient**: Tasty ingredients to add to your test runner.
 
 # Example Project
 
