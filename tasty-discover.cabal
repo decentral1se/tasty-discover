@@ -55,7 +55,7 @@ executable tasty-discover
 
 test-suite test
   type: exitcode-stdio-1.0
-  main-is: Tasty.hs
+  main-is: Driver.hs
   hs-source-dirs:
       test
   ghc-options: -Wall

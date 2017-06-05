@@ -42,7 +42,7 @@ executables:
 
 tests:
   test:
-    main: "Tasty.hs"
+    main: "Driver.hs"
     source-dirs: "test"
     dependencies:
     - "base"
