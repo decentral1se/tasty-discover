@@ -126,9 +126,9 @@ Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --module-suffix=FooBar #
 
 # Example Project
 
-Please see the [test directory for this package] so see a fully configured example.
+See the [testing for this package] for a fully configured example.
 
-[test directory for this package]: https://github.com/lwm/tasty-discover/tree/master/test
+[testing for this package]: https://github.com/lwm/tasty-discover/tree/master/test
 
 # Change Log
 
