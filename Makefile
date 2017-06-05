@@ -48,3 +48,11 @@ hlint_refactor: hlint_apply_refact
 upload:
 	stack upload .
 .PHONY: upload
+
+test_readme_dependencies:
+	stack install tasty-hunit tasty-hspec tasty-quickcheck tasty markdown-unlit
+.PHONY: test_readme_dependencies
+
+test_readme: test_readme_dependencies
+	stack exec -- ghc -pgmL markdown-unlit README.lhs
+.PHONY: test_readme
