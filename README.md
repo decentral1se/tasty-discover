@@ -11,20 +11,50 @@ Automatic test discovery and runner for the [tasty framework].
 
 # Getting Started
 
-5 steps to tasty test discovery satori:
-  - Create a [Tasty.hs] in the `hs-source-dirs` of your test suite.
-  - Set your test suite `main-is` to the `Tasty.hs`.
-  - Create test modules in files with suffix `*Test.hs` or `*Spec.hs`.
-  - Write your tests with the following prefixes:
-    - `prop_`: [QuickCheck](http://hackage.haskell.org/package/tasty-quickcheck) properties.
-    - `scprop_`: [SmallCheck](http://hackage.haskell.org/package/tasty-smallcheck) properties.
-    - `unit_`: [HUnit](http://hackage.haskell.org/package/tasty-hunit) test cases.
-    - `spec_`: [Hspec](http://hackage.haskell.org/package/tasty-hspec) specifications.
-    - `test_`: [Tasty](http://hackage.haskell.org/package/tasty) TestTrees.
+There's 3 simple steps:
 
-[Tasty.hs]: https://github.com/lwm/tasty-discover#configuration
+  1. Create a test driver file
+  2. Mark it as the `main-is` in your test suite
+  3. Name your tests with correct prefixes
 
-# Examples
+## Create Test Driver File
+
+You can name this file anything you want but it must contain
+the correct preprocessor definition for tasty-discover to run
+and detect your configuration. It should be in the top level
+of the directory with all your tests.
+
+Here's an example:
+
+``` haskell
+{-# OPTIONS_GHC -F -pgmF tasty-discover #-}
+```
+
+## Configure Cabal Test Suite
+
+In order for Cabal/Stack to know where your tests are, you'll need to configure
+the `main-is` option of your `test-suite` to point to that file. In the following
+example, the test driver file is called `Test.hs`:
+
+``` haskell
+test-suite test
+  main-is: Test.hs
+  hs-source-dirs: tests
+  build-depends: base
+```
+
+# Write Tests
+
+Create modules with file suffix `Test.hs` and correctly prefix your
+tests with the name that corresponds to the testing library:
+
+  - `prop_`: [QuickCheck](http://hackage.haskell.org/package/tasty-quickcheck) properties.
+  - `scprop_`: [SmallCheck](http://hackage.haskell.org/package/tasty-smallcheck) properties.
+  - `unit_`: [HUnit](http://hackage.haskell.org/package/tasty-hunit) test cases.
+  - `spec_`: [Hspec](http://hackage.haskell.org/package/tasty-hspec) specifications.
+  - `test_`: [Tasty](http://hackage.haskell.org/package/tasty) TestTrees.
+
+Here's an example test module:
 
 ``` haskell
 {-# LANGUAGE ScopedTypeVariables #-}
@@ -73,27 +103,12 @@ test_generateTrees = do
   pure $ map (\s -> testCase s $ pure ()) inputs
 ```
 
-# Configuration
+# Customise Discovery
 
-In order to configure the test discovery and running, you'll need to add the
-following in your `Tasty.hs`.
-
-You can pass configuration options with `-optF`:
-
-``` haskell
-{-#
- OPTIONS_GHC -F -pgmF tasty-discover
- -optF <OPTION>
- -optF <OPTION>
- -- etc.
-#-}
-```
-
-Also see [an example in the package test suite].
-
-[an example in the package test suite]: https://github.com/lwm/tasty-discover/blob/master/test/Tasty.hs
+You configure tasty-discover by passing options to the test driver file.
 
 ## No Arguments
+
 Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --debug #-}`
 
   - `--no-module-suffix`: Collect all test modules, regardless of module suffix.
@@ -101,6 +116,7 @@ Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --debug #-}`
   - `--tree-display`: Display the test output results hierarchically.
 
 ## With Arguments
+
 Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --module-suffix=FooBar #-}`
 
   - `--module-suffix`: Which test module suffix you wish to have discovered.
@@ -108,15 +124,25 @@ Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --module-suffix=FooBar #
   - `--ignore-module`: Which test modules to ignore from discovery.
   - `--ingredient`: Tasty ingredients to add to your test runner.
 
+# Example Project
+
+Please see the [test directory for this package] so see a fully configured example.
+
+[test directory for this package]: https://github.com/lwm/tasty-discover/tree/master/test
+
+
 # Change Log
+
 See the [change log] for the latest changes.
 
 [change log]: https://github.com/lwm/tasty-discover/blob/master/CHANGELOG.md
 
 # Contributing
+
 All contributions welcome!
 
 # Acknowledgements
+
 Thanks to [hspec-discover] and [tasty-auto] for making this possible.
 
 [hspec-discover]: https://hspec.github.io/hspec-discover.html
