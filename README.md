@@ -26,7 +26,7 @@ of the directory with all your tests.
 
 Here's an example:
 
-``` haskell
+```
 {-# OPTIONS_GHC -F -pgmF tasty-discover #-}
 ```
 
@@ -36,7 +36,7 @@ In order for Cabal/Stack to know where your tests are, you'll need to configure
 the main-is option of your test-suite to point to that file. In the following
 example, the test driver file is called Test.hs:
 
-``` haskell
+```
 test-suite test
   main-is: Test.hs
   hs-source-dirs: tests
@@ -48,11 +48,11 @@ test-suite test
 Create modules with file suffix Test.hs and correctly prefix your
 tests with the name that corresponds to the testing library:
 
-  - `prop_`: [QuickCheck](http://hackage.haskell.org/package/tasty-quickcheck) properties.
-  - `scprop_`: [SmallCheck](http://hackage.haskell.org/package/tasty-smallcheck) properties.
-  - `unit_`: [HUnit](http://hackage.haskell.org/package/tasty-hunit) test cases.
-  - `spec_`: [Hspec](http://hackage.haskell.org/package/tasty-hspec) specifications.
-  - `test_`: [Tasty](http://hackage.haskell.org/package/tasty) TestTrees.
+  - **prop_**: [QuickCheck](http://hackage.haskell.org/package/tasty-quickcheck) properties.
+  - **scprop_**: [SmallCheck](http://hackage.haskell.org/package/tasty-smallcheck) properties.
+  - **unit_**: [HUnit](http://hackage.haskell.org/package/tasty-hunit) test cases.
+  - **spec_**: [Hspec](http://hackage.haskell.org/package/tasty-hspec) specifications.
+  - **test_**: [Tasty](http://hackage.haskell.org/package/tasty) TestTrees.
 
 Here's an example test module:
 
@@ -129,7 +129,6 @@ Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --module-suffix=FooBar #
 Please see the [test directory for this package] so see a fully configured example.
 
 [test directory for this package]: https://github.com/lwm/tasty-discover/tree/master/test
-
 
 # Change Log
 
