@@ -31,6 +31,7 @@ Automatic test discovery and runner for the [tasty framework].
 
 module ExampleTest where
 
+import Data.List
 import Test.Tasty
 import Test.Tasty.HUnit
 import Test.Tasty.Hspec
