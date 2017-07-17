@@ -33,14 +33,14 @@ hlint_install:
 .PHONY: hlint_install
 
 hlint: hlint_install
-	hlint library/ executable/ test/
+	hlint --cpp-simple library/ executable/ test/
 .PHONY: hlint
 
 hlint_apply_refact: hlint_install
 	stack install apply-refact
 .PHONY: hlint_apply_refact
 
-HLINT=hlint --refactor --refactor-options -i {} \;
+HLINT=hlint --cpp-simple --refactor --refactor-options -i {} \;
 hlint_refactor: hlint_apply_refact
 	find library/ executable/ test/ -name "*.hs" -exec $(HLINT)
 .PHONY: hlint_refactor
