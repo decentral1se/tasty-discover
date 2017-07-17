@@ -1,3 +1,4 @@
 - ignore: {name: "Eta reduce"}
 - ignore: {name: "Use camelCase"}
 - ignore: {name: "Use ++"}
+- ignore: {name: "Parse error"}
