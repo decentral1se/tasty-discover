@@ -1,4 +1,3 @@
-{-# OPTIONS_GHC -fno-warn-orphans #-}
 module ConfigTest where
 
 import           Data.List             (isInfixOf)

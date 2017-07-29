@@ -28,15 +28,16 @@ dependencies:
 - "directory  >= 1.1 && < 2.0"
 - "filepath   >= 1.3 && < 2.0"
 
-ghc-options:
-- "-Wall"
-
 library:
   source-dirs: "library"
+  ghc-options:
+  - "-Wall"
 
 executables:
   tasty-discover:
     main: "executable/Main.hs"
+    ghc-options:
+    - "-Wall"
     dependencies:
     - "tasty-discover"
 
@@ -44,6 +45,8 @@ tests:
   test:
     main: "Driver.hs"
     source-dirs: "test"
+    ghc-options:
+    - "-fno-warn-orphans -Wall"
     dependencies:
     - "base"
     - "tasty"
