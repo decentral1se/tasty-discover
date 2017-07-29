@@ -1,4 +1,4 @@
--- This file has been generated from package.yaml by hpack version 0.17.0.
+-- This file has been generated from package.yaml by hpack version 0.18.1.
 --
 -- see: https://github.com/sol/hpack
 
@@ -40,6 +40,8 @@ library
       Test.Tasty.Config
       Test.Tasty.Discover
       Test.Tasty.Generator
+  other-modules:
+      Paths_tasty_discover
   default-language: Haskell2010
 
 executable tasty-discover
@@ -58,7 +60,7 @@ test-suite test
   main-is: Driver.hs
   hs-source-dirs:
       test
-  ghc-options: -Wall
+  ghc-options: -fno-warn-orphans -Wall
   build-depends:
       base       >= 4.8 && < 5.0
     , containers >= 0.4 && < 1.0
