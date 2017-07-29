@@ -1,7 +1,16 @@
--- Configuration options module.
-module Test.Tasty.Config
-  ( Config(..)
+-- | The test driver configuration options module.
+--
+-- Anything that can be passed as an argument to the test driver
+-- definition exists as a field in the 'Config' type.
+
+module Test.Tasty.Config (
+  -- * Configuration Options
+  Config (..)
+
+  -- * Configuration Parser
   , parseConfig
+
+  -- * Configuration Defaults
   , defaultConfig
   ) where
 
@@ -10,16 +19,17 @@ import           System.Console.GetOpt (ArgDescr (NoArg, ReqArg),
                                         ArgOrder (Permute), OptDescr (Option),
                                         getOpt)
 
+-- | A type alias for readability.
 type Ingredient = String
 
 data Config = Config
-  { moduleSuffix        :: Maybe String
-  , generatedModuleName :: Maybe String
-  , ignoredModules      :: [FilePath]
-  , tastyIngredients    :: [Ingredient]
-  , noModuleSuffix      :: Bool
-  , debug               :: Bool
-  , treeDisplay         :: Bool
+  { moduleSuffix        :: Maybe String -- ^ Module suffix.
+  , generatedModuleName :: Maybe String -- ^ Name of the generated main module.
+  , ignoredModules      :: [FilePath]   -- ^ Ignored modules by full name.
+  , tastyIngredients    :: [Ingredient] -- ^ Tasty ingredients to use.
+  , noModuleSuffix      :: Bool         -- ^ suffix and look in all modules.
+  , debug               :: Bool         -- ^ Debug the generated module.
+  , treeDisplay         :: Bool         -- ^ Tree display for the test results table.
   } deriving (Show)
 
 -- | The default configuration

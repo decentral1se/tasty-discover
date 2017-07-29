@@ -1,5 +1,16 @@
 -- | Automatic test discovery and runner for the tasty framework.
-module Test.Tasty.Discover where
+
+module Test.Tasty.Discover (
+  -- * Main Test Generator
+  generateTestDriver
+
+  -- * For Testing Purposes Only
+  , ModuleTree (..)
+  , findTests
+  , addSuffixes
+  , mkModuleTree
+  , showTests
+  ) where
 
 import           Data.List            (dropWhileEnd, intercalate, isPrefixOf,
                                        isSuffixOf, nub)
@@ -11,6 +22,8 @@ import           Test.Tasty.Config    (Config (..))
 import           Test.Tasty.Generator (Generator (..), Test (..), generators,
                                        getGenerators, mkTest, showSetup)
 
+-- | Main function generator, along with all the boilerplate which
+-- which will run the discovered tests.
 generateTestDriver :: Config -> String -> [String] -> FilePath -> [Test] -> String
 generateTestDriver config modname is src tests =
   let generators' = getGenerators tests
@@ -40,12 +53,15 @@ generateTestDriver config modname is src tests =
         ]
       ]
 
+-- | Append specified suffixes to a list of test modules.
 addSuffixes :: [String] -> [String]
 addSuffixes modules = (++) <$> modules <*> [".lhs", ".hs"]
 
+-- | Is the file in question a hidden file?
 isHidden :: FilePath -> Bool
 isHidden filename = head filename /= '.'
 
+-- | Filter modules by suffix
 filesBySuffix :: FilePath -> [String] -> IO [FilePath]
 filesBySuffix dir suffixes = do
   entries <- filter isHidden <$> getDirectoryContents dir
@@ -59,9 +75,11 @@ filesBySuffix dir suffixes = do
     else
       pure []
 
+-- | Is a particular module being ignored?
 isIgnored :: [FilePath] -> String -> Bool
 isIgnored ignores filename = filename `notElem` addSuffixes ignores
 
+-- | Discover tests.
 findTests :: FilePath -> Config -> IO [Test]
 findTests src config = do
   let dir      = takeDirectory src
@@ -72,6 +90,7 @@ findTests src config = do
   where
     extract dir file = extractTests file <$> readFile (dir </> file)
 
+-- | Extract the test names from discovered modules.
 extractTests :: FilePath -> String -> [Test]
 extractTests file = mkTestDeDuped . isKnownPrefix . parseTest
   where
@@ -80,6 +99,7 @@ extractTests file = mkTestDeDuped . isKnownPrefix . parseTest
     checkPrefix g = (`isPrefixOf` g) . generatorPrefix
     parseTest     = map fst . concatMap lex . lines
 
+-- | Consider the suffix configuration and deal with test modules.
 testFileSuffixes :: Config -> [String]
 testFileSuffixes config = if noModuleSuffix config
     then [""]
@@ -89,15 +109,19 @@ testFileSuffixes config = if noModuleSuffix config
       Just suffix' -> [suffix']
       Nothing      -> ["Spec", "Test"]
 
+-- | Show the imports.
 showImports :: [String] -> String
 showImports mods = unlines $ nub $ map (\m -> "import qualified " ++ m ++ "\n") mods
 
+-- | Retrieve the ingredient name.
 ingredientImport :: String -> String
 ingredientImport = init . dropWhileEnd (/= '.')
 
+-- | Ingredients to be included.
 ingredients :: [String] -> String
 ingredients is = concat $ map (++":") is ++ ["T.defaultIngredients"]
 
+-- | Show the tests.
 showTests :: Config -> [Test] -> [String] -> [String]
 showTests config tests testNumVars = if treeDisplay config
   then showModuleTree $ mkModuleTree tests testNumVars
