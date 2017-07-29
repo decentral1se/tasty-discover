@@ -1,4 +1,5 @@
 -- | Main executable module.
+
 module Main where
 
 import           Control.Monad       (when)
