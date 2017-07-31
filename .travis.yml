@@ -2,6 +2,8 @@ sudo: false
 
 language: haskell
 
+ghc: 8.2.1
+
 cache:
   directories:
   - $HOME/.ghc
@@ -9,33 +11,16 @@ cache:
   - $HOME/.stack
 
 matrix:
+  fast_finish: true
   include:
   - env: BUILD=cabal
-    compiler: "GHC 8.0.2"
-    addons: {apt: {packages: [cabal-install-1.24,ghc-8.0.1,happy-1.19.5,alex-3.1.7], sources: [hvr-ghc]}}
-
   - env: BUILD=stack
-    compiler: "GHC-8.0.2"
-    addons: {apt: {packages: [libgmp-dev]}}
-
   - env: BUILD=hlint
-    compiler: "GHC-8.0.2"
-    addons: {apt: {packages: [libgmp-dev]}}
-
   - env: BUILD=stylish-haskell
-    compiler: "GHC-8.0.2"
-    addons: {apt: {packages: [libgmp-dev]}}
-
   - env: BUILD=sdist
-    compiler: "GHC-8.0.2"
-    addons: {apt: {packages: [libgmp-dev]}}
-
   - env: BUILD=readme
-    compiler: "GHC-8.0.2"
-    addons: {apt: {packages: [libgmp-dev]}}
 
 before_install:
-- export PATH=/opt/ghc/$GHCVER/bin:/opt/cabal/$CABALVER/bin:$HOME/.local/bin:/opt/alex/$ALEXVER/bin:/opt/happy/$HAPPYVER/bin:$HOME/.cabal/bin:$PATH
 - |
   set -ex
   case "$BUILD" in
@@ -57,12 +42,12 @@ install:
   set -ex
   case "$BUILD" in
     cabal)
-      cabal update
-      cabal install --dependencies-only --enable-tests
-      cabal install
+      travis_retry cabal update
+      cabal install --only-dependencies --enable-tests;;
       ;;
     *)
-      stack setup --upgrade-cabal && stack install --pedantic
+      stack setup
+      stack install
       ;;
   esac
   set +ex
