@@ -78,11 +78,21 @@ showSetup t var = "  " ++ var ++ " <- " ++ setup ++ "\n"
 generators :: [Generator]
 generators =
   [ quickCheckPropertyGenerator
+  , hedgehogPropertyGenerator
   , hunitTestCaseGeneratorDeprecated
   , hunitTestCaseGenerator
   , hspecTestCaseGenerator
   , tastyTestGroupGenerator
   ]
+
+-- | Quickcheck group generator prefix.
+hedgehogPropertyGenerator :: Generator
+hedgehogPropertyGenerator = Generator
+  { generatorPrefix = "hprop_"
+  , generatorImport = "import qualified Test.Tasty.Hedgehog as H\n"
+  , generatorClass  = ""
+  , generatorSetup  = \t -> "pure $ H.testProperty \"" ++ name t ++ "\" " ++ qualifyFunction t
+  }
 
 -- | Quickcheck group generator prefix.
 quickCheckPropertyGenerator :: Generator

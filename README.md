@@ -50,6 +50,7 @@ tests with the name that corresponds to the testing library:
 
   - **prop_**: [QuickCheck](http://hackage.haskell.org/package/tasty-quickcheck) properties.
   - **scprop_**: [SmallCheck](http://hackage.haskell.org/package/tasty-smallcheck) properties.
+  - **hprop_**: [Hedgehog](http://hackage.haskell.org/package/tasty-hedgehog) properties.
   - **unit_**: [HUnit](http://hackage.haskell.org/package/tasty-hunit) test cases.
   - **spec_**: [Hspec](http://hackage.haskell.org/package/tasty-hspec) specifications.
   - **test_**: [Tasty](http://hackage.haskell.org/package/tasty) TestTrees.

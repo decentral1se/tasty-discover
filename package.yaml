@@ -52,3 +52,5 @@ tests:
     - "tasty-hunit"
     - "tasty-quickcheck"
     - "tasty-smallcheck"
+    - "tasty-hedgehog"
+    - "hedgehog"

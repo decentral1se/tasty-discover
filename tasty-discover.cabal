@@ -1,4 +1,4 @@
--- This file has been generated from package.yaml by hpack version 0.17.0.
+-- This file has been generated from package.yaml by hpack version 0.17.1.
 --
 -- see: https://github.com/sol/hpack
 
@@ -71,6 +71,8 @@ test-suite test
     , tasty-hunit
     , tasty-quickcheck
     , tasty-smallcheck
+    , tasty-hedgehog
+    , hedgehog
   other-modules:
       ConfigTest
       DiscoverTest

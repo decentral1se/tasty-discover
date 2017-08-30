@@ -7,6 +7,9 @@ import           Test.Tasty
 import           Test.Tasty.Hspec
 import           Test.Tasty.HUnit
 import           Test.Tasty.QuickCheck
+import qualified Hedgehog as H
+import qualified Hedgehog.Range as Range
+import qualified Hedgehog.Gen as Gen
 
 unit_listCompare :: IO ()
 unit_listCompare = [1 :: Int, 2, 3] `compare` [1,2] @?= GT
@@ -41,3 +44,8 @@ test_generateTrees :: IO [TestTree]
 test_generateTrees = do
   inputs <- pure ["First input", "Second input"]
   pure $ map (\s -> testCase s $ pure ()) inputs
+
+hprop_reverse :: H.Property
+hprop_reverse = H.property $ do
+  xs <- H.forAll $ Gen.list (Range.linear 0 100) Gen.alpha
+  reverse (reverse xs) H.=== xs
