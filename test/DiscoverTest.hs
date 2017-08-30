@@ -3,13 +3,13 @@
 module DiscoverTest where
 
 import           Data.List
-import           Test.Tasty
-import           Test.Tasty.Hspec
-import           Test.Tasty.HUnit
-import           Test.Tasty.QuickCheck
 import qualified Hedgehog as H
-import qualified Hedgehog.Range as Range
 import qualified Hedgehog.Gen as Gen
+import qualified Hedgehog.Range as Range
+import           Test.Tasty
+import           Test.Tasty.HUnit
+import           Test.Tasty.Hspec
+import           Test.Tasty.QuickCheck
 
 unit_listCompare :: IO ()
 unit_listCompare = [1 :: Int, 2, 3] `compare` [1,2] @?= GT
@@ -45,6 +45,7 @@ test_generateTrees = do
   inputs <- pure ["First input", "Second input"]
   pure $ map (\s -> testCase s $ pure ()) inputs
 
+{-# ANN hprop_reverse "HLint: ignore Avoid reverse" #-}
 hprop_reverse :: H.Property
 hprop_reverse = H.property $ do
   xs <- H.forAll $ Gen.list (Range.linear 0 100) Gen.alpha
