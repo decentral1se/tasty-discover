@@ -3,12 +3,12 @@
 module DiscoverTest where
 
 import           Data.List
-import qualified Hedgehog as H
-import qualified Hedgehog.Gen as Gen
-import qualified Hedgehog.Range as Range
+import qualified Hedgehog              as H
+import qualified Hedgehog.Gen          as Gen
+import qualified Hedgehog.Range        as Range
 import           Test.Tasty
-import           Test.Tasty.HUnit
 import           Test.Tasty.Hspec
+import           Test.Tasty.HUnit
 import           Test.Tasty.QuickCheck
 
 unit_listCompare :: IO ()
