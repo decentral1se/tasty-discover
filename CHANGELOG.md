@@ -8,6 +8,20 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
+# 4.0.0 [UNRELEASED]
+
+## Changed
+- Deprecated `--[no-]module-suffix` for `--modules` (see pull request [#117]).
+- Deprecated `--ignore-module` for `--ignores` (see pull request [#117]).
+
+## Added
+- `tasty-hedgehog` is now a supported test library.
+
+## Removed
+- `unit_` prefixes have been removed.
+
+[#117]: https://github.com/lwm/tasty-discover/pull/117
+
 # 3.0.2 [2017-06-05]
 
 ### Fixed
