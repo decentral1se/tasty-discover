@@ -7,18 +7,17 @@ module Test.Tasty.Discover (
   -- * For Testing Purposes Only
   , ModuleTree (..)
   , findTests
-  , addSuffixes
   , mkModuleTree
   , showTests
   ) where
 
 import           Data.List            (dropWhileEnd, intercalate, isPrefixOf,
-                                       isSuffixOf, nub)
+                                       nub)
 import qualified Data.Map.Strict      as M
-import           Data.Traversable     (for)
-import           System.Directory     (doesDirectoryExist, getDirectoryContents)
-import           System.FilePath      (takeDirectory, (</>))
-import           Test.Tasty.Config    (Config (..))
+import           Data.Maybe           (fromMaybe)
+import           System.FilePath      (takeDirectory, takeFileName, (</>))
+import           System.FilePath.Glob (compile, globDir1, match)
+import           Test.Tasty.Config    (Config (..), GlobPattern)
 import           Test.Tasty.Generator (Generator (..), Test (..), generators,
                                        getGenerators, mkTest, showSetup)
 
@@ -53,42 +52,27 @@ generateTestDriver config modname is src tests =
         ]
       ]
 
--- | Append specified suffixes to a list of test modules.
-addSuffixes :: [String] -> [String]
-addSuffixes modules = (++) <$> modules <*> [".lhs", ".hs"]
+-- | Match files by specified glob pattern.
+filesByModuleGlob :: FilePath -> Maybe GlobPattern -> IO [String]
+filesByModuleGlob directory globPattern = do
+  (fmap takeFileName) <$> globDir1 pattern directory
+  where pattern = compile (fromMaybe "*.hs*" globPattern)
 
--- | Is the file in question a hidden file?
-isHidden :: FilePath -> Bool
-isHidden filename = head filename /= '.'
+-- | Filter and remove files by specified glob pattern.
+ignoreByModuleGlob :: [FilePath] -> Maybe GlobPattern -> [FilePath]
+ignoreByModuleGlob directories ignoreGlob = filter (not . match pattern) directories
+  where pattern = compile (fromMaybe "" ignoreGlob)
 
--- | Filter modules by suffix
-filesBySuffix :: FilePath -> [String] -> IO [FilePath]
-filesBySuffix dir suffixes = do
-  entries <- filter isHidden <$> getDirectoryContents dir
-  fmap concat $ for entries $ \entry -> do
-    let dir' = dir </> entry
-    dirExists <- doesDirectoryExist dir'
-    if dirExists then
-      map (entry </>) <$> filesBySuffix dir' suffixes
-    else if any (`isSuffixOf` entry) suffixes then
-      pure [entry]
-    else
-      pure []
-
--- | Is a particular module being ignored?
-isIgnored :: [FilePath] -> String -> Bool
-isIgnored ignores filename = filename `notElem` addSuffixes ignores
-
--- | Discover tests.
+-- | Discover the tests modules.
 findTests :: FilePath -> Config -> IO [Test]
 findTests src config = do
-  let dir      = takeDirectory src
-      suffixes = testFileSuffixes config
-      ignores  = ignoredModules config
-  files <- filter (isIgnored ignores) <$> filesBySuffix dir suffixes
-  concat <$> traverse (extract dir) files
+  let directory = takeDirectory src
+  allModules <- filesByModuleGlob directory (modules config)
+  let filtered = ignoreByModuleGlob allModules (ignores config)
+  concat <$> traverse (extract directory) filtered
   where
-    extract dir file = extractTests file <$> readFile (dir </> file)
+    extract directory file = do
+      extractTests file <$> readFile (directory </> file)
 
 -- | Extract the test names from discovered modules.
 extractTests :: FilePath -> String -> [Test]
@@ -98,16 +82,6 @@ extractTests file = mkTestDeDuped . isKnownPrefix . parseTest
     isKnownPrefix = filter (\g -> any (checkPrefix g) generators)
     checkPrefix g = (`isPrefixOf` g) . generatorPrefix
     parseTest     = map fst . concatMap lex . lines
-
--- | Consider the suffix configuration and deal with test modules.
-testFileSuffixes :: Config -> [String]
-testFileSuffixes config = if noModuleSuffix config
-    then [""]
-    else addSuffixes suffixes
-  where
-    suffixes = case moduleSuffix config of
-      Just suffix' -> [suffix']
-      Nothing      -> ["Spec", "Test"]
 
 -- | Show the imports.
 showImports :: [String] -> String

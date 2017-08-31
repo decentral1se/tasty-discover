@@ -79,7 +79,6 @@ generators :: [Generator]
 generators =
   [ quickCheckPropertyGenerator
   , hedgehogPropertyGenerator
-  , hunitTestCaseGeneratorDeprecated
   , hunitTestCaseGenerator
   , hspecTestCaseGenerator
   , tastyTestGroupGenerator
@@ -101,27 +100,6 @@ quickCheckPropertyGenerator = Generator
   , generatorImport = "import qualified Test.Tasty.QuickCheck as QC\n"
   , generatorClass  = ""
   , generatorSetup  = \t -> "pure $ QC.testProperty \"" ++ name t ++ "\" " ++ qualifyFunction t
-  }
-
--- | Deprecation message for old `case_` prefix.
-deprecationMessage :: String
-deprecationMessage =
-  error $ concat
-    [ "\n\n"
-    , "----------------------------------------------------------\n"
-    , "DEPRECATION NOTICE: The `case_` prefix is deprecated.\n"
-    , "Please use the `unit_` prefix instead.\n"
-    , "Please see https://github.com/lwm/tasty-discover/issues/95.\n"
-    , "----------------------------------------------------------\n"
-    ]
-
--- | HUnit generator prefix. DEPRECATED: Use `unit_` instead.
-hunitTestCaseGeneratorDeprecated :: Generator
-hunitTestCaseGeneratorDeprecated = Generator
-  { generatorPrefix = "case_"
-  , generatorImport = deprecationMessage
-  , generatorClass  = deprecationMessage
-  , generatorSetup  = const deprecationMessage
   }
 
 -- | HUnit generator prefix.
