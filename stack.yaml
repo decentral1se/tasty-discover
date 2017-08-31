@@ -2,4 +2,6 @@ resolver: lts-9.2
 packages:
 - '.'
 extra-deps:
+# FIXME: Once this extra-dep comes into the LTS, go back to doing a
+# `stack init --force` in the `make test_sdist` Make target
 - tasty-hedgehog-0.1.0.1
