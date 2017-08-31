@@ -14,9 +14,8 @@ untar_sdist: sdist
 .PHONY: untar_sdist
 
 SDIST_FOLDER:=$$(basename $(SDIST_TAR) .tar.gz)
-INIT:=$$(stack init --force)
 test_sdist: untar_sdist
-	cd $(SDIST_FOLDER) && $(INIT) && $(TEST)
+	cd $(SDIST_FOLDER) && $(TEST)
 .PHONY: test_sdist
 
 stylish_haskell_install:
