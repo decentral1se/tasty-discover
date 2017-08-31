@@ -133,7 +133,16 @@ See the [testing for this package] for a fully configured example.
 
 # Change Log
 
-See the [change log] for the latest changes.
+Please see the [CHANGELOG.md] for the latest changes.
+
+[CHANGELOG.md]: https://github.com/lwm/tasty-discover/blob/master/CHANGELOG.md
+
+# Deprecation Policy
+
+If a breaking change is implemented, you'll see a major version increase, an
+entry in the [change log] and a compile time error with a deprecation warning
+and clear instructions on how to upgrade. Please do complain if we're doing
+this too much.
 
 [change log]: https://github.com/lwm/tasty-discover/blob/master/CHANGELOG.md
 
