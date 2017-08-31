@@ -11,20 +11,22 @@ Automatic test discovery and runner for the [tasty framework].
 
 # Getting Started
 
-There's 3 simple steps:
+There's 4 simple steps:
 
-  1. Create a test driver file
-  2. Mark it as the main-is in your test suite
-  3. Name your tests with correct prefixes
+  1. [Create a test driver file in the test directory](#create-test-driver-file)
+  2. [Mark the driver file as the `main-is` in the test suite](#configure-cabal-test-suite)
+  3. [Mark tests with the correct prefixes](#write-tests)
+  4. [Customise test discovery as needed](#customise-discovery)
+
+Check out the [example project](#example-project) to get moving quickly.
 
 ## Create Test Driver File
 
-You can name this file anything you want but it must contain
-the correct preprocessor definition for tasty-discover to run
-and detect your configuration. It should be in the top level
-of the directory with all your tests.
+You can name this file anything you want but it must contain the correct
+preprocessor definition for tasty-discover to run and also, to detect the
+configuration. It should be in the top level of the test directory.
 
-Here's an example:
+For example (in `test/Driver.hs`):
 
 ```
 {-# OPTIONS_GHC -F -pgmF tasty-discover #-}
@@ -32,21 +34,34 @@ Here's an example:
 
 ## Configure Cabal Test Suite
 
-In order for Cabal/Stack to know where your tests are, you'll need to configure
+In order for Cabal/Stack to know where the tests are, you'll need to configure
 the main-is option of your test-suite to point to that file. In the following
-example, the test driver file is called Test.hs:
+example, the test driver file is called Driver.hs:
 
 ```
 test-suite test
-  main-is: Test.hs
+  main-is: Driver.hs
   hs-source-dirs: tests
   build-depends: base
 ```
 
+If you use [hpack], that might look like:
+
+[hpack]: https://github.com/sol/hpack
+
+``` yaml
+tests:
+  test:
+    main: "Driver.hs"
+    source-dirs: "test"
+    dependencies:
+    - "base"
+```
+
 # Write Tests
 
-Create modules with file suffix Test.hs and correctly prefix your
-tests with the name that corresponds to the testing library:
+Create test modules and correctly prefix the tests with the name that
+corresponds to the testing library you wish to run the test with:
 
   - **prop_**: [QuickCheck](http://hackage.haskell.org/package/tasty-quickcheck) properties.
   - **scprop_**: [SmallCheck](http://hackage.haskell.org/package/tasty-smallcheck) properties.
@@ -112,17 +127,16 @@ You configure tasty-discover by passing options to the test driver file.
 
 Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --debug #-}`
 
-  - **--no-module-suffix**: Collect all test modules, regardless of module suffix.
   - **--debug**: Output the contents of the generated module while testing.
   - **--tree-display**: Display the test output results hierarchically.
 
 ## With Arguments
 
-Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --module-suffix=FooBar #-}`
+Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --modules="*CustomTest.hs" #-}`
 
-  - **--module-suffix**: Which test module suffix you wish to have discovered.
+  - **--modules**: Which test modules to discover (with glob pattern).
+  - **--ignores**: Which test modules to ignore (with glob pattern).
   - **--generated-module**: The name of the generated test module.
-  - **--ignore-module**: Which test modules to ignore from discovery.
   - **--ingredient**: Tasty ingredients to add to your test runner.
 
 # Example Project
