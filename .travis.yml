@@ -62,7 +62,8 @@ install:
       cabal install
       ;;
     *)
-      stack setup --upgrade-cabal && stack install --pedantic
+      stack setup
+      stack install --pedantic
       ;;
   esac
   set +ex
