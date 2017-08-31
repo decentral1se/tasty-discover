@@ -1,4 +1,5 @@
 TEST:=stack build --test --haddock --no-haddock-deps --pedantic
+
 test:
 	 $(TEST) tasty-discover:test
 .PHONY: test
