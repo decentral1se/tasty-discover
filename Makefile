@@ -49,7 +49,8 @@ upload:
 .PHONY: upload
 
 test_readme_dependencies:
-	stack install tasty-hunit tasty-hspec tasty-quickcheck tasty markdown-unlit
+	stack install markdown-unlit
+	stack build tasty-hunit tasty-hspec tasty-quickcheck tasty
 .PHONY: test_readme_dependencies
 
 test_readme: test_readme_dependencies
