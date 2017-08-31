@@ -13,12 +13,29 @@ import           Test.Tasty.Hspec
 import           Test.Tasty.HUnit
 import           Test.Tasty.QuickCheck
 
-spec_customModuleSuffix :: Spec
-spec_customModuleSuffix =
+spec_modules :: Spec
+spec_modules =
+  describe "Test discovery" $
+  it "Discovers tests" $ do
+    let expectedTest = mkTest "PropTest" "prop_additionAssociative"
+        config       = defaultConfig { modules = Just "*Test.hs" }
+    discoveredTests <- findTests "test/SubMod/" config
+    discoveredTests `shouldBe` [expectedTest]
+
+spec_ignores :: Spec
+spec_ignores =
+  describe "Module ignore configuration" $
+  it "Ignores tests in modules with the specified suffix" $ do
+    let ignoreModuleConfig = defaultConfig { ignores = Just "*.hs" }
+    discoveredTests <- findTests "test/SubMod/" ignoreModuleConfig
+    discoveredTests `shouldBe` []
+
+spec_badModuleGlob :: Spec
+spec_badModuleGlob =
   describe "Module suffix configuration" $
   it "Filters discovered tests by specified suffix" $ do
-    let customSuffixConfig = defaultConfig { moduleSuffix = Just "DoesntExist"}
-    discoveredTests <- findTests "test/SubMod/" customSuffixConfig
+    let badGlobConfig = defaultConfig { modules = Just "DoesntExist*.hs" }
+    discoveredTests <- findTests "test/SubMod/" badGlobConfig
     discoveredTests `shouldBe` []
 
 spec_customModuleName :: Spec
@@ -28,45 +45,16 @@ spec_customModuleName =
     let generatedModule = generateTestDriver defaultConfig "FunkyModuleName" [] "test/" []
     "FunkyModuleName" `shouldSatisfy` (`isInfixOf` generatedModule)
 
-spec_ignoreModule :: Spec
-spec_ignoreModule =
-  describe "Module ignore configuration" $
-  it "Ignores tests in modules with the specified suffix" $ do
-    let ignoreModuleConfig = defaultConfig { ignoredModules = ["PropTest"] }
-    discoveredTests <- findTests "test/SubMod/" ignoreModuleConfig
-    discoveredTests `shouldBe` []
-
-spec_findsTests :: Spec
-spec_findsTests =
-  describe "Test discovery" $
-  it "Discovers tests" $ do
-    let expectedTest = mkTest "PropTest" "prop_additionAssociative"
-    discoveredTests <- findTests "test/SubMod/" defaultConfig
-    discoveredTests `shouldBe` [expectedTest]
-
-spec_noModuleSuffix :: Spec
-spec_noModuleSuffix =
-  describe "No module suffix configuration" $
-  it "Discovers tests in modules with every suffix" $ do
-    let noModuleSuffixConfig = defaultConfig { noModuleSuffix = True }
-        expectedTests = [ mkTest "FooBaz" "prop_additionCommutative"
-                        , mkTest "FooBaz" "prop_multiplationDistributiveOverAddition"
-                        , mkTest "PropTest" "prop_additionAssociative"
-                        ]
-    moreDiscoveredTests <- findTests "test/SubMod/" noModuleSuffixConfig
-    moreDiscoveredTests `shouldSatisfy` all (`elem` expectedTests)
-
 unit_noTreeDisplayDefault :: IO ()
 unit_noTreeDisplayDefault = do
-  let config = defaultConfig { noModuleSuffix = True }
-  tests <- findTests "test/SubMod/" config
+  tests <- findTests "test/SubMod/" defaultConfig
   let testNumVars = map (('t' :) . show) [(0::Int)..]
-      trees = showTests config tests testNumVars
+      trees = showTests defaultConfig tests testNumVars
   length trees @?= 3
 
 unit_treeDisplay :: IO ()
 unit_treeDisplay = do
-  let config = defaultConfig { noModuleSuffix = True, treeDisplay = True }
+  let config = defaultConfig { treeDisplay = True }
   tests <- findTests "test/SubMod/" config
   let testNumVars = map (('t' :) . show) [(0::Int)..]
       trees = showTests config tests testNumVars
