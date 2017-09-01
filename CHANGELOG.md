@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
-# 4.0.0 [UNRELEASED]
+# 4.0.0 [2017-09-01]
 
 ## Changed
 - Deprecated `--[no-]module-suffix` for `--modules` (see pull request [#117]).
