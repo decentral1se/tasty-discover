@@ -1,6 +1,6 @@
-sudo: false
-
 language: haskell
+
+ghc: 8.2.1
 
 cache:
   directories:
@@ -11,46 +11,11 @@ cache:
 matrix:
   include:
   - env: BUILD=cabal
-    compiler: "GHC 8.0.2"
-    addons: {apt: {packages: [cabal-install-1.24,ghc-8.0.1,happy-1.19.5,alex-3.1.7], sources: [hvr-ghc]}}
-
   - env: BUILD=stack
-    compiler: "GHC-8.0.2"
-    addons: {apt: {packages: [libgmp-dev]}}
-
   - env: BUILD=hlint
-    compiler: "GHC-8.0.2"
-    addons: {apt: {packages: [libgmp-dev]}}
-
   - env: BUILD=stylish-haskell
-    compiler: "GHC-8.0.2"
-    addons: {apt: {packages: [libgmp-dev]}}
-
   - env: BUILD=sdist
-    compiler: "GHC-8.0.2"
-    addons: {apt: {packages: [libgmp-dev]}}
-
   - env: BUILD=readme
-    compiler: "GHC-8.0.2"
-    addons: {apt: {packages: [libgmp-dev]}}
-
-before_install:
-- export PATH=/opt/ghc/$GHCVER/bin:/opt/cabal/$CABALVER/bin:$HOME/.local/bin:/opt/alex/$ALEXVER/bin:/opt/happy/$HAPPYVER/bin:$HOME/.cabal/bin:$PATH
-- |
-  set -ex
-  case "$BUILD" in
-    cabal)
-      mkdir -p $HOME/.cabal
-      echo 'jobs: $ncpus' >> $HOME/.cabal/config
-      echo 'remote-repo: hackage.haskell.org:http://hackage.fpcomplete.com/' > $HOME/.cabal/config
-      echo 'remote-repo-cache: $HOME/.cabal/packages' >> $HOME/.cabal/config
-      ;;
-    *)
-      mkdir -p ~/.local/bin
-      travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
-      ;;
-  esac
-  set +ex
 
 install:
 - |
@@ -62,8 +27,9 @@ install:
       cabal install
       ;;
     *)
-      stack setup
-      stack install --pedantic
+      mkdir -p ~/.local/bin
+      travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+      stack --system-ghc install --pedantic
       ;;
   esac
   set +ex
