@@ -33,6 +33,7 @@ generateTestDriver config modname is src tests =
       , "{-# LANGUAGE FlexibleInstances #-}\n"
       , "module " ++ modname ++ " (main, ingredients, tests) where\n"
       , "import Prelude\n"
+      , "import qualified System.Environment as E\n"
       , "import qualified Test.Tasty as T\n"
       , "import qualified Test.Tasty.Ingredients as T\n"
       , unlines $ map generatorImport generators'
@@ -44,12 +45,13 @@ generateTestDriver config modname is src tests =
       , "  pure $ T.testGroup \"" ++ src ++ "\" ["
       , intercalate "," $ showTests config tests testNumVars
       , "]\n"
-      , concat
-        [ "ingredients :: [T.Ingredient]\n"
-        , "ingredients = " ++ ingredients is ++ "\n"
-        , "main :: IO ()\n"
-        , "main = tests >>= T.defaultMainWithIngredients ingredients\n"
-        ]
+      , "ingredients :: [T.Ingredient]\n"
+      , "ingredients = " ++ ingredients is ++ "\n"
+      , "main :: IO ()\n"
+      , "main = do\n"
+      , "  args <- E.getArgs\n"
+      , "  E.withArgs (" ++ show (tastyOptions config) ++ " ++ args) $"
+      , "    tests >>= T.defaultMainWithIngredients ingredients\n"
       ]
 
 -- | Match files by specified glob pattern.

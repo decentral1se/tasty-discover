@@ -18,7 +18,7 @@ module Test.Tasty.Config (
 import           Data.Maybe            (isJust)
 import           System.Console.GetOpt (ArgDescr (NoArg, ReqArg),
                                         ArgOrder (Permute), OptDescr (Option),
-                                        getOpt)
+                                        getOpt')
 
 -- | A tasty ingredient.
 type Ingredient = String
@@ -34,6 +34,7 @@ data Config = Config
   , ignores             :: Maybe GlobPattern -- ^ Glob pattern for ignoring modules during test discovery.
   , ignoredModules      :: [FilePath]        -- ^ <<<DEPRECATED>>>: Ignored modules by full name.
   , tastyIngredients    :: [Ingredient]      -- ^ Tasty ingredients to use.
+  , tastyOptions        :: [String]          -- ^ Options passed to tasty
   , noModuleSuffix      :: Bool              -- ^ <<<DEPRECATED>>>: suffix and look in all modules.
   , debug               :: Bool              -- ^ Debug the generated module.
   , treeDisplay         :: Bool              -- ^ Tree display for the test results table.
@@ -41,7 +42,7 @@ data Config = Config
 
 -- | The default configuration
 defaultConfig :: Config
-defaultConfig = Config Nothing Nothing Nothing Nothing [] [] False False False
+defaultConfig = Config Nothing Nothing Nothing Nothing [] [] [] False False False
 
 -- | Deprecation message for old `--[no-]module-suffix` option.
 moduleSuffixDeprecationMessage :: String
@@ -68,9 +69,9 @@ ignoreModuleDeprecationMessage =
 
 -- | Configuration options parser.
 parseConfig :: String -> [String] -> Either String Config
-parseConfig prog args = case getOpt Permute options args of
-    (opts, [], []) ->
-      let config = foldl (flip id) defaultConfig opts in
+parseConfig prog args = case getOpt' Permute options args of
+    (opts, rest, rest', []) ->
+      let config = foldl (flip id) defaultConfig { tastyOptions = rest ++ rest' } opts in
         if noModuleSuffix config || isJust (moduleSuffix config) then
           error moduleSuffixDeprecationMessage
         else
@@ -78,8 +79,7 @@ parseConfig prog args = case getOpt Permute options args of
           error ignoreModuleDeprecationMessage
         else
         Right config
-    (_, _, err:_)  -> formatError err
-    (_, arg:_, _)  -> formatError ("unexpected argument `" ++ arg ++ "`\n")
+    (_, _, _, err:_)  -> formatError err
   where
     formatError err = Left (prog ++ ": " ++ err)
 
