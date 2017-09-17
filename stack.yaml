@@ -6,5 +6,3 @@ extra-deps:
 # FIXME: Once this extra-dep comes into the LTS, go back to doing a
 # `stack init --force` in the `make test_sdist` Make target
 - tasty-hedgehog-0.1.0.1
-
-- Glob-0.8.0
