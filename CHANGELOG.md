@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
+# X.X.X [UNRELEASED]
+
+## Added
+- Add ability to override tasty arguments (see pull request [#120]).
+
+[#120]: https://github.com/lwm/tasty-discover/pull/120
+
 # 4.0.0 [2017-09-01]
 
 ## Changed
