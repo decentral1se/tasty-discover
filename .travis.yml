@@ -9,8 +9,6 @@ cache:
   - $HOME/.stack
 
 matrix:
-  allow_failures:
-  - env: BUILD=cabal
   include:
   - env: BUILD=cabal
   - env: BUILD=stack
@@ -25,8 +23,9 @@ install:
   case "$BUILD" in
     cabal)
       cabal update
-      cabal install --dependencies-only --enable-tests --force-reinstalls
-      cabal install
+      cabal configure --enable-tests -v2 --ghc-options="-O0 $GHC_OPTIONS"
+      cabal install happy  # FIXME: Remove me and hope the build passes.
+      cabal install --enable-tests --force-reinstalls --ghc-options=-O0
       ;;
     *)
       mkdir -p ~/.local/bin
