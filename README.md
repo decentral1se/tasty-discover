@@ -139,6 +139,12 @@ Example: `{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --modules="*CustomTest.h
   - **--generated-module**: The name of the generated test module.
   - **--ingredient**: Tasty ingredients to add to your test runner.
 
+It is also possible to override tasty arguments with `-optF`:
+
+``` bash
+{-# OPTIONS_GHC -F -pgmF tasty-discover -optF --hide-successes #-}
+```
+
 # Example Project
 
 See the [testing for this package] for a fully configured example.
