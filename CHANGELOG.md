@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
-# X.X.X [UNRELEASED]
+# 4.1.0 [2017-09-26]
 
 ## Fixed
 - Find tests recursively in test directory.
