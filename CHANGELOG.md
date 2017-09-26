@@ -10,6 +10,9 @@ The format is based on [Keep a Changelog] and this project adheres to
 
 # X.X.X [UNRELEASED]
 
+## Fixed
+- Find tests recursively in test directory.
+
 ## Added
 - Add ability to override tasty arguments (see pull request [#120]).
 
@@ -25,7 +28,7 @@ The format is based on [Keep a Changelog] and this project adheres to
 - `tasty-hedgehog` is now a supported test library.
 
 ## Removed
-- `unit_` prefixes have been removed.
+- `case_` prefixes have been removed.
 
 [#117]: https://github.com/lwm/tasty-discover/pull/117
 
