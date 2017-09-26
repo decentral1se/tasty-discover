@@ -8,15 +8,23 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
+# 4.1.1 [2017-09-26]
+
+## Fixed
+- Incorrect test case doing bad comparison (see issue [#123]).
+
+[#123]: https://github.com/lwm/tasty-discover/issues/123
+
 # 4.1.0 [2017-09-26]
 
 ## Fixed
-- Find tests recursively in test directory.
+- Find tests recursively in test directory. (see pull request [#122]).
 
 ## Added
 - Add ability to override tasty arguments (see pull request [#120]).
 
 [#120]: https://github.com/lwm/tasty-discover/pull/120
+[#122]: https://github.com/lwm/tasty-discover/pull/122
 
 # 4.0.0 [2017-09-01]
 

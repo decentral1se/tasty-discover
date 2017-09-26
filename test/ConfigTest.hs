@@ -2,7 +2,7 @@
 
 module ConfigTest where
 
-import           Data.List             (isInfixOf)
+import           Data.List             (isInfixOf, sort)
 import qualified Data.Map.Strict       as M
 import           Test.Tasty.Config
 import           Test.Tasty.Discover   (ModuleTree (..), findTests,
@@ -21,7 +21,7 @@ spec_modules =
                           mkTest "SubSubMod/PropTest.hs" "prop_additionCommutative" ]
         config        = defaultConfig { modules = Just "*Test.hs" }
     discoveredTests <- findTests "test/SubMod/" config
-    discoveredTests `shouldBe` expectedTests
+    sort discoveredTests `shouldBe` sort expectedTests
 
 spec_ignores :: Spec
 spec_ignores =
