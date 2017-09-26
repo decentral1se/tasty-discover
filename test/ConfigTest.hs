@@ -17,10 +17,11 @@ spec_modules :: Spec
 spec_modules =
   describe "Test discovery" $
   it "Discovers tests" $ do
-    let expectedTest = mkTest "PropTest" "prop_additionAssociative"
-        config       = defaultConfig { modules = Just "*Test.hs" }
+    let expectedTests = [ mkTest "PropTest.hs" "prop_additionAssociative",
+                          mkTest "SubSubMod/PropTest.hs" "prop_additionCommutative" ]
+        config        = defaultConfig { modules = Just "*Test.hs" }
     discoveredTests <- findTests "test/SubMod/" config
-    discoveredTests `shouldBe` [expectedTest]
+    discoveredTests `shouldBe` expectedTests
 
 spec_ignores :: Spec
 spec_ignores =
@@ -50,7 +51,7 @@ unit_noTreeDisplayDefault = do
   tests <- findTests "test/SubMod/" defaultConfig
   let testNumVars = map (('t' :) . show) [(0::Int)..]
       trees = showTests defaultConfig tests testNumVars
-  length trees @?= 3
+  length trees @?= 4
 
 unit_treeDisplay :: IO ()
 unit_treeDisplay = do
@@ -58,7 +59,7 @@ unit_treeDisplay = do
   tests <- findTests "test/SubMod/" config
   let testNumVars = map (('t' :) . show) [(0::Int)..]
       trees = showTests config tests testNumVars
-  length trees @?= 2
+  length trees @?= 3
 
 prop_mkModuleTree :: ModuleTree -> Property
 prop_mkModuleTree mtree =

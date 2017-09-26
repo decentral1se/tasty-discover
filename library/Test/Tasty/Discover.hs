@@ -12,10 +12,10 @@ module Test.Tasty.Discover (
   ) where
 
 import           Data.List            (dropWhileEnd, intercalate, isPrefixOf,
-                                       nub)
+                                       nub, stripPrefix)
 import qualified Data.Map.Strict      as M
 import           Data.Maybe           (fromMaybe)
-import           System.FilePath      (takeDirectory, takeFileName, (</>))
+import           System.FilePath      (pathSeparator, takeDirectory)
 import           System.FilePath.Glob (compile, globDir1, match)
 import           Test.Tasty.Config    (Config (..), GlobPattern)
 import           Test.Tasty.Generator (Generator (..), Test (..), generators,
@@ -57,13 +57,14 @@ generateTestDriver config modname is src tests =
 -- | Match files by specified glob pattern.
 filesByModuleGlob :: FilePath -> Maybe GlobPattern -> IO [String]
 filesByModuleGlob directory globPattern = do
-  (fmap takeFileName) <$> globDir1 pattern directory
-  where pattern = compile (fromMaybe "*.hs*" globPattern)
+  globDir1 pattern directory
+  where pattern = compile ("**/" ++ fromMaybe "*.hs*" globPattern)
 
 -- | Filter and remove files by specified glob pattern.
 ignoreByModuleGlob :: [FilePath] -> Maybe GlobPattern -> [FilePath]
-ignoreByModuleGlob directories ignoreGlob = filter (not . match pattern) directories
-  where pattern = compile (fromMaybe "" ignoreGlob)
+ignoreByModuleGlob filePaths Nothing = filePaths
+ignoreByModuleGlob filePaths (Just ignoreGlob) = filter (not . match pattern) filePaths
+  where pattern = compile ("**/" ++ ignoreGlob)
 
 -- | Discover the tests modules.
 findTests :: FilePath -> Config -> IO [Test]
@@ -73,8 +74,10 @@ findTests src config = do
   let filtered = ignoreByModuleGlob allModules (ignores config)
   concat <$> traverse (extract directory) filtered
   where
-    extract directory file = do
-      extractTests file <$> readFile (directory </> file)
+    extract directory filePath = do
+      extractTests (dropDirectory directory filePath) <$> readFile filePath
+    dropDirectory directory filePath = fromMaybe filePath $
+      stripPrefix (directory ++ [pathSeparator]) filePath
 
 -- | Extract the test names from discovered modules.
 extractTests :: FilePath -> String -> [Test]
