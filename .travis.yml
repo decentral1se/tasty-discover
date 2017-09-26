@@ -9,6 +9,8 @@ cache:
   - $HOME/.stack
 
 matrix:
+  allow_failures:
+  - env: BUILD=cabal
   include:
   - env: BUILD=cabal
   - env: BUILD=stack
