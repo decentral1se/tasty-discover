@@ -29,7 +29,7 @@ generateTestDriver config modname is src tests =
       testNumVars = map (("t"++) . show) [(0 :: Int)..]
   in
     concat
-      [ "{-# LINE 1 \"" ++ src ++ "\" #-}\n"
+      [ "{-# LINE 1 " ++ show src ++ " #-}\n"
       , "{-# LANGUAGE FlexibleInstances #-}\n"
       , "module " ++ modname ++ " (main, ingredients, tests) where\n"
       , "import Prelude\n"
@@ -42,7 +42,7 @@ generateTestDriver config modname is src tests =
       , "tests :: IO T.TestTree\n"
       , "tests = do\n"
       , unlines $ zipWith showSetup tests testNumVars
-      , "  pure $ T.testGroup \"" ++ src ++ "\" ["
+      , "  pure $ T.testGroup " ++ show src ++ " ["
       , intercalate "," $ showTests config tests testNumVars
       , "]\n"
       , "ingredients :: [T.Ingredient]\n"
