@@ -27,6 +27,7 @@ generateTestDriver :: Config -> String -> [String] -> FilePath -> [Test] -> Stri
 generateTestDriver config modname is src tests =
   let generators' = getGenerators tests
       testNumVars = map (("t"++) . show) [(0 :: Int)..]
+      escapeBackslash = foldr (\c acc -> if c == '\\' then "\\\\" ++ acc else c:acc) ""
   in
     concat
       [ "{-# LINE 1 \"" ++ src ++ "\" #-}\n"
@@ -42,7 +43,7 @@ generateTestDriver config modname is src tests =
       , "tests :: IO T.TestTree\n"
       , "tests = do\n"
       , unlines $ zipWith showSetup tests testNumVars
-      , "  pure $ T.testGroup \"" ++ src ++ "\" ["
+      , "  pure $ T.testGroup \"" ++ escapeBackslash src ++ "\" ["
       , intercalate "," $ showTests config tests testNumVars
       , "]\n"
       , "ingredients :: [T.Ingredient]\n"
