@@ -9,6 +9,14 @@ Automatic test discovery and runner for the [tasty framework].
 
 [tasty framework]: https://github.com/feuerbach/tasty
 
+# Maintenance
+
+If you're interested in helping maintain this package, please let @lwm know!
+
+We're currently two people, @minad included, keeping an eye and trying to respond to issues.
+
+I currently have less and less time that I can spare to work on this. Any help appreciated.
+
 # Getting Started
 
 There's 4 simple steps:
