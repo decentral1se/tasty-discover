@@ -13,6 +13,7 @@ matrix:
   - env: BUILD=cabal
     addons: {apt: {packages: [cabal-install-1.24,ghc-8.0.2], sources: [hvr-ghc]}}
   - env: BUILD=stack
+  - env: BUILD=stackage
   - env: BUILD=hlint
   - env: BUILD=stylish-haskell
   - env: BUILD=sdist
@@ -57,6 +58,9 @@ script:
       ;;
     stack)
       make test
+      ;;
+    stackage)
+      stack build --resolver nightly --haddock --test --bench --no-run-benchmarks
       ;;
     hlint)
       make hlint_binary
