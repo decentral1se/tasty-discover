@@ -1,3 +1,4 @@
 resolver: lts-10.0
 packages:
 - '.'
+save-hackage-creds: false
