@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
+# 4.1.2 [2017-12-19]
+
+## Fixed
+- Escaping issues for the Windows platform (see issue [#124]).
+
+[#124]: https://github.com/lwm/tasty-discover/issues/124
+
 # 4.1.1 [2017-09-26]
 
 ## Fixed

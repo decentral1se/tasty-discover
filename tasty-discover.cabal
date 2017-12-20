@@ -2,10 +2,10 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: f4a1c633f4acfb1e21f11d223698ed8babc0d97c8b2461405d41b4cdb16fb0c1
+-- hash: 38c30e2aaa0ce753221b60acaf08bd424fd91e93fdd8a22ba67f1eb52b9b8ee1
 
 name:           tasty-discover
-version:        4.1.1
+version:        4.1.2
 synopsis:       Test discovery for the tasty framework.
 description:    Automatic test discovery and runner for the tasty framework.
                 Prefix your test case names and tasty-discover will discover, collect and run them. All popular test libraries are covered. Configure once and then just write your tests. Avoid forgetting to add test modules to your Cabal/Hpack files. Tasty ingredients are included along with various configuration options for different use cases. Please see the `README.md` below for how to get started.
