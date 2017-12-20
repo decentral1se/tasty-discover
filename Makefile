@@ -1,4 +1,5 @@
-TEST:=stack build --test --haddock --no-haddock-deps --pedantic
+SOURCEDIRS := library/ executable/ test/
+TEST       := stack build --test --haddock --no-haddock-deps --pedantic
 
 test:
 	 $(TEST) tasty-discover:test
@@ -25,15 +26,19 @@ stylish_haskell_install:
 
 STYLISH=stylish-haskell -i {} \;
 stylish_haskell: stylish_haskell_install
-	find library/ executable/ test/ -name "*.hs" -exec $(STYLISH) && git diff --exit-code
+	find $(SOURCEDIRS) -name "*.hs" -exec $(STYLISH) && git diff --exit-code
 .PHONY: stylish_haskell
 
 hlint_install:
 	stack install hlint
 .PHONY: hlint_install
 
+hlint_binary:
+	@curl -sL https://raw.github.com/ndmitchell/hlint/master/misc/travis.sh | sh -s -- --cpp-simple $(SOURCEDIRS)
+.PHONY: hlint_binary
+
 hlint: hlint_install
-	hlint --cpp-simple library/ executable/ test/
+	hlint --cpp-simple $(SOURCEDIRS)
 .PHONY: hlint
 
 hlint_apply_refact: hlint_install
@@ -42,7 +47,7 @@ hlint_apply_refact: hlint_install
 
 HLINT=hlint --cpp-simple --refactor --refactor-options -i {} \;
 hlint_refactor: hlint_apply_refact
-	find library/ executable/ test/ -name "*.hs" -exec $(HLINT)
+	find $(SOURCEDIRS) -name "*.hs" -exec $(HLINT)
 .PHONY: hlint_refactor
 
 upload:
