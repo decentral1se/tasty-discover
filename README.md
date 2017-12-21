@@ -36,8 +36,8 @@ For example (in `test/Driver.hs`):
 ## Configure Cabal Test Suite
 
 In order for Cabal/Stack to know where the tests are, you'll need to configure
-the main-is option of your test-suite to point to that file. In the following
-example, the test driver file is called Driver.hs:
+the main-is option of your test-suite to point to the driver file. In the
+following example, the test driver file is called Driver.hs:
 
 ```
 test-suite test
