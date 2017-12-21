@@ -35,7 +35,7 @@ install:
   case "$BUILD" in
     cabal)
       travis_retry cabal update -v
-      cabal install alex happy  # FIXME: https://github.com/yav/pretty-show/issues/24
+      cabal install alex happy
       cabal install --only-dependencies --enable-tests
       ;;
     *)
