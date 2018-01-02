@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
+# 4.1.3 [2018-01-01]
+
+## Fixed
+- Re-enable on Stackage due to tasty/tasty-hedgehog failure (see issue [#132]).
+
+[#32]: https://github.com/lwm/tasty-discover/pull/132.
+
 # 4.1.2 [2017-12-19]
 
 ## Fixed
