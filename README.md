@@ -42,7 +42,7 @@ following example, the test driver file is called Driver.hs:
 ```
 test-suite test
   main-is: Driver.hs
-  hs-source-dirs: tests
+  hs-source-dirs: test
   build-depends: base
 ```
 
