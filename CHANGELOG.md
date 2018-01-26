@@ -13,7 +13,7 @@ The format is based on [Keep a Changelog] and this project adheres to
 ## Fixed
 - Re-enable on Stackage due to tasty/tasty-hedgehog failure (see issue [#132]).
 
-[#132]: https://github.com/lwm/tasty-discover/pull/132.
+[#132]: https://github.com/lwm/tasty-discover/pull/132
 
 # 4.1.2 [2017-12-19]
 
