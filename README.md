@@ -15,7 +15,7 @@ Automatic test discovery and runner for the [tasty framework].
 There's 4 simple steps:
 
   1. [Create a test driver file in the test directory](#create-test-driver-file)
-  2. [Mark the driver file as the `main-is` in the test suite](#configure-cabal-test-suite)
+  2. [Mark the driver file as the `main-is` in the test suite](#configure-cabal-or-hpack-test-suite)
   3. [Mark tests with the correct prefixes](#write-tests)
   4. [Customise test discovery as needed](#customise-discovery)
 
@@ -33,7 +33,7 @@ For example (in `test/Driver.hs`):
 {-# OPTIONS_GHC -F -pgmF tasty-discover #-}
 ```
 
-## Configure Cabal Test Suite
+## Configure Cabal or Hpack Test Suite
 
 In order for Cabal/Stack to know where the tests are, you'll need to configure
 the main-is option of your test-suite to point to the driver file. In the
