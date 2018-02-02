@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 -- | Automatic test discovery and runner for the tasty framework.
 
 module Test.Tasty.Discover (
@@ -11,15 +12,22 @@ module Test.Tasty.Discover (
   , showTests
   ) where
 
-import           Data.List            (dropWhileEnd, intercalate, isPrefixOf,
-                                       nub, stripPrefix)
-import qualified Data.Map.Strict      as M
-import           Data.Maybe           (fromMaybe)
-import           System.FilePath      (pathSeparator, takeDirectory)
-import           System.FilePath.Glob (compile, globDir1, match)
-import           Test.Tasty.Config    (Config (..), GlobPattern)
-import           Test.Tasty.Generator (Generator (..), Test (..), generators,
-                                       getGenerators, mkTest, showSetup)
+import           Data.List                (dropWhileEnd, intercalate,
+                                           isPrefixOf, nub, stripPrefix)
+import qualified Data.Map.Strict          as M
+import           Data.Maybe               (fromMaybe)
+#if defined(mingw32_HOST_OS)
+import           GHC.IO.Encoding.CodePage (mkLocaleEncoding)
+import           GHC.IO.Encoding.Failure  (CodingFailureMode (TransliterateCodingFailure))
+#endif
+import           GHC.IO.Handle            (hGetContents, hSetEncoding)
+import           System.FilePath          (pathSeparator, takeDirectory)
+import           System.FilePath.Glob     (compile, globDir1, match)
+import           System.IO                (IOMode (ReadMode), openFile)
+import           Test.Tasty.Config        (Config (..), GlobPattern)
+import           Test.Tasty.Generator     (Generator (..), Test (..),
+                                           generators, getGenerators, mkTest,
+                                           showSetup)
 
 -- | Main function generator, along with all the boilerplate which
 -- which will run the discovered tests.
@@ -75,7 +83,12 @@ findTests src config = do
   concat <$> traverse (extract directory) filtered
   where
     extract directory filePath = do
-      extractTests (dropDirectory directory filePath) <$> readFile filePath
+      h <- openFile filePath ReadMode
+#if defined(mingw32_HOST_OS)
+      -- Avoid internal error: hGetContents: invalid argument (invalid byte sequence)' non UTF-8 Windows
+      hSetEncoding h $ mkLocaleEncoding TransliterateCodingFailure
+#endif
+      extractTests (dropDirectory directory filePath) <$> hGetContents h
     dropDirectory directory filePath = fromMaybe filePath $
       stripPrefix (directory ++ [pathSeparator]) filePath
 
