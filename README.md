@@ -6,11 +6,11 @@
 
 # tasty-discover
 
-Automatic test discovery and runner for the [tasty framework].
+Haskell auto-magic test discovery and runner for the [tasty framework].
 
 Prefix your test case names and `tasty-discover` will discover, collect and run
-them. All popular test libraries are covered. Configure once and then just
-write your tests. Avoid forgetting to add test modules to your Cabal/Hpack
+them. All popular Haksell test libraries are covered. Configure once and then
+just write your tests. Avoid forgetting to add test modules to your Cabal/Hpack
 files. Tasty ingredients are included along with various configuration options
 for different use cases.
 
