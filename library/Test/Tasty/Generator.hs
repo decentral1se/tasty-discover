@@ -26,7 +26,7 @@ module Test.Tasty.Generator
 import           Data.Function   (on)
 import           Data.List       (find, groupBy, isPrefixOf, sortOn)
 import           Data.Maybe      (fromJust)
-import           System.FilePath (dropExtension, pathSeparator)
+import           System.FilePath (dropExtension, isPathSeparator)
 
 -- | The test type.
 data Test = Test
@@ -36,8 +36,8 @@ data Test = Test
 
 -- | 'Test' constructor.
 mkTest :: FilePath -> String -> Test
-mkTest = Test . chooser pathSeparator '.' . dropExtension
-  where chooser c1 c2 = map $ \c3 -> if c3 == c1 then c2 else c3
+mkTest = Test . replacePathSepTo '.' . dropExtension
+  where replacePathSepTo c1 = map $ \c2 -> if isPathSeparator c2 then c1 else c2
 
 -- | The generator type.
 data Generator = Generator
