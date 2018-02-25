@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
+# 4.1.4 [2018-02-25]
+
+## Added
+- Windows OS continuous integration build (see pull request [#136]).
+
+## Fixed
+- Test failure related to path handling on Windows OS (see pull request [#136]).
+- Resolved upstream tasty-hedgehog nightly blocking issue (see issue [#131]).
+
+[#136]: https://github.com/lwm/tasty-discover/pull/136
+[#131]: https://github.com/lwm/tasty-discover/issues/131
+
 # 4.1.3 [2018-01-01]
 
 ## Fixed
