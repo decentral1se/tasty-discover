@@ -6,7 +6,23 @@
 
 # tasty-discover
 
+- [Getting Started](#getting-started)
+  * [Create Test Driver File](#create-test-driver-file)
+  * [Configure Cabal or Hpack Test Suite](#configure-cabal-or-hpack-test-suite)
+- [Write Tests](#write-tests)
+- [Customise Discovery](#customise-discovery)
+  * [No Arguments](#no-arguments)
+  * [With Arguments](#with-arguments)
+- [Example Project](#example-project)
+- [Change Log](#change-log)
+- [Deprecation Policy](#deprecation-policy)
+- [Contributing](#contributing)
+- [Maintenance](#maintenance)
+- [Acknowledgements](#acknowledgements)
+
 Haskell auto-magic test discovery and runner for the [tasty framework].
+
+[tasty framework]: https://github.com/feuerbach/tasty
 
 Prefix your test case names and `tasty-discover` will discover, collect and run
 them. All popular Haksell test libraries are covered. Configure once and then
@@ -15,8 +31,6 @@ files. Tasty ingredients are included along with various configuration options
 for different use cases.
 
 See below for full documentation and examples.
-
-[tasty framework]: https://github.com/feuerbach/tasty
 
 # Getting Started
 
@@ -177,17 +191,25 @@ this too much.
 
 # Contributing
 
-All contributions welcome!
+All contributions welcome! The continuous integration suite is pretty
+comprehensive, so just get hacking and add a test case - there are *plenty* of
+examples, so this should be simple - and I'll get to review your change ASAP.
 
 # Maintenance
 
 If you're interested in helping maintain this package, please let [@lwm] know!
 
+You can [create an issue] or drop him a line at **lukewm AT riseup DOT NET**.
+
 [@lwm]: https://github.com/lwm
+[create an issue]: https://github.com/lwm/tasty-discover/issues/new
 
 # Acknowledgements
 
 Thanks to [hspec-discover] and [tasty-auto] for making this possible.
 
+A huge thanks to the growing list of [contributors].
+
 [hspec-discover]: https://hspec.github.io/hspec-discover.html
 [tasty-auto]: https://github.com/minad/tasty-auto
+[contributors]: https://github.com/lwm/tasty-discover/graphs/contributors
