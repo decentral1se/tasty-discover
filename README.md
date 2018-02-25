@@ -178,7 +178,10 @@ See the [testing for this package] for a fully configured example.
 
 Please see the [CHANGELOG.md] for the latest changes.
 
+We try to keep [tagged releases] in our release process, if you care about that.
+
 [CHANGELOG.md]: https://github.com/lwm/tasty-discover/blob/master/CHANGELOG.md
+[tagged releases]: https://github.com/lwm/tasty-discover/releases
 
 # Deprecation Policy
 
