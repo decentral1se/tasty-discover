@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
+# 4.1.5 [2018-02-26]
+
+## Fixed
+- Fixed multi-byte string issue (see pull request [#138]).
+
+[#138]: https://github.com/lwm/tasty-discover/pull/138
+
 # 4.1.4 [2018-02-25]
 
 ## Added
