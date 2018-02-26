@@ -19,8 +19,10 @@ import           Data.Maybe               (fromMaybe)
 #if defined(mingw32_HOST_OS)
 import           GHC.IO.Encoding.CodePage (mkLocaleEncoding)
 import           GHC.IO.Encoding.Failure  (CodingFailureMode (TransliterateCodingFailure))
-#endif
 import           GHC.IO.Handle            (hGetContents, hSetEncoding)
+#else
+import           GHC.IO.Handle            (hGetContents)
+#endif
 import           System.FilePath          (pathSeparator, takeDirectory)
 import           System.FilePath.Glob     (compile, globDir1, match)
 import           System.IO                (IOMode (ReadMode), openFile)
