@@ -202,6 +202,14 @@ examples, so this should be simple - and I'll get to review your change ASAP.
 
 If you're interested in helping maintain this package, please let [@lwm] know!
 
+It doesn't take much time (max ~3 hours a month) and all we need to do is:
+
+  * Triage issues that are raised.
+  * Review pull requests from contributors.
+  * Fix bugs when present.
+  * Make releases.
+  * Manage bounds issues on Stackage.
+
 You can [create an issue] or drop him a line at **lukewm AT riseup DOT NET**.
 
 [@lwm]: https://github.com/lwm
