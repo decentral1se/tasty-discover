@@ -78,6 +78,7 @@ showSetup t var = "  " ++ var ++ " <- " ++ setup ++ "\n"
 generators :: [Generator]
 generators =
   [ quickCheckPropertyGenerator
+  , smallCheckPropertyGenerator
   , hedgehogPropertyGenerator
   , hunitTestCaseGenerator
   , hspecTestCaseGenerator
@@ -100,6 +101,15 @@ quickCheckPropertyGenerator = Generator
   , generatorImport = "import qualified Test.Tasty.QuickCheck as QC\n"
   , generatorClass  = ""
   , generatorSetup  = \t -> "pure $ QC.testProperty \"" ++ name t ++ "\" " ++ qualifyFunction t
+  }
+
+-- | Smallcheck group generator prefix.
+smallCheckPropertyGenerator :: Generator
+smallCheckPropertyGenerator = Generator
+  { generatorPrefix = "scprop_"
+  , generatorImport = "import qualified Test.Tasty.SmallCheck as SC\n"
+  , generatorClass  = ""
+  , generatorSetup  = \t -> "pure $ SC.testProperty \"" ++ name t ++ "\" " ++ qualifyFunction t
   }
 
 -- | HUnit generator prefix.
