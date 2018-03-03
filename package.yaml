@@ -1,5 +1,5 @@
 name: "tasty-discover"
-version: "4.1.5"
+version: "4.2.0"
 synopsis: "Test discovery for the tasty framework."
 description: >
   Automatic test discovery and runner for the tasty framework.

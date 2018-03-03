@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
+# 4.2.0 [2018-03-03]
+
+## Fixed
+- Actually support `scprop_` prefixed SmallCheck test cases (see issue [#140]).
+
+[#140]: https://github.com/lwm/tasty-discover/issues/140
+
 # 4.1.5 [2018-02-26]
 
 ## Fixed
