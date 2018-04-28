@@ -18,6 +18,8 @@ matrix:
   - env: BUILD=stylish-haskell
   - env: BUILD=sdist
   - env: BUILD=readme
+  allow_failures:
+    - env: BUILD=stackage
 
 before_install:
 - unset CC
