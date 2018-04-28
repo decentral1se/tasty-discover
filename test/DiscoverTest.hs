@@ -37,13 +37,11 @@ test_multiplication =
 
 test_generateTree :: IO TestTree
 test_generateTree = do
-  input <- pure "Some input"
+  let input = "Some input"
   pure $ testCase input $ pure ()
 
 test_generateTrees :: IO [TestTree]
-test_generateTrees = do
-  inputs <- pure ["First input", "Second input"]
-  pure $ map (\s -> testCase s $ pure ()) inputs
+test_generateTrees = map (\ s -> testCase s $ pure ()) <$> pure ["First input", "Second input"]
 
 {-# ANN hprop_reverse "HLint: ignore Avoid reverse" #-}
 hprop_reverse :: H.Property
