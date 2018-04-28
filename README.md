@@ -25,7 +25,7 @@ Haskell auto-magic test discovery and runner for the [tasty framework].
 [tasty framework]: https://github.com/feuerbach/tasty
 
 Prefix your test case names and `tasty-discover` will discover, collect and run
-them. All popular Haksell test libraries are covered. Configure once and then
+them. All popular Haskell test libraries are covered. Configure once and then
 just write your tests. Avoid forgetting to add test modules to your Cabal/Hpack
 files. Tasty ingredients are included along with various configuration options
 for different use cases.
@@ -46,8 +46,8 @@ Check out the [example project](#example-project) to get moving quickly.
 ## Create Test Driver File
 
 You can name this file anything you want but it must contain the correct
-preprocessor definition for tasty-discover to run and also, to detect the
-configuration. It should be in the top level of the test directory.
+preprocessor definition for tasty-discover to run and to detect the
+configuration. It should be at the top level of the test directory.
 
 For example (in `test/Driver.hs`):
 
@@ -186,7 +186,7 @@ We try to keep [tagged releases] in our release process, if you care about that.
 # Deprecation Policy
 
 If a breaking change is implemented, you'll see a major version increase, an
-entry in the [change log] and a compile time error with a deprecation warning
+entry in the [change log] and a compile-time error with a deprecation warning
 and clear instructions on how to upgrade. Please do complain if we're doing
 this too much.
 
