@@ -1,8 +1,8 @@
--- This file has been generated from package.yaml by hpack version 0.20.0.
+-- This file has been generated from package.yaml by hpack version 0.28.2.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7f57cc7ff691dc37cb2fc91f183182a851042dbf6e5e06d4c7e5250f1891f46c
+-- hash: b6a25627d41eb4ad886ac646620239a53199d06552d786ade9925ac42c0c7dad
 
 name:           tasty-discover
 version:        4.2.0
@@ -20,7 +20,6 @@ license:        MIT
 license-file:   LICENSE
 build-type:     Simple
 cabal-version:  >= 1.10
-
 extra-source-files:
     CHANGELOG.md
     README.md
